@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src='javascript/logic.js'></script>
 </head>
 
 <body class='container'>
@@ -108,104 +109,7 @@
         </div>
         <button type='submit'>Submit</button>
     </form>
-
+    <main id='recordsContainer'></main>
 </body>
-
-<script>
-    function drawAllCards() {
-        
-        let queryURL = 'http://localhost:4000/entries'
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response.data)
-
-            //FOR EACH ENTRY
-            for (j = 0; j < response.data.length; j++) {
-
-                //OBJECT KEY/VALUE ANALYSIS
-                let fields = (Object.keys(response.data[j]))
-                let values = (Object.values(response.data[j]))
-
-                //CARD DRAW
-                let card = $(`<div class='card mt-3 mb-3 p-2'></div>`)
-                let table = $(`<table class='table jobDescriptionTable' style='display: none'></table>`)
-                for (i = 0; i < fields.length; i++) {
-                    let row = $('<tr>')
-                    row.append(`<td>${fields[i]}</td>`)
-                    row.append(`<td>${values[i]}</td>`)
-                    $(table).append(row)
-                }
-                $(card).append(table)
-                $(card).prepend(`<small class='deleteRecordButton text-right' id='${response.data[j]._id}'>Delete</small>`)
-                $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].company}</h4>`)
-                $('body').append(card)
-            }
-        });
-    }
-    drawAllCards()
-</script>
-
-<script>
-    $(document).on("click", ".cardRevealControl", function () {
-        $(this).siblings().toggle()
-    })
-
-    $(document).on('click', '.deleteRecordButton', function () {
-        event.preventDefault()
-        let idToDelete = $(this).attr('id')
-        let queryURL = `http://localhost:4000/delete?id=${idToDelete}`
-
-        console.log(queryURL)
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (response) {
-            console.log('Adding!')
-        })
-    })
-
-    $(document).on('submit', '#addRecordForm', function () {
-        event.preventDefault()
-        let queryURL = 'http://localhost:4000/add'
-
-        console.log(queryURL)
-        $.ajax({
-            url: queryURL,
-            method: "POST",
-            data: {
-                companyName: $('#companyName').val(),
-                jobTitle: $('#jobTitle').val(),
-                jobDescription: $('#jobDescription').val(),
-                jobLevel: $('#jobLevel').val(),
-                minimumYearsExperience: $('#minimumYearsExperience').val(),
-                desireLevel: $('#desireLevel').val(),
-                confidenceLevel: $('#confidenceLevel').val(),
-                applicationSubmissionDate: $('#applicationFormSubmissionDate').val(),
-                dateOfFirstResponse: $('#dateOfFirstResponse').val(),
-                fourYearDegreeRequired: $('#fourYearDegreeRequired').val(),
-                csDegreePreferred: $('#csDegreePreferred').is(':checked'),
-                majorCorporation: $('#majorCorporation').is(':checked'),
-                essentialSkills: $('#essentialSkills').val(),
-                locationOfPosting: $('#locatinoOfPosting').val(),
-                locationOfSubmission: $('#locationOfSubmission').val(),
-                easyApply: $('#easyApply').is(':checked'),
-                stackType: $('#stackType').val(),
-                yearsExperienceAtTimeOfApplication: $('#yearsExperienceAtTimeOfApplication').val(),
-                numberOfFeaturedProjectsAtTimeOfApplication: $('#numberOfFeaturedProjectsAtTimeOfApplication').val(),
-                applicationWithdrawn: $('#applicationWithdrawn').is(':checked'),
-                neverResponded: $('#neverResponded').is(':checked'),
-                interviewGranted: $('#interviewGranted').is(':checked'),
-                deniedJob: $('#deniedJob').is(':checked'),
-                offeredJob: $('#offeredJob').is(':checked')
-            }
-        }).then(function (response) {
-            console.log('Adding!')
-            drawAllCards()
-        })
-    })
-
-</script>
 
 </html>
