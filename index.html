@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body class='container'>
+
+    <form id='addRecordForm' class='row'>
+        <div class="col-6">
+            <label>Company Name</label>
+            <input type="text" class="form-control" id='companyName' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Job Title</label>
+            <input type="text" class="form-control" id='jobTitle' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Job Description</label>
+            <input type="text" class="form-control" id='jobDescription' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Job Level</label>
+            <input type="text" class="form-control" id='jobLevel' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Minimum Years Experience</label>
+            <input type="text" class="form-control" id='minimumYearsExperience' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Desire Level</label>
+            <input type="range" class="form-control slider" min="1" max="5" value="3" id='desireLevel'>
+        </div>
+        <div class="col-6">
+            <label>Confidence Level</label>
+            <input type="range" class="form-control slider" min="1" max="5" value="3" id='confidenceLevel'>
+        </div>
+        <div class="col-6">
+            <label>Application Submission Date</label>
+            <input type="date" class="form-control" id='applicationSubmissionDate' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Date of First Response</label>
+            <input type="date" class="form-control" id='dateOfFirstResponse' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Four Year Degree Required?</label>
+            <input type="checkbox" class="form-control" id="fourYearDegreeRequired">
+        </div>
+        <div class="col-6">
+            <label>CS Degree Preferred?</label>
+            <input type="checkbox" class="form-control" id="csDegreePreferred">
+        </div>
+        <div class="col-6">
+            <label>Major Corporation?</label>
+            <input type="checkbox" class="form-control" id="majorCorporation">
+        </div>
+        <div class="col-6">
+            <label>Essential Skills</label>
+            <input type="text" class="form-control" id='essentialSkills' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Location of Posting</label>
+            <input type="text" class="form-control" id='locationOfPosting' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Location of Submission</label>
+            <input type="text" class="form-control" id='locationOfSubmission' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Easy Apply?</label>
+            <input type="checkbox" class="form-control" id="easyApply">
+        </div>
+        <div class="col-6">
+            <label>Stack Type</label>
+            <input type="text" class="form-control" id='stackType' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Years Experience at Time of Application</label>
+            <input type="text" class="form-control" id='yearsExperienceAtTimeOfApplication' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Number of Featured Projects at Time of Application</label>
+            <input type="text" class="form-control" id='numberOfFeaturedProjectsAtTimeOfApplication' placeholder="">
+        </div>
+        <div class="col-6">
+            <label>Application Withdrawn?</label>
+            <input type="checkbox" class="form-control" id="applicationWithdrawn">
+        </div>
+        <div class="col-6">
+            <label>Interview Granted?</label>
+            <input type="checkbox" class="form-control" id="interviewGranted">
+        </div>
+        <div class="col-6">
+            <label>Denied Job?</label>
+            <input type="checkbox" class="form-control" id="deniedJob">
+        </div>
+        <div class="col-6">
+            <label>Offered Job?</label>
+            <input type="checkbox" class="form-control" id="offeredJob">
+        </div>
+        <button type='submit'>Submit</button>
+    </form>
+
+</body>
+
+<script>
+    function drawAllCards() {
+        
+        let queryURL = 'http://localhost:4000/entries'
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response.data)
+
+            //FOR EACH ENTRY
+            for (j = 0; j < response.data.length; j++) {
+
+                //OBJECT KEY/VALUE ANALYSIS
+                let fields = (Object.keys(response.data[j]))
+                let values = (Object.values(response.data[j]))
+
+                //CARD DRAW
+                let card = $(`<div class='card mt-3 mb-3 p-2'></div>`)
+                let table = $(`<table class='table jobDescriptionTable' style='display: none'></table>`)
+                for (i = 0; i < fields.length; i++) {
+                    let row = $('<tr>')
+                    row.append(`<td>${fields[i]}</td>`)
+                    row.append(`<td>${values[i]}</td>`)
+                    $(table).append(row)
+                }
+                $(card).append(table)
+                $(card).prepend(`<small class='deleteRecordButton text-right' id='${response.data[j]._id}'>Delete</small>`)
+                $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].company}</h4>`)
+                $('body').append(card)
+            }
+        });
+    }
+    drawAllCards()
+</script>
+
+<script>
+    $(document).on("click", ".cardRevealControl", function () {
+        $(this).siblings().toggle()
+    })
+
+    $(document).on('click', '.deleteRecordButton', function () {
+        event.preventDefault()
+        let idToDelete = $(this).attr('id')
+        let queryURL = `http://localhost:4000/delete?id=${idToDelete}`
+
+        console.log(queryURL)
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log('Adding!')
+        })
+    })
+
+    $(document).on('submit', '#addRecordForm', function () {
+        event.preventDefault()
+        let queryURL = 'http://localhost:4000/add'
+
+        console.log(queryURL)
+        $.ajax({
+            url: queryURL,
+            method: "POST",
+            data: {
+                companyName: $('#companyName').val(),
+                jobTitle: $('#jobTitle').val(),
+                jobDescription: $('#jobDescription').val(),
+                jobLevel: $('#jobLevel').val(),
+                minimumYearsExperience: $('#minimumYearsExperience').val(),
+                desireLevel: $('#desireLevel').val(),
+                confidenceLevel: $('#confidenceLevel').val(),
+                applicationSubmissionDate: $('#applicationFormSubmissionDate').val(),
+                dateOfFirstResponse: $('#dateOfFirstResponse').val(),
+                fourYearDegreeRequired: $('#fourYearDegreeRequired').val(),
+                csDegreePreferred: $('#csDegreePreferred').is(':checked'),
+                majorCorporation: $('#majorCorporation').is(':checked'),
+                essentialSkills: $('#essentialSkills').val(),
+                locationOfPosting: $('#locatinoOfPosting').val(),
+                locationOfSubmission: $('#locationOfSubmission').val(),
+                easyApply: $('#easyApply').is(':checked'),
+                stackType: $('#stackType').val(),
+                yearsExperienceAtTimeOfApplication: $('#yearsExperienceAtTimeOfApplication').val(),
+                numberOfFeaturedProjectsAtTimeOfApplication: $('#numberOfFeaturedProjectsAtTimeOfApplication').val(),
+                applicationWithdrawn: $('#applicationWithdrawn').is(':checked'),
+                neverResponded: $('#neverResponded').is(':checked'),
+                interviewGranted: $('#interviewGranted').is(':checked'),
+                deniedJob: $('#deniedJob').is(':checked'),
+                offeredJob: $('#offeredJob').is(':checked')
+            }
+        }).then(function (response) {
+            console.log('Adding!')
+            drawAllCards()
+        })
+    })
+
+</script>
+
+</html>
