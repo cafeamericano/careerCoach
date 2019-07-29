@@ -31,6 +31,10 @@ function drawAllCards() {
             $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
             $('#recordsContainer').append(card)
         }
+
+        printAvgDesireLevel(response.data)
+        printOutstandingCount(response.data)
+
     });
 }
 
@@ -103,6 +107,30 @@ $(document).on("click", ".cardRevealControl", function () {
 //Empty the Records Container
 function emptyRecordsContainer() {
     $('#recordsContainer').empty()
+}
+
+// ************************* STATS *************************
+
+function printAvgDesireLevel(resObj) {
+    let x = 0;
+    let recordCount = resObj.length
+    for (i = 0; i < recordCount; i++) {
+        x += parseInt(resObj[i].desireLevel)
+    }
+    let avgDesireLevel = (x / (recordCount)).toFixed(1);
+    $('statsbox').append(`<p>Average Desire Level: ${avgDesireLevel}</p>`)
+}
+
+function printOutstandingCount(resObj) {
+    let x = 0;
+    let recordCount = resObj.length
+    for (i = 0; i < recordCount; i++) {
+        if (resObj[i].applicationWithdrawn == 'false' && resObj[i].deniedJob == 'false' && resObj[i].neverResponded == 'false') {
+            x += 1
+        }
+    }
+    let avgDesireLevel = (x / (recordCount)).toFixed(1);
+    $('statsbox').append(`<p>Outstanding/Total Ratio: ${x}/${recordCount}</p>`)
 }
 
 // ************************* RUN PROGRAM *************************
