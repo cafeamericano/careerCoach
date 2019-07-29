@@ -27,8 +27,8 @@ function drawAllCards() {
                 $(table).append(row)
             }
             $(card).append(table)
-            $(card).prepend(`<small class='deleteRecordButton text-right' id='${response.data[j]._id}'>Delete</small>`)
-            $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].company}</h4>`)
+            $(card).prepend(`<button style='width: 70px' class='deleteRecordButton text-right' id='${response.data[j]._id}'>Delete</button>`)
+            $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
             $('#recordsContainer').append(card)
         }
     });
