@@ -18,7 +18,7 @@ function drawAllCards() {
             let values = (Object.values(response.data[j]))
 
             //CARD DRAW
-            let card = $(`<div class='card mt-3 mb-3 p-2'></div>`)
+            let card = $(`<div class='card mt-3 mb-3 p-2' style='background: #fffde0'></div>`)
             let dataHolder = $(`<div class='jobDescriptionTable row' style='display: none'></div>`)
             let col1 = $(`<div class='col-6'></div>`)
             let col2 = $(`<div class='col-6'></div>`)
