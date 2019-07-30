@@ -33,7 +33,9 @@ function drawAllCards() {
         }
 
         printAvgDesireLevel(response.data)
+        printAvgConfidenceLevel(response.data)
         printOutstandingCount(response.data)
+        printApplicationsPerDay(response.data)
 
     });
 }
@@ -55,7 +57,7 @@ $(document).on('submit', '#addRecordForm', function () {
             minimumYearsExperience: $('#minimumYearsExperience').val(),
             desireLevel: $('#desireLevel').val(),
             confidenceLevel: $('#confidenceLevel').val(),
-            applicationSubmissionDate: $('#applicationFormSubmissionDate').val(),
+            applicationSubmissionDate: $('#applicationSubmissionDate').val(),
             dateOfFirstResponse: $('#dateOfFirstResponse').val(),
             fourYearDegreeRequired: $('#fourYearDegreeRequired').val(),
             csDegreePreferred: $('#csDegreePreferred').is(':checked'),
@@ -121,6 +123,16 @@ function printAvgDesireLevel(resObj) {
     $('statsbox').append(`<p>Average Desire Level: ${avgDesireLevel}</p>`)
 }
 
+function printAvgConfidenceLevel(resObj) {
+    let x = 0;
+    let recordCount = resObj.length
+    for (i = 0; i < recordCount; i++) {
+        x += parseInt(resObj[i].confidenceLevel)
+    }
+    let avgConfidenceLevel = (x / (recordCount)).toFixed(1);
+    $('statsbox').append(`<p>Average Confidence Level: ${avgConfidenceLevel}</p>`)
+}
+
 function printOutstandingCount(resObj) {
     let x = 0;
     let recordCount = resObj.length
@@ -129,10 +141,27 @@ function printOutstandingCount(resObj) {
             x += 1
         }
     }
-    let avgDesireLevel = (x / (recordCount)).toFixed(1);
-    $('statsbox').append(`<p>Outstanding/Total Ratio: ${x}/${recordCount}</p>`)
+    $('statsbox').append(`<p>Outstanding/Total Ratio: ${x} out of ${recordCount}</p>`)
+}
+
+function printApplicationsPerDay(resObj) {
+    let x = 0;
+    let last60DaysArray = pullLast60Days()
+    let recordCount = resObj.length
+    let compValsArr = []
+    for (i = 0; i < recordCount; i++) {
+        let valueToInsert = 0;
+        for (j = 0; j < last60DaysArray.length; j++) {
+            if (resObj[i].applicationSubmissionDate === last60DaysArray[j]) {
+                valueToInsert += 1 
+            }
+        }
+        compValsArr.push(valueToInsert)
+    }
+    console.log(compValsArr)
 }
 
 // ************************* RUN PROGRAM *************************
 
 drawAllCards()
+console.log(pullLast60Days()) //Loaded in from a previous JS file in the HTML
