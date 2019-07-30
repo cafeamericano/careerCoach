@@ -164,15 +164,15 @@ function printApplicationsPerDay(resObj) {
     //Create the new chart
     var ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: last60DaysArray,
             datasets: [{
                 label: 'Share Value',
                 data: compValsArr,
-                backgroundColor: [
+                backgroundColor: 
                     'rgba(13, 193, 175, 0.5)'
-                ],
+                ,
             }]
         },
         options: {
