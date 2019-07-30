@@ -19,14 +19,22 @@ function drawAllCards() {
 
             //CARD DRAW
             let card = $(`<div class='card mt-3 mb-3 p-2'></div>`)
-            let table = $(`<table class='table jobDescriptionTable' style='display: none'></table>`)
+            let dataHolder = $(`<div class='jobDescriptionTable row' style='display: none'></div>`)
+            let col1 = $(`<div class='col-6'></div>`)
+            let col2 = $(`<div class='col-6'></div>`)
+
             for (i = 0; i < fields.length; i++) {
-                let row = $('<tr>')
-                row.append(`<td>${fields[i]}</td>`)
-                row.append(`<td>${values[i]}</td>`)
-                $(table).append(row)
+                if ((i % 2) === 0) {
+                    col1.append(`<p style='font-size: 11px'><strong>${fields[i]}</strong>: ${values[i]} </p>`)
+                } else if ((i % 2) === 1) {
+                    col2.append(`<p style='font-size: 11px'><strong>${fields[i]}</strong>: ${values[i]} </p>`)
+                }
             }
-            $(card).append(table)
+
+            $(dataHolder).append(col1)
+            $(dataHolder).append(col2)
+            $(card).append(dataHolder)
+
             $(card).prepend(`<button style='width: 70px' class='deleteRecordButton text-right' id='${response.data[j]._id}'>Delete</button>`)
             $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
             $('#recordsContainer').append(card)
@@ -170,7 +178,7 @@ function printApplicationsPerDay(resObj) {
             datasets: [{
                 label: 'Share Value',
                 data: compValsArr,
-                backgroundColor: 
+                backgroundColor:
                     'rgba(13, 193, 175, 0.5)'
                 ,
             }]
