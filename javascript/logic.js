@@ -149,11 +149,11 @@ function printApplicationsPerDay(resObj) {
     let last60DaysArray = pullLast60Days()
     let recordCount = resObj.length
     let compValsArr = []
-    for (i = 0; i < recordCount; i++) {
+    for (i = 0; i < last60DaysArray.length; i++) {
         let valueToInsert = 0;
-        for (j = 0; j < last60DaysArray.length; j++) {
-            if (resObj[i].applicationSubmissionDate === last60DaysArray[j]) {
-                valueToInsert += 1 
+        for (j = 0; j < recordCount; j++) {
+            if (last60DaysArray[i] === resObj[j].applicationSubmissionDate) {
+                valueToInsert += 1
             }
         }
         compValsArr.push(valueToInsert)
