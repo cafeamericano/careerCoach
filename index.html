@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js'></script>
     <script src='javascript/moment.js'></script>
     <script src='javascript/dateArrayMaker.js'></script>
     <script src='javascript/logic.js'></script>
@@ -111,10 +112,12 @@
         </div>
         <button type='submit'>Submit</button>
     </form>
+    <hr>
     <main id='recordsContainer'></main>
-    <statsbox>
-
-    </statsbox>
+    <hr>
+    <canvas id='myChart'></canvas>
+    <hr>
+    <statsbox></statsbox>
 </body>
 
 </html>

@@ -158,10 +158,40 @@ function printApplicationsPerDay(resObj) {
         }
         compValsArr.push(valueToInsert)
     }
+    console.log(last60DaysArray)
     console.log(compValsArr)
+
+    //Create the new chart
+    var ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: last60DaysArray,
+            datasets: [{
+                label: 'Share Value',
+                data: compValsArr,
+                backgroundColor: [
+                    'rgba(13, 193, 175, 0.5)'
+                ],
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }]
+            }
+        }
+    });
+
 }
 
 // ************************* RUN PROGRAM *************************
 
 drawAllCards()
 console.log(pullLast60Days()) //Loaded in from a previous JS file in the HTML
+
+
