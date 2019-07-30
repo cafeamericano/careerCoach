@@ -119,6 +119,10 @@ function emptyRecordsContainer() {
     $('#recordsContainer').empty()
 }
 
+$(document).on("click", "#captureNewEntryModalButton", function () {
+    $('.modal').modal('toggle')
+})
+
 // ************************* STATS *************************
 
 function printAvgDesireLevel(resObj) {
