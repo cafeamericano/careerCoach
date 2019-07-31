@@ -56,7 +56,7 @@
     <!-- MODALS ############################################################################################################################## -->
 
     <!-- TIMELINES MODAL -->
-    <div class="modal fade" id="timelinesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <modal class="modal fade" id="timelinesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -76,10 +76,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </modal>
 
     <!-- STATISTICS MODAL -->
-    <div class="modal fade" id="statisticsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <modal class="modal fade" id="statisticsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -98,10 +98,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </modal>
 
     <!-- VIEW RECORD MODAL -->
-    <div class="modal fade" id="viewRecordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <modal class="modal fade" id="viewRecordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -118,10 +118,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </modal>
 
     <!-- EDIT RECORD MODAL -->
-    <div class="modal fade" id="editRecordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <modal class="modal fade" id="editRecordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -141,10 +141,10 @@
                 </form>
             </div>
         </div>
-    </div>
+    </modal>
 
     <!-- CREATE NEW RECORD MODAL-->
-    <div class="modal fade" id="addRecordModal" tabindex="-1" role="dialog">
+    <modal class="modal fade" id="addRecordModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -154,8 +154,8 @@
                     </button>
                 </div>
 
-                <div class="modal-body">
-                    <form id='addRecordForm' class='row'>
+                <form id='addRecordForm'>
+                    <div class="modal-body">
                         <div class="col-12">
                             <label>Company Name</label>
                             <input type="text" class="form-control" id='companyName' placeholder="">
@@ -251,15 +251,16 @@
                             <label>Offered Job?</label>
                             <input type="checkbox" class="form-control" id="offeredJob">
                         </div>
-                        <div class='text-right'>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id='captureNewEntryModalButton'>Add</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
+        </div>
+    </modal>
 
     <!-- LIST OF ALL RECORDS ############################################################################################################################## -->
     <main class='container'>

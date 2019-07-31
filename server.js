@@ -118,7 +118,9 @@ function updateOneRecord(req, res) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        var myquery = { companyName: req.body.companyName };
+        let incomingObject = req.body
+        delete incomingObject._id
+        var myquery = { companyName: incomingObject.companyName };
         console.log(myquery)
         var newvalues = { $set: req.body };
         console.log(newvalues)

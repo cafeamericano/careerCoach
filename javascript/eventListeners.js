@@ -8,6 +8,7 @@ $(document).on('submit', '#addRecordForm', function () {
     event.preventDefault()
     let queryURL = 'http://localhost:4000/add'
     addRequestedRecord(queryURL)
+    deactivateModal()
     card.drawAll()
 })
 
@@ -38,6 +39,8 @@ $(document).on('submit', '#updateRecordForm', function () {
     let idToEdit = $(this).children().children().attr('data-id')
     let queryURL = `http://localhost:4000/edit`
     defineTheEditObjecToPost(idToEdit, queryURL)
+    deactivateModal()
+    card.drawAll()
 })
 
 // #################### FUNCTIONS #################### 
@@ -71,7 +74,7 @@ function prepareTheEditModal(queryURL) {
         let values = (Object.values(response.data))
         console.log(values)
         let div = $(`<div data-id='${response.data._id}'></div>`)
-        for (i = 1; i < fields.length; i++) { //Start at one to skip id field
+        for (i = 0; i < fields.length; i++) { //Start at one to skip id field
             $(div).append(`<strong>${fields[i]}</strong>: <input id='${fields[i]}_${response.data._id}' value='${values[i]}'/><br>`)
             let objProp = `${fields[i]}`
             postObj[objProp] = ''
@@ -145,6 +148,10 @@ function addRequestedRecord(queryURL) {
     }).then(function (response) {
         console.log('Sent add request.')
     })
-    $('#addRecordModal').hide();
+}
+
+function deactivateModal() {
+    $('modal').hide();
     $('.modal-backdrop').hide();
+    $('body').removeClass('modal-open');
 }

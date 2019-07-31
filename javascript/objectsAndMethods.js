@@ -1,36 +1,22 @@
 let card = {
     drawAll: function () {
-        recordContainer.empty()
+        $('#recordsContainer').empty()
         let queryURL = 'http://localhost:4000/entries'
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response.data)
-
+            
             //FOR EACH ENTRY
             for (j = 0; j < response.data.length; j++) {
 
-                //OBJECT KEY/VALUE ANALYSIS
-                let fields = (Object.keys(response.data[j]))
-                let values = (Object.values(response.data[j]))
-
                 //CARD DRAW
                 let card = $(`<div class='card m-2 shadow' style='border-radius: 20px;'></div>`)
-                let dataHolder = $(`<div class='jobDescriptionTable row' style='display: none'></div>`)
-                let col1 = $(`<div class='col-6'></div>`)
-                let col2 = $(`<div class='col-6'></div>`)
 
-                $('#viewRecordModalBody').empty()
-                for (i = 0; i < fields.length; i++) {
-                    $('#viewRecordModalBody').append(`<p style='font-size: 11px'><strong>${fields[i]}</strong>: ${values[i]} </p>`)
-                }
-                
                 $(card).prepend(`<button style='width: 70px' class='deleteRecordButton text-right' id='${response.data[j]._id}'>Delete</button>`)
                 $(card).prepend(`<button style='width: 70px' class='editRecordButton text-right' data-toggle='modal' data-target='#editRecordModal' id='${response.data[j]._id}'>Edit</button>`)
                 $(card).prepend(`<button style='width: 70px' class='viewRecordButton text-right' data-toggle='modal' data-target='#viewRecordModal' id='${response.data[j]._id}'>View</button>`)
 
-                //$(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
                 $(card).prepend(`<small>Applied: ${response.data[j].applicationSubmissionDate}</small>`)
                 $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
 
@@ -124,17 +110,5 @@ let graph = {
             }
         });
 
-    }
-}
-
-let recordContainer = {
-    empty: function () {
-        $('#recordsContainer').empty()
-    }
-}
-
-let editRecordModal = {
-    populate: function() {
-        $('#editRecordModal').empty()
     }
 }
