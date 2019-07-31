@@ -226,8 +226,6 @@ function printApplicationsPerDay(resObj) {
 // ************************* RUN PROGRAM *************************
 
 drawAllCards()
-console.log(pullLast60Days()) //Loaded in from a previous JS file in the HTML
-
 
 function pullRecordSpecifics(id) {
     let queryURL = 'http://localhost:4000/entries'
