@@ -29,8 +29,11 @@ app.get('/findentry', (req, res) => {
 });
 
 app.post('/add', (req, res) => {
-    console.log('add route hit')
     addNewEntry(req, res)
+});
+
+app.post('/edit', (req, res) => {
+    updateOneRecord(req, res)
 });
 
 app.get('/delete', (req, res) => {
@@ -110,3 +113,19 @@ function deleteEntry(req, res) {
     });
 }
 
+//Update One Record
+function updateOneRecord(req, res) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        var myquery = { _id: mongo.ObjectID(req.body._id) };
+        console.log(myquery)
+        var newvalues = { $set: req.body };
+        console.log(newvalues)
+        // dbo.collection("customers").updateOne(myquery, newvalues, function (err, res) {
+        //     if (err) throw err;
+        //     console.log("1 document updated");
+        //     db.close();
+        // });
+    });
+}

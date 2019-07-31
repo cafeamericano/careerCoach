@@ -25,11 +25,10 @@ let card = {
                 for (i = 0; i < fields.length; i++) {
                     $('#specialModal').append(`<p style='font-size: 11px'><strong>${fields[i]}</strong>: ${values[i]} </p>`)
                 }
-
-                $('#selectedRecordInformationModal').append(col1)
-                $('#selectedRecordInformationModal').append(col2)
-
+                
                 $(card).prepend(`<button style='width: 70px' class='deleteRecordButton text-right' id='${response.data[j]._id}'>Delete</button>`)
+                $(card).prepend(`<button style='width: 70px' class='editRecordButton text-right' id='${response.data[j]._id}'>Edit</button>`)
+
                 //$(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
                 $(card).prepend(`<small>Applied: ${response.data[j].applicationSubmissionDate}</small>`)
                 $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
@@ -162,5 +161,11 @@ let graph = {
 let recordContainer = {
     empty: function () {
         $('#recordsContainer').empty()
+    }
+}
+
+let editRecordModal = {
+    populate: function() {
+        $('#editRecordModal').empty()
     }
 }
