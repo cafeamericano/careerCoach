@@ -104,7 +104,7 @@ function prepareTheEditModal(queryURL) {
         let values = (Object.values(response.data))
         console.log(values)
         let form = $(`<form data-id='${response.data._id}' class='updateRecordForm'></form>`)
-        for (i = 0; i < fields.length; i++) {
+        for (i = 1; i < fields.length; i++) { //Start at one to skip id field
             $(form).append(`<strong>${fields[i]}</strong>: <input id='${fields[i]}_${response.data._id}' value='${values[i]}'/><br>`)
             let objProp = `${fields[i]}`
             postObj[objProp] = ''
@@ -127,7 +127,7 @@ $(document).on('submit', '.updateRecordForm', function () {
     event.preventDefault()
     let idToEdit= $(this).attr('data-id')
     alert(idToEdit)
-    let queryURL = `http://localhost:4000/findentry?id=${idToEdit}`
+    let queryURL = `http://localhost:4000/edit`
     alert(queryURL)
     let inputValsToGrab = Object.keys(postObj)
     for (i = 0; i < inputValsToGrab.length; i++) {
@@ -138,4 +138,5 @@ $(document).on('submit', '.updateRecordForm', function () {
         postObj[x] = $(elementName).val()
     }
     console.log(postObj)
+    postEditedForm(queryURL, postObj)
 })
