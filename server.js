@@ -24,6 +24,10 @@ app.get('/entries', (req, res) => {
     showAllEntries(req, res)
 });
 
+app.get('/findentry', (req, res) => {
+    findEntry(req, res)
+});
+
 app.post('/add', (req, res) => {
     console.log('add route hit')
     addNewEntry(req, res)
@@ -42,7 +46,7 @@ app.listen(4000, function () {
 //FUNCTIONS BY ACTION////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Show All Entries
-function showAllEntries(req, res){
+function showAllEntries(req, res) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
@@ -57,8 +61,25 @@ function showAllEntries(req, res){
     })
 }
 
+//Find Entry
+function findEntry(req, res) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        var query = { _id: mongo.ObjectID(req.query.id) };
+        console.log(query)
+        dbo.collection(entriesCollection).find(query).toArray(function (err, result) {
+            console.log(result)
+            if (err) throw err;
+            return res.json({
+                data: result[0]
+            })
+        });
+    });
+}
+
 //Add New Entry
-function addNewEntry(req, res){
+function addNewEntry(req, res) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
@@ -75,11 +96,11 @@ function addNewEntry(req, res){
 }
 
 //Delete an Entry
-function deleteEntry(req, res){
+function deleteEntry(req, res) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        var myquery = { _id: mongo.ObjectID(req.query.id)}
+        var myquery = { _id: mongo.ObjectID(req.query.id) }
         console.log(myquery)
         dbo.collection(entriesCollection).deleteOne(myquery, function (err, obj) {
             if (err) throw err;
@@ -88,3 +109,4 @@ function deleteEntry(req, res){
         });
     });
 }
+
