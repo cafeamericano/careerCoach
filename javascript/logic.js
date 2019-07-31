@@ -18,25 +18,27 @@ function drawAllCards() {
             let values = (Object.values(response.data[j]))
 
             //CARD DRAW
-            let card = $(`<div class='card mt-3 mb-3 p-2' style='background: #fffde0'></div>`)
+            let card = $(`<div class='card m-2 shadow' style='border-radius: 20px;'></div>`)
             let dataHolder = $(`<div class='jobDescriptionTable row' style='display: none'></div>`)
             let col1 = $(`<div class='col-6'></div>`)
             let col2 = $(`<div class='col-6'></div>`)
 
+            $('#specialModal').empty()
             for (i = 0; i < fields.length; i++) {
-                if ((i % 2) === 0) {
-                    col1.append(`<p style='font-size: 11px'><strong>${fields[i]}</strong>: ${values[i]} </p>`)
-                } else if ((i % 2) === 1) {
-                    col2.append(`<p style='font-size: 11px'><strong>${fields[i]}</strong>: ${values[i]} </p>`)
-                }
+                $('#specialModal').append(`<p style='font-size: 11px'><strong>${fields[i]}</strong>: ${values[i]} </p>`)
             }
 
-            $(dataHolder).append(col1)
-            $(dataHolder).append(col2)
-            $(card).append(dataHolder)
+            $('#selectedRecordInformationModal').append(col1)
+            $('#selectedRecordInformationModal').append(col2)
 
             $(card).prepend(`<button style='width: 70px' class='deleteRecordButton text-right' id='${response.data[j]._id}'>Delete</button>`)
+            //$(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
+            $(card).prepend(`<small>Applied: ${response.data[j].applicationSubmissionDate}</small>`)
             $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
+
+            $('#recordsContainer').addClass('row')
+            $(card).addClass('col-4 p-3 recordPreviewCard')
+            $(card).attr('data-id', response.data[j]._id)
             $('#recordsContainer').append(card)
         }
 
@@ -123,6 +125,10 @@ $(document).on("click", "#captureNewEntryModalButton", function () {
     $('.modal').modal('toggle')
 })
 
+$(document).on("click", ".recordPreviewCard", function () {
+    alert('card clicked')
+})
+
 // ************************* STATS *************************
 
 function printAvgDesireLevel(resObj) {
@@ -207,3 +213,49 @@ drawAllCards()
 console.log(pullLast60Days()) //Loaded in from a previous JS file in the HTML
 
 
+function pullRecordSpecifics(id) {
+    let queryURL = 'http://localhost:4000/entries'
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response.data)
+
+        //FOR EACH ENTRY
+        for (j = 0; j < response.data.length; j++) {
+
+            //OBJECT KEY/VALUE ANALYSIS
+            let fields = (Object.keys(response.data[j]))
+            let values = (Object.values(response.data[j]))
+
+            //CARD DRAW
+            let card = $(`<div class='card m-2 shadow' style='border-radius: 20px;'></div>`)
+            let dataHolder = $(`<div class='jobDescriptionTable row' style='display: none'></div>`)
+            let col1 = $(`<div class='col-6'></div>`)
+            let col2 = $(`<div class='col-6'></div>`)
+
+            $('#specialModal').empty()
+            for (i = 0; i < fields.length; i++) {
+                $('#specialModal').append(`<p style='font-size: 11px'><strong>${fields[i]}</strong>: ${values[i]} </p>`)
+            }
+
+            $('#selectedRecordInformationModal').append(col1)
+            $('#selectedRecordInformationModal').append(col2)
+
+            $(card).prepend(`<button style='width: 70px' class='deleteRecordButton text-right' id='${response.data[j]._id}'>Delete</button>`)
+            //$(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
+            $(card).prepend(`<small>Applied: ${response.data[j].applicationSubmissionDate}</small>`)
+            $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
+
+            $('#recordsContainer').addClass('row')
+            $(card).addClass('col-4 p-3 recordPreviewCard')
+            $('#recordsContainer').append(card)
+        }
+
+        printAvgDesireLevel(response.data)
+        printAvgConfidenceLevel(response.data)
+        printOutstandingCount(response.data)
+        printApplicationsPerDay(response.data)
+
+    });
+}
