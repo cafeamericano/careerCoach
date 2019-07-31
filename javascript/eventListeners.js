@@ -16,6 +16,7 @@ $(document).on('click', '.deleteRecordButton', function () {
     let idToDelete = $(this).attr('id')
     let queryURL = `http://localhost:4000/delete?id=${idToDelete}`
     deleteRequestedRecord(queryURL)
+    $(this).parent().fadeOut()
 })
 
 $(document).on("click", ".viewRecordButton", function () {
@@ -32,9 +33,9 @@ $(document).on('click', '.editRecordButton', function () {
     prepareTheEditModal(queryURL)
 })
 
-$(document).on('submit', '.updateRecordForm', function () {
+$(document).on('submit', '#updateRecordForm', function () {
     event.preventDefault()
-    let idToEdit = $(this).attr('data-id')
+    let idToEdit = $(this).children().children().attr('data-id')
     let queryURL = `http://localhost:4000/edit`
     defineTheEditObjecToPost(idToEdit, queryURL)
 })
@@ -69,14 +70,13 @@ function prepareTheEditModal(queryURL) {
         console.log(fields)
         let values = (Object.values(response.data))
         console.log(values)
-        let form = $(`<form data-id='${response.data._id}' class='updateRecordForm'></form>`)
+        let div = $(`<div data-id='${response.data._id}'></div>`)
         for (i = 1; i < fields.length; i++) { //Start at one to skip id field
-            $(form).append(`<strong>${fields[i]}</strong>: <input id='${fields[i]}_${response.data._id}' value='${values[i]}'/><br>`)
+            $(div).append(`<strong>${fields[i]}</strong>: <input id='${fields[i]}_${response.data._id}' value='${values[i]}'/><br>`)
             let objProp = `${fields[i]}`
             postObj[objProp] = ''
         }
-        $(form).append(`<button type='submit'>Submit</button>`)
-        $('#editRecordModalBody').append(form)
+        $('#editRecordModalBody').append(div)
     })
 }
 
@@ -99,9 +99,7 @@ function deleteRequestedRecord(queryURL) {
         method: "GET"
     }).then(function (response) {
         console.log('Delete request sent.')
-
     })
-    $(this).parent().fadeOut()
 }
 
 function postEditedForm(queryURL, postObject) {
@@ -147,4 +145,6 @@ function addRequestedRecord(queryURL) {
     }).then(function (response) {
         console.log('Sent add request.')
     })
+    $('#addRecordModal').hide();
+    $('.modal-backdrop').hide();
 }
