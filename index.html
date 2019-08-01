@@ -26,6 +26,9 @@
     <script src='javascript/eventListeners.js'></script>
     <script src='javascript/runProgram.js'></script>
 
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body>
@@ -58,10 +61,10 @@
     <!-- TIMELINES MODAL -->
     <modal class="modal fade" id="timelinesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 70%; max-height: 70%">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="timelinesModalTitle">Modal title</h5>
+                    <h5 class="modal-title" id="timelinesModalTitle">Timeline</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -81,10 +84,10 @@
     <!-- STATISTICS MODAL -->
     <modal class="modal fade" id="statisticsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 70%; max-height: 70%">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="statisticsModalTitle">Modal title</h5>
+                    <h5 class="modal-title" id="statisticsModalTitle">Statistics</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -103,7 +106,7 @@
     <!-- VIEW RECORD MODAL -->
     <modal class="modal fade" id="viewRecordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 70%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">View Record</h5>
@@ -123,7 +126,7 @@
     <!-- EDIT RECORD MODAL -->
     <modal class="modal fade" id="editRecordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 70%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Edit Record</h5>
@@ -145,11 +148,11 @@
 
     <!-- CREATE NEW RECORD MODAL-->
     <modal class="modal fade" id="addRecordModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" style="max-width: 70%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addRecordModalTitle">Add Record</h5>
-                    <button type="button" class="close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -251,6 +254,18 @@
                             <label>Offered Job?</label>
                             <input type="checkbox" class="form-control" id="offeredJob">
                         </div>
+                        <div class="col-12">
+                            <label>Application Status</label>
+                            <select class="form-control" id='status'>
+                                <option value="Application Not Yet Submitted">Application Not Yet Submitted</option>
+                                <option value="Awaiting Response">Awaiting Response</option>
+                                <option value="Interview Granted">Interview Granted</option>
+                                <option value="Denied with Interview Granted">Denied with Interview Granted</option>
+                                <option value="Denied without Interview Granted">Denied without Interview Granted
+                                </option>
+                                <option value="Withdrawn">Withdrawn</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
@@ -264,7 +279,7 @@
 
     <!-- LIST OF ALL RECORDS ############################################################################################################################## -->
     <main class='container'>
-        <div id='recordsContainer' class='row'></div>
+        <div id='recordsContainer' class='row' style='justify-content: space-between'></div>
     </main>
 
 </body>

@@ -131,3 +131,22 @@ function updateOneRecord(req, res) {
         });
     });
 }
+
+//Update All Records
+function updateManyRecords(key, value) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        var field = {
+            $set:
+            {
+                [key]: value
+            }
+        };
+        dbo.collection(entriesCollection).updateMany({}, field, function (err, res) {
+            if (err) throw err;
+            console.log("All documents updated");
+            db.close();
+        });
+    });
+}

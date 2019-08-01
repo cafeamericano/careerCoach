@@ -17,7 +17,7 @@ $(document).on('click', '.deleteRecordButton', function () {
     let idToDelete = $(this).attr('id')
     let queryURL = `http://localhost:4000/delete?id=${idToDelete}`
     deleteRequestedRecord(queryURL)
-    $(this).parent().fadeOut()
+    $(this).parent().parent().fadeOut()
 })
 
 $(document).on("click", ".viewRecordButton", function () {
@@ -143,7 +143,8 @@ function addRequestedRecord(queryURL) {
             neverResponded: $('#neverResponded').is(':checked'),
             interviewGranted: $('#interviewGranted').is(':checked'),
             deniedJob: $('#deniedJob').is(':checked'),
-            offeredJob: $('#offeredJob').is(':checked')
+            offeredJob: $('#offeredJob').is(':checked'),
+            status: $('#status').val()
         }
     }).then(function (response) {
         console.log('Sent add request.')

@@ -6,22 +6,27 @@ let card = {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            
+
             //FOR EACH ENTRY
             for (j = 0; j < response.data.length; j++) {
 
                 //CARD DRAW
-                let card = $(`<div class='card m-2 shadow' style='border-radius: 20px;'></div>`)
+                let card = $(`<div class='card m-2 shadow'></div>`)
 
-                $(card).prepend(`<button style='width: 70px' class='deleteRecordButton text-right' id='${response.data[j]._id}'>Delete</button>`)
-                $(card).prepend(`<button style='width: 70px' class='editRecordButton text-right' data-toggle='modal' data-target='#editRecordModal' id='${response.data[j]._id}'>Edit</button>`)
-                $(card).prepend(`<button style='width: 70px' class='viewRecordButton text-right' data-toggle='modal' data-target='#viewRecordModal' id='${response.data[j]._id}'>View</button>`)
+                $(card).prepend(`<small class='p-3'>Status: ${response.data[j].status}</small>`)
+                $(card).prepend(`<small class='p-3'>Applied: ${response.data[j].applicationSubmissionDate}</small><br/>`)
+                $(card).prepend(`<h4 class='card-header row'><div>${response.data[j].companyName}</div></h4>`)
 
-                $(card).prepend(`<small>Applied: ${response.data[j].applicationSubmissionDate}</small>`)
-                $(card).prepend(`<h4 class='cardRevealControl'>${response.data[j].companyName}</h4>`)
+                let cardFooter = $(`<div class='card-footer text-right'></div>`)
+
+                $(cardFooter).prepend(`<div class='deleteRecordButton text-center' id='${response.data[j]._id}'><i class="material-icons">delete</i></div>`)
+                $(cardFooter).prepend(`<div class='editRecordButton text-center' data-toggle='modal' data-target='#editRecordModal' id='${response.data[j]._id}'><i class="material-icons">edit</i></div>`)
+                $(cardFooter).prepend(`<div class='viewRecordButton text-center' data-toggle='modal' data-target='#viewRecordModal' id='${response.data[j]._id}'><i class="material-icons">zoom_in</i></div>`)
+
+                $(card).append(cardFooter)
 
                 $('#recordsContainer').addClass('row')
-                $(card).addClass('col-4 p-3 recordPreviewCard')
+                $(card).addClass('col-lg-5 col-md-12 recordPreviewCard')
                 $(card).attr('data-id', response.data[j]._id)
                 $('#recordsContainer').append(card)
             }

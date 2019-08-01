@@ -4,3 +4,23 @@ body {
     background-repeat: repeat;
     background-attachment: fixed;
 }
+
+.deleteRecordButton, .editRecordButton, .viewRecordButton {
+    margin-right: 10px;
+    cursor: pointer;
+    display: inline;
+}
+
+.recordPreviewCard {
+    display: inline;
+    word-wrap: normal
+}
+
+.col-lg-5, .col-md-12 {
+    padding: 0px
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px
+}
