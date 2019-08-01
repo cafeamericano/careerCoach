@@ -130,7 +130,7 @@ let graph = {
             data: {
                 labels: last60DaysArray,
                 datasets: [{
-                    label: 'Share Value',
+                    label: 'Applications Submitted',
                     data: compValsArr,
                     backgroundColor:
                         'rgba(13, 193, 175, 0.5)'

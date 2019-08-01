@@ -56,8 +56,12 @@ function prepareTheReadOnlyModal(queryURL) {
         console.log(fields)
         let values = (Object.values(response.data))
         console.log(values)
-        for (i = 0; i < fields.length; i++) {
-            $('#viewRecordModalBody').append(`<p style='font-size: 11px'><strong>${fields[i]}</strong>: ${values[i]} </p>`)
+        for (i = 0; i < listOfStandardFields.length; i++) { //Look at standard field list
+            for (j = 0; j < fields.length; j++) { //Look at this objects fields
+                if (listOfStandardFields[i] === fields[j]) { //Find where they match and grab that value
+                    $('#viewRecordModalBody').append(`<p style='font-size: 11px'><strong>${listOfStandardFields[i]}</strong>: ${values[j]} </p>`)
+                }
+            }
         }
     })
 }
