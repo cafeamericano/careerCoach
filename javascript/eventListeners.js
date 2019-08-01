@@ -156,3 +156,4 @@ function deactivateModal() {
     $('.modal-backdrop').hide();
     $('body').removeClass('modal-open');
 }
+

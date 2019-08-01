@@ -16,6 +16,11 @@ body {
     word-wrap: normal
 }
 
+.card-body{
+    padding: 0px;
+    padding-bottom: 10px
+}
+
 .col-lg-5, .col-md-12 {
     padding: 0px
 }
