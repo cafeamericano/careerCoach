@@ -1,6 +1,7 @@
 const express = require('express');
-const cors = require('cors');
 var bodyParser = require('body-parser')
+var handlebars = require('express-handlebars')
+var path = require('path')
 var app = express()
 var mongo = require('mongodb');
 
@@ -12,14 +13,47 @@ let entriesCollection = 'job_apps';
 var MongoClient = require('mongodb').MongoClient;
 var url = `mongodb://localhost:27017/${databaseName}`;
 
-//MIDDLEWARE================================================================
+//EXPRESS PUBLIC FOLDER================================================================
 
-app.use(cors());
+app.use(express.static(__dirname + '/public'));
+
+//BODY PARSER MIDDLEWARE================================================================
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//HANDLEBARS================================================================
+
+app.set('views', path.join(__dirname, 'views'));
+app.engine('handlebars', handlebars({ defaultLayout: 'standard' }))
+app.set('view engine', 'handlebars');
+
 //ROUTES================================================================
+
+//Rendering ############
+
+app.get('/view_all', (req, res) => {
+    res.render('view_all')
+});
+
+app.get('/add_record_page', (req, res) => {
+    res.render('add_record')
+});
+
+app.get('/edit_record_page', (req, res) => {
+    res.render('edit_record')
+});
+
+app.get('/timelines', (req, res) => {
+    res.render('timelines')
+});
+
+app.get('/statistics', (req, res) => {
+    res.render('statistics')
+});
+
+//Processing ############
+
 app.get('/entries', (req, res) => {
     showAllEntries(req, res)
 });

@@ -22,6 +22,7 @@
     <script src='https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js'></script>
     <script src='javascript/moment.js'></script>
     <script src='javascript/fieldList.js'></script>
+    <script src='javascript/fieldGenerator.js'></script>
     <script src='javascript/dateArrayMaker.js'></script>
     <script src='javascript/objectsAndMethods.js'></script>
     <script src='javascript/eventListeners.js'></script>
@@ -45,13 +46,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#addRecordModal">Add</a>
+                    <a class="nav-link" id='addRecordModalTrigger' data-toggle="modal" data-target="#addRecordModal">Add</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#timelinesModal">Timelines</a>
+                    <a class="nav-link" id='timelinesModalTrigger' data-toggle="modal" data-target="#timelinesModal">Timelines</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#statisticsModal">Statistics</a>
+                    <a class="nav-link" id='statisticsModalTrigger' data-toggle="modal" data-target="#statisticsModal">Statistics</a>
                 </li>
             </ul>
         </div>
@@ -72,7 +73,6 @@
                 </div>
                 <div class="modal-body">
                     <canvas id='myChart'></canvas>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -157,117 +157,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
                 <form id='addRecordForm'>
-                    <div class="modal-body">
-                        <div class="col-12">
-                            <label>Company Name</label>
-                            <input type="text" class="form-control" id='companyName' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Job Title</label>
-                            <input type="text" class="form-control" id='jobTitle' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Job Description</label>
-                            <input type="text" class="form-control" id='jobDescription' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Job Level</label>
-                            <input type="text" class="form-control" id='jobLevel' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Minimum Years Experience</label>
-                            <input type="text" class="form-control" id='minimumYearsExperience' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Desire Level</label>
-                            <input type="range" class="form-control slider" min="1" max="5" value="3" id='desireLevel'>
-                        </div>
-                        <div class="col-12">
-                            <label>Confidence Level</label>
-                            <input type="range" class="form-control slider" min="1" max="5" value="3"
-                                id='confidenceLevel'>
-                        </div>
-                        <div class="col-12">
-                            <label>Application Submission Date</label>
-                            <input type="date" class="form-control" id='applicationSubmissionDate' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Date of First Response</label>
-                            <input type="date" class="form-control" id='dateOfFirstResponse' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Four Year Degree Required?</label>
-                            <input type="checkbox" class="form-control" id="fourYearDegreeRequired">
-                        </div>
-                        <div class="col-12">
-                            <label>CS Degree Preferred?</label>
-                            <input type="checkbox" class="form-control" id="csDegreePreferred">
-                        </div>
-                        <div class="col-12">
-                            <label>Major Corporation?</label>
-                            <input type="checkbox" class="form-control" id="majorCorporation">
-                        </div>
-                        <div class="col-12">
-                            <label>Essential Skills</label>
-                            <input type="text" class="form-control" id='essentialSkills' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Location of Posting</label>
-                            <input type="text" class="form-control" id='locationOfPosting' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Location of Submission</label>
-                            <input type="text" class="form-control" id='locationOfSubmission' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Easy Apply?</label>
-                            <input type="checkbox" class="form-control" id="easyApply">
-                        </div>
-                        <div class="col-12">
-                            <label>Stack Type</label>
-                            <input type="text" class="form-control" id='stackType' placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Years Experience at Time of Application</label>
-                            <input type="text" class="form-control" id='yearsExperienceAtTimeOfApplication'
-                                placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Number of Featured Projects at Time of Application</label>
-                            <input type="text" class="form-control" id='numberOfFeaturedProjectsAtTimeOfApplication'
-                                placeholder="">
-                        </div>
-                        <div class="col-12">
-                            <label>Application Withdrawn?</label>
-                            <input type="checkbox" class="form-control" id="applicationWithdrawn">
-                        </div>
-                        <div class="col-12">
-                            <label>Interview Granted?</label>
-                            <input type="checkbox" class="form-control" id="interviewGranted">
-                        </div>
-                        <div class="col-12">
-                            <label>Denied Job?</label>
-                            <input type="checkbox" class="form-control" id="deniedJob">
-                        </div>
-                        <div class="col-12">
-                            <label>Offered Job?</label>
-                            <input type="checkbox" class="form-control" id="offeredJob">
-                        </div>
-                        <div class="col-12">
-                            <label>Application Status</label>
-                            <select class="form-control" id='status'>
-                                <option value="Application Not Yet Submitted">Application Not Yet Submitted</option>
-                                <option value="Awaiting Response">Awaiting Response</option>
-                                <option value="Interview Granted">Interview Granted</option>
-                                <option value="Denied With Interview Granted">Denied with Interview Granted</option>
-                                <option value="Denied Without Interview Granted">Denied without Interview Granted
-                                </option>
-                                <option value="Job Offered">Job Offered</option>
-                                <option value="Withdrawn">Withdrawn</option>
-                            </select>
-                        </div>
+                    <div id='addRecordFormModalBody' class="modal-body">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
