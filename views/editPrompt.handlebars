@@ -32,11 +32,13 @@
     </div>
     <div class="col-12">
         <label>Confidence Level</label>
-        <input type="range" class="form-control slider" min="1" max="5" value="{{this.confidenceLevel}}" name='confidenceLevel'>
+        <input type="range" class="form-control slider" min="1" max="5" value="{{this.confidenceLevel}}"
+            name='confidenceLevel'>
     </div>
     <div class="col-12">
         <label>Application Submission Date</label>
-        <input type="date" class="form-control" name='applicationSubmissionDate' value="{{this.applicationSubmissionDate}}">
+        <input type="date" class="form-control" name='applicationSubmissionDate'
+            value="{{this.applicationSubmissionDate}}">
     </div>
     <div class="col-12">
         <label>Date of First Response</label>
@@ -44,7 +46,8 @@
     </div>
     <div class="col-12">
         <label>Four Year Degree Required?</label>
-        <input type="checkbox" class="form-control" name="fourYearDegreeRequired" value="{{this.fourYearDegreeRequired}}">
+        <input type="checkbox" class="form-control" name="fourYearDegreeRequired"
+            value="{{this.fourYearDegreeRequired}}">
     </div>
     <div class="col-12">
         <label>CS Degree Preferred?</label>
@@ -76,11 +79,13 @@
     </div>
     <div class="col-12">
         <label>Years Experience at Time of Application</label>
-        <input type="text" class="form-control" name='yearsExperienceAtTimeOfApplication' value="{{this.yearsExperienceAtTimeOfApplication}}">
+        <input type="text" class="form-control" name='yearsExperienceAtTimeOfApplication'
+            value="{{this.yearsExperienceAtTimeOfApplication}}">
     </div>
     <div class="col-12">
         <label>Number of Featured Projects at Time of Application</label>
-        <input type="text" class="form-control" name='numberOfFeaturedProjectsAtTimeOfApplication' value="{{this.numberOfFeaturedProjectsAtTimeOfApplication}}">
+        <input type="text" class="form-control" name='numberOfFeaturedProjectsAtTimeOfApplication'
+            value="{{this.numberOfFeaturedProjectsAtTimeOfApplication}}">
     </div>
     <div class="col-12">
         <label>Application Withdrawn?</label>
@@ -99,6 +104,11 @@
         <input type="checkbox" class="form-control" name="offeredJob" value="{{this.offeredJob}}">
     </div>
     <div class="col-12">
+        <label>Application URL</label>
+        <input type="text" class="form-control" name='applicationURL'
+            value="{{this.applicationURL}}">
+    </div>
+    <div class="col-12">
         <label>Application Status</label>
         <select class="form-control" name='status'>
             <option value="Application Not Yet Submitted">Application Not Yet Submitted</option>
@@ -115,5 +125,5 @@
     {{/each}}
 
     <button type='submit'>Submit</button>
-    
+
 </form>
