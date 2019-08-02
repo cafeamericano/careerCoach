@@ -12,60 +12,58 @@ function pullLast60Days() {
     return datesArr
 }
 
-let graph = {
-    applicationsPerDay: function (resObj) {
-        let x = 0;
-        let last60DaysArray = pullLast60Days()
-        let recordCount = resObj.length
-        let compValsArr = []
-        for (i = 0; i < last60DaysArray.length; i++) {
-            let valueToInsert = 0;
-            for (j = 0; j < recordCount; j++) {
-                if (last60DaysArray[i] === resObj[j].applicationSubmissionDate) {
-                    valueToInsert += 1
-                }
+function applicationsPerDay(resObj) {
+    let x = 0;
+    let last60DaysArray = pullLast60Days()
+    let recordCount = resObj.length
+    let compValsArr = []
+    for (i = 0; i < last60DaysArray.length; i++) {
+        let valueToInsert = 0;
+        for (j = 0; j < recordCount; j++) {
+            if (last60DaysArray[i] === resObj[j].applicationSubmissionDate) {
+                valueToInsert += 1
             }
-            compValsArr.push(valueToInsert)
         }
-        console.log(last60DaysArray)
-        console.log(compValsArr)
-
-        //Create the new chart
-        var ctx = document.getElementById('myChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: last60DaysArray,
-                datasets: [{
-                    label: 'Applications Submitted',
-                    data: compValsArr,
-                    backgroundColor:
-                        'rgba(13, 193, 175, 0.5)'
-                    ,
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1
-                        }
-                    }]
-                }
-            }
-        });
-
+        compValsArr.push(valueToInsert)
     }
+    console.log(last60DaysArray)
+    console.log(compValsArr)
+
+    //Create the new chart
+    var ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: last60DaysArray,
+            datasets: [{
+                label: 'Applications Submitted',
+                data: compValsArr,
+                backgroundColor:
+                    'rgba(13, 193, 175, 0.5)'
+                ,
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }]
+            }
+        }
+    });
+
 }
 
 function pullEntryDataForChart() {
-    let queryURL = 'http://localhost:4000/entries'
+    let queryURL = 'http://localhost:4000/api/entries'
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        graph.applicationsPerDay(response.data)
+        applicationsPerDay(response.data)
     });
 }
 

@@ -1,3 +1,64 @@
-<script src='viewAll.js'></script>
-
 <div id='recordsContainer'></div>
+
+{{!-- Functions --}}
+<script>
+
+    function grabEntries() {
+        $.ajax({
+            url: `/api/entries`,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response.data)
+            drawBasicCards(response)
+        })
+    }
+
+    function deleteEntry(id) {
+        $.ajax({
+            url: `/delete/process`,
+            method: "POST",
+            data: {
+                id: id
+            }
+        }).then(function (response) {
+            console.log(response)
+            console.log('Sent delete request.')
+        })
+    }
+
+    function drawBasicCards(response) {
+        for (i = 0; i < response.data.length; i++) {
+            let block = $(`<div>`)
+            $(block).append(response.data[i].companyName + '<br/>')
+            $(block).append(response.data[i].applicationSubmissionDate + '<br/>')
+            $(block).append(response.data[i].status + '<br/>')
+            $(block).append(`
+        <form action="/edit/prompt" method="post">
+            <input readonly style="display: none" type="text" name="id" value="${response.data[i]._id}">
+            <button type="submit" class="btn btn-success">
+                Edit
+            </button>
+        </form>
+        `)
+            $(block).append(`<button id=${response.data[i]._id} class='btn btn-secondary deleteRecordButton'>Delete</button>`)
+            $(block).append('<br/><hr>')
+            $('#recordsContainer').append(block)
+
+        }
+    }
+
+</script>
+
+{{!-- Event Listeners --}}
+<script>
+    $(document).on('click', '.deleteRecordButton', function () {
+        let idToDelete = $(this).attr('id')
+        deleteEntry(idToDelete)
+        $(this).parent().fadeOut()
+    })
+</script>
+
+{{!-- Run Program --}}
+<script>
+    grabEntries()
+</script>

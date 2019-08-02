@@ -1,5 +1,3 @@
-<script src='edit_record.js'></script>
-
 <form action="/edit/process" method="POST">
 
     {{# each data}}
@@ -102,7 +100,7 @@
     </div>
     <div class="col-12">
         <label>Application Status</label>
-        <select class="form-control" name='status' value="{{this.status}}">
+        <select class="form-control" name='status'>
             <option value="Application Not Yet Submitted">Application Not Yet Submitted</option>
             <option value="Awaiting Response">Awaiting Response</option>
             <option value="Interview Granted">Interview Granted</option>
