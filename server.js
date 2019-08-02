@@ -32,6 +32,10 @@ app.set('view engine', 'handlebars');
 
 //Rendering ############
 
+app.get('/', (req, res) => {
+    res.redirect('/view_all')
+});
+
 app.get('/view_all', (req, res) => {
     res.render('view_all')
 });
@@ -70,7 +74,7 @@ app.post('/edit', (req, res) => {
     updateOneRecord(req, res)
 });
 
-app.get('/delete', (req, res) => {
+app.post('/delete', (req, res) => {
     deleteEntry(req, res)
 });
 
@@ -129,6 +133,7 @@ function addNewEntry(req, res) {
             console.log(myobj)
             db.close();
         });
+        res.send('Success')
     });
 }
 
@@ -137,7 +142,7 @@ function deleteEntry(req, res) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        var myquery = { _id: mongo.ObjectID(req.query.id) }
+        var myquery = { _id: mongo.ObjectID(req.body.id) }
         console.log(myquery)
         dbo.collection(entriesCollection).deleteOne(myquery, function (err, obj) {
             if (err) throw err;
