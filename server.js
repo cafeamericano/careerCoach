@@ -28,66 +28,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', handlebars({ defaultLayout: 'standard' }))
 app.set('view engine', 'handlebars');
 
-//ROUTES================================================================
+// API (APPLICATION PROGRAMMING INTERFACE) FOR JSON RESPONSES //////////////////////////////////////
 
-//Rendering ############
-
-app.get('/', (req, res) => {
-    res.redirect('/view_all')
-});
-
-app.get('/view_all', (req, res) => {
-    res.render('view_all')
-});
-
-app.get('/add_record_page', (req, res) => {
-    res.render('add_record')
-});
-
-app.get('/edit_record_page', (req, res) => {
-    res.render('edit_record')
-});
-
-app.get('/timelines', (req, res) => {
-    res.render('timelines')
-});
-
-app.get('/statistics', (req, res) => {
-    res.render('statistics')
-});
-
-//Processing ############
-
-app.get('/entries', (req, res) => {
-    showAllEntries(req, res)
-});
-
-app.get('/findentry', (req, res) => {
-    findEntry(req, res)
-});
-
-app.post('/add', (req, res) => {
-    addNewEntry(req, res)
-});
-
-app.post('/edit', (req, res) => {
-    updateOneRecord(req, res)
-});
-
-app.post('/delete', (req, res) => {
-    deleteEntry(req, res)
-});
-
-//START SERVER================================================================
-
-app.listen(4000, function () {
-    console.log('Server listening on Port 4000...')
-})
-
-//FUNCTIONS BY ACTION////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//Show All Entries
-function showAllEntries(req, res) {
+app.get('/api/entries', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
@@ -100,14 +43,13 @@ function showAllEntries(req, res) {
             })
         });
     })
-}
+});
 
-//Find Entry
-function findEntry(req, res) {
+app.get('/api/entries/:id', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        var query = { _id: mongo.ObjectID(req.query.id) };
+        var query = { _id: mongo.ObjectID(req.params.id) };
         console.log(query)
         dbo.collection(entriesCollection).find(query).toArray(function (err, result) {
             console.log(result)
@@ -117,14 +59,53 @@ function findEntry(req, res) {
             })
         });
     });
-}
+});
 
-//Add New Entry
-function addNewEntry(req, res) {
+// HANDELBARS TEMPLATE SERVING /////////////////////////////////////////////////////////////////////////
+
+
+app.get('/', (req, res) => {
+    res.redirect('/viewall')
+});
+
+app.get('/viewall', (req, res) => {
+    res.render('viewAll')
+});
+
+app.get('/add/prompt', (req, res) => {
+    res.render('addPrompt')
+});
+
+app.post('/edit/prompt', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        console.log(req)
+        var query = { _id: mongo.ObjectID(req.body.id) };
+        console.log(query)
+        dbo.collection(entriesCollection).find(query).toArray(function (err, result) {
+            console.log(result)
+            if (err) throw err;
+            res.render('editPrompt', {
+                data: result
+            })
+        });
+    });
+});
+
+app.get('/timelines', (req, res) => {
+    res.render('timelines')
+});
+
+app.get('/statistics', (req, res) => {
+    res.render('statistics')
+});
+
+// CREATING, UPDATING, AND DELETING /////////////////////////////////////////////////////////////////////////
+
+app.post('/add/process', (req, res) => {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
         console.log(req.body)
         var myobj = (req.body);
         dbo.collection(entriesCollection).insertOne(myobj, function (err, res) {
@@ -133,12 +114,30 @@ function addNewEntry(req, res) {
             console.log(myobj)
             db.close();
         });
-        res.send('Success')
+        res.redirect('/viewall')
     });
-}
+});
 
-//Delete an Entry
-function deleteEntry(req, res) {
+app.post('/edit/process', (req, res) => {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        let incomingObject = req.body
+        var myquery = { _id: mongo.ObjectID(incomingObject.id) };
+        console.log(myquery)
+        delete incomingObject._id
+        var newvalues = { $set: req.body };
+        console.log(newvalues)
+        dbo.collection(entriesCollection).updateOne(myquery, newvalues, function (err, res) {
+            if (err) throw err;
+            console.log("1 document updated");
+            db.close();
+        });
+    });
+    res.redirect('/viewall')
+});
+
+app.post('/delete/process', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
@@ -150,42 +149,10 @@ function deleteEntry(req, res) {
             db.close();
         });
     });
-}
+});
 
-//Update One Record
-function updateOneRecord(req, res) {
-    MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbo = db.db(databaseName);
-        let incomingObject = req.body
-        delete incomingObject._id
-        var myquery = { companyName: incomingObject.companyName };
-        console.log(myquery)
-        var newvalues = { $set: req.body };
-        console.log(newvalues)
-        dbo.collection(entriesCollection).updateOne(myquery, newvalues, function (err, res) {
-            if (err) throw err;
-            console.log("1 document updated");
-            db.close();
-        });
-    });
-}
+//START SERVER================================================================
 
-//Update All Records
-function updateManyRecords(key, value) {
-    MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbo = db.db(databaseName);
-        var field = {
-            $set:
-            {
-                [key]: value
-            }
-        };
-        dbo.collection(entriesCollection).updateMany({}, field, function (err, res) {
-            if (err) throw err;
-            console.log("All documents updated");
-            db.close();
-        });
-    });
-}
+app.listen(4000, function () {
+    console.log('Server listening on Port 4000...')
+})

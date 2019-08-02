@@ -1,3 +1,7 @@
+//#####################################################################
+//############################# FUNCTIONS #############################
+//#####################################################################
+
 function pickColorFromStatusIndicator(status) {
     switch (status) {
         case 'Application Not Yet Submitted':
@@ -21,7 +25,7 @@ function pickColorFromStatusIndicator(status) {
 
 function grabEntries() {
     $.ajax({
-        url: `/entries`,
+        url: `/api/entries`,
         method: "GET"
     }).then(function (response) {
         console.log(response.data)
@@ -31,7 +35,7 @@ function grabEntries() {
 
 function deleteEntry(id) {
     $.ajax({
-        url: `/delete`,
+        url: `/delete/process`,
         method: "POST",
         data: {
             id: id
@@ -48,9 +52,18 @@ function drawBasicCards(response) {
         $(block).append(response.data[i].companyName + '<br/>')
         $(block).append(response.data[i].applicationSubmissionDate + '<br/>')
         $(block).append(response.data[i].status + '<br/>')
+        $(block).append(`
+        <form action="/edit/prompt" method="post">
+            <input readonly style="display: none" type="text" name="id" value="${response.data[i]._id}">
+            <button type="submit" class="btn btn-success">
+                Edit
+            </button>
+        </form>
+        `)
         $(block).append(`<button id=${response.data[i]._id} class='btn btn-secondary deleteRecordButton'>Delete</button>`)
         $(block).append('<br/><hr>')
         $('#recordsContainer').append(block)
+
     }
 }
 
@@ -93,10 +106,30 @@ function drawFancyCards(response) {
     }
 }
 
+//#####################################################################
+//########################## EVENT LISTENERS ##########################
+//#####################################################################
+
 $(document).on('click', '.deleteRecordButton', function () {
     let idToDelete = $(this).attr('id')
     deleteEntry(idToDelete)
     $(this).parent().fadeOut()
 })
+
+$(document).on('click', '.editRecordButton', function () {
+    let id = $(this).attr('id')
+    alert(id)
+    // $.ajax({
+    //     url: `/entries`,
+    //     method: "GET"
+    // }).then(function (response) {
+    //     console.log(response.data)
+    //     drawBasicCards(response)
+    // })
+})
+
+//#####################################################################
+//############################## STARTUP ##############################
+//#####################################################################
 
 grabEntries()

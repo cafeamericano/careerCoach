@@ -1,0 +1,121 @@
+<script src='edit_record.js'></script>
+
+<form action="/edit/process" method="POST">
+
+    {{# each data}}
+
+    <div class="col-12" style='display: none'>
+        <label>ID</label>
+        <input type="text" class="form-control" name='id' value="{{this._id}}">
+    </div>
+    <div class="col-12">
+        <label>Company Name</label>
+        <input type="text" class="form-control" name='companyName' value="{{this.companyName}}">
+    </div>
+    <div class="col-12">
+        <label>Job Title</label>
+        <input type="text" class="form-control" name='jobTitle' value="{{this.jobTitle}}">
+    </div>
+    <div class="col-12">
+        <label>Job Description</label>
+        <input type="text" class="form-control" name='jobDescription' value="{{this.jobDescription}}">
+    </div>
+    <div class="col-12">
+        <label>Job Level</label>
+        <input type="text" class="form-control" name='jobLevel' value="{{this.jobLevel}}">
+    </div>
+    <div class="col-12">
+        <label>Minimum Years Experience</label>
+        <input type="text" class="form-control" name='minimumYearsExperience' value="{{this.minimumYearsExperience}}">
+    </div>
+    <div class="col-12">
+        <label>Desire Level</label>
+        <input type="range" class="form-control slider" min="1" max="5" value="{{this.desireLevel}}" name='desireLevel'>
+    </div>
+    <div class="col-12">
+        <label>Confidence Level</label>
+        <input type="range" class="form-control slider" min="1" max="5" value="{{this.confidenceLevel}}" name='confidenceLevel'>
+    </div>
+    <div class="col-12">
+        <label>Application Submission Date</label>
+        <input type="date" class="form-control" name='applicationSubmissionDate' value="{{this.applicationSubmissionDate}}">
+    </div>
+    <div class="col-12">
+        <label>Date of First Response</label>
+        <input type="date" class="form-control" name='dateOfFirstResponse' value="{{this.dateOfFirstResponse}}">
+    </div>
+    <div class="col-12">
+        <label>Four Year Degree Required?</label>
+        <input type="checkbox" class="form-control" name="fourYearDegreeRequired" value="{{this.fourYearDegreeRequired}}">
+    </div>
+    <div class="col-12">
+        <label>CS Degree Preferred?</label>
+        <input type="checkbox" class="form-control" name="csDegreePreferred" value="{{this.csDegreePreferred}}">
+    </div>
+    <div class="col-12">
+        <label>Major Corporation?</label>
+        <input type="checkbox" class="form-control" name="majorCorporation" value="{{this.majorCorporation}}">
+    </div>
+    <div class="col-12">
+        <label>Essential Skills</label>
+        <input type="text" class="form-control" name='essentialSkills' value="{{this.essentialSkills}}">
+    </div>
+    <div class="col-12">
+        <label>Location of Posting</label>
+        <input type="text" class="form-control" name='locationOfPosting' value="{{this.locationOfPosting}}">
+    </div>
+    <div class="col-12">
+        <label>Location of Submission</label>
+        <input type="text" class="form-control" name='locationOfSubmission' value="{{this.locationOfSubmission}}">
+    </div>
+    <div class="col-12">
+        <label>Easy Apply?</label>
+        <input type="checkbox" class="form-control" name="easyApply" value="{{this.easyApply}}">
+    </div>
+    <div class="col-12">
+        <label>Stack Type</label>
+        <input type="text" class="form-control" name='stackType' value="{{this.stackType}}">
+    </div>
+    <div class="col-12">
+        <label>Years Experience at Time of Application</label>
+        <input type="text" class="form-control" name='yearsExperienceAtTimeOfApplication' value="{{this.yearsExperienceAtTimeOfApplication}}">
+    </div>
+    <div class="col-12">
+        <label>Number of Featured Projects at Time of Application</label>
+        <input type="text" class="form-control" name='numberOfFeaturedProjectsAtTimeOfApplication' value="{{this.numberOfFeaturedProjectsAtTimeOfApplication}}">
+    </div>
+    <div class="col-12">
+        <label>Application Withdrawn?</label>
+        <input type="checkbox" class="form-control" name="applicationWithdrawn" value="{{this.applicationWithdrawn}}">
+    </div>
+    <div class="col-12">
+        <label>Interview Granted?</label>
+        <input type="checkbox" class="form-control" name="interviewGranted" value="{{this.interviewGranted}}">
+    </div>
+    <div class="col-12">
+        <label>Denied Job?</label>
+        <input type="checkbox" class="form-control" name="deniedJob" value="{{this.deniedJob}}">
+    </div>
+    <div class="col-12">
+        <label>Offered Job?</label>
+        <input type="checkbox" class="form-control" name="offeredJob" value="{{this.offeredJob}}">
+    </div>
+    <div class="col-12">
+        <label>Application Status</label>
+        <select class="form-control" name='status' value="{{this.status}}">
+            <option value="Application Not Yet Submitted">Application Not Yet Submitted</option>
+            <option value="Awaiting Response">Awaiting Response</option>
+            <option value="Interview Granted">Interview Granted</option>
+            <option value="Denied With Interview Granted">Denied with Interview Granted</option>
+            <option value="Denied Without Interview Granted">Denied without Interview Granted
+            </option>
+            <option value="Job Offered">Job Offered</option>
+            <option value="Withdrawn">Withdrawn</option>
+        </select>
+    </div>
+
+    {{/each}}
+
+    <button type='submit'>Submit</button>
+    
+</form>

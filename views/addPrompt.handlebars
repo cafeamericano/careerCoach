@@ -1,101 +1,99 @@
-<script src='add_record.js'></script>
-
-<form onsubmit="addRequestedRecord()">
+<form action="/add/process" method="post">
     <div class="col-12">
         <label>Company Name</label>
-        <input type="text" class="form-control" id='companyName' placeholder="">
+        <input type="text" class="form-control" name='companyName' placeholder="">
     </div>
     <div class="col-12">
         <label>Job Title</label>
-        <input type="text" class="form-control" id='jobTitle' placeholder="">
+        <input type="text" class="form-control" name='jobTitle' placeholder="">
     </div>
     <div class="col-12">
         <label>Job Description</label>
-        <input type="text" class="form-control" id='jobDescription' placeholder="">
+        <input type="text" class="form-control" name='jobDescription' placeholder="">
     </div>
     <div class="col-12">
         <label>Job Level</label>
-        <input type="text" class="form-control" id='jobLevel' placeholder="">
+        <input type="text" class="form-control" name='jobLevel' placeholder="">
     </div>
     <div class="col-12">
         <label>Minimum Years Experience</label>
-        <input type="text" class="form-control" id='minimumYearsExperience' placeholder="">
+        <input type="text" class="form-control" name='minimumYearsExperience' placeholder="">
     </div>
     <div class="col-12">
         <label>Desire Level</label>
-        <input type="range" class="form-control slider" min="1" max="5" value="3" id='desireLevel'>
+        <input type="range" class="form-control slnameer" min="1" max="5" value="3" name='desireLevel'>
     </div>
     <div class="col-12">
-        <label>Confidence Level</label>
-        <input type="range" class="form-control slider" min="1" max="5" value="3" id='confidenceLevel'>
+        <label>Confnameence Level</label>
+        <input type="range" class="form-control slnameer" min="1" max="5" value="3" name='confnameenceLevel'>
     </div>
     <div class="col-12">
         <label>Application Submission Date</label>
-        <input type="date" class="form-control" id='applicationSubmissionDate' placeholder="">
+        <input type="date" class="form-control" name='applicationSubmissionDate' placeholder="">
     </div>
     <div class="col-12">
         <label>Date of First Response</label>
-        <input type="date" class="form-control" id='dateOfFirstResponse' placeholder="">
+        <input type="date" class="form-control" name='dateOfFirstResponse' placeholder="">
     </div>
     <div class="col-12">
         <label>Four Year Degree Required?</label>
-        <input type="checkbox" class="form-control" id="fourYearDegreeRequired">
+        <input type="checkbox" class="form-control" name="fourYearDegreeRequired">
     </div>
     <div class="col-12">
         <label>CS Degree Preferred?</label>
-        <input type="checkbox" class="form-control" id="csDegreePreferred">
+        <input type="checkbox" class="form-control" name="csDegreePreferred">
     </div>
     <div class="col-12">
         <label>Major Corporation?</label>
-        <input type="checkbox" class="form-control" id="majorCorporation">
+        <input type="checkbox" class="form-control" name="majorCorporation">
     </div>
     <div class="col-12">
         <label>Essential Skills</label>
-        <input type="text" class="form-control" id='essentialSkills' placeholder="">
+        <input type="text" class="form-control" name='essentialSkills' placeholder="">
     </div>
     <div class="col-12">
         <label>Location of Posting</label>
-        <input type="text" class="form-control" id='locationOfPosting' placeholder="">
+        <input type="text" class="form-control" name='locationOfPosting' placeholder="">
     </div>
     <div class="col-12">
         <label>Location of Submission</label>
-        <input type="text" class="form-control" id='locationOfSubmission' placeholder="">
+        <input type="text" class="form-control" name='locationOfSubmission' placeholder="">
     </div>
     <div class="col-12">
         <label>Easy Apply?</label>
-        <input type="checkbox" class="form-control" id="easyApply">
+        <input type="checkbox" class="form-control" name="easyApply">
     </div>
     <div class="col-12">
         <label>Stack Type</label>
-        <input type="text" class="form-control" id='stackType' placeholder="">
+        <input type="text" class="form-control" name='stackType' placeholder="">
     </div>
     <div class="col-12">
         <label>Years Experience at Time of Application</label>
-        <input type="text" class="form-control" id='yearsExperienceAtTimeOfApplication' placeholder="">
+        <input type="text" class="form-control" name='yearsExperienceAtTimeOfApplication' placeholder="">
     </div>
     <div class="col-12">
         <label>Number of Featured Projects at Time of Application</label>
-        <input type="text" class="form-control" id='numberOfFeaturedProjectsAtTimeOfApplication' placeholder="">
+        <input type="text" class="form-control" name='numberOfFeaturedProjectsAtTimeOfApplication' placeholder="">
     </div>
     <div class="col-12">
         <label>Application Withdrawn?</label>
-        <input type="checkbox" class="form-control" id="applicationWithdrawn">
+        <input type="checkbox" class="form-control" name="applicationWithdrawn">
     </div>
     <div class="col-12">
         <label>Interview Granted?</label>
-        <input type="checkbox" class="form-control" id="interviewGranted">
+        <input type="checkbox" class="form-control" name="interviewGranted">
     </div>
     <div class="col-12">
         <label>Denied Job?</label>
-        <input type="checkbox" class="form-control" id="deniedJob">
+        <input type="checkbox" class="form-control" name="deniedJob">
     </div>
     <div class="col-12">
         <label>Offered Job?</label>
-        <input type="checkbox" class="form-control" id="offeredJob">
+        <input type="checkbox" class="form-control" name="offeredJob">
     </div>
     <div class="col-12">
         <label>Application Status</label>
-        <select class="form-control" id='status'>
+        <select class="form-control" name='status'>
             <option value="Application Not Yet Submitted">Application Not Yet Submitted</option>
             <option value="Awaiting Response">Awaiting Response</option>
             <option value="Interview Granted">Interview Granted</option>
