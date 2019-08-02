@@ -72,11 +72,11 @@ app.get('/viewall', (req, res) => {
     res.render('viewAll')
 });
 
-app.get('/add/prompt', (req, res) => {
+app.get('/add_prompt', (req, res) => {
     res.render('addPrompt')
 });
 
-app.post('/edit/prompt', (req, res) => {
+app.post('/edit_prompt', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
