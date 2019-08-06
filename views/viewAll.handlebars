@@ -42,22 +42,18 @@
         })
     }
 
-    function pickColorFromStatusIndicator(status) {
+    function pickColorFromClosureIndicator(status) {
         switch (status) {
-            case 'Application Not Yet Submitted':
-                return 'gray';
-            case 'Awaiting Response':
-                return 'rgb(240, 219, 31)';
-            case 'Interview Granted':
-                return 'rgb(189, 189, 81)';
-            case 'Denied With Interview Granted':
-                return 'rgb(224, 159, 47)';
-            case 'Denied Without Interview Granted':
-                return 'rgb(207, 86, 50)';
-            case 'Job Offered':
+            case 'Outstanding':
+                return 'yellow';
+            case 'Accepted':
                 return 'rgb(122, 173, 62)'
+            case 'Denied':
+                return 'rgb(207, 86, 50)';
             case 'Withdrawn':
                 return '#474747';
+            case 'Never Responded':
+                return 'rgb(207, 86, 50)';
             default:
                 return 'gray';
         }
@@ -70,13 +66,13 @@
                 <div class="col-xl-4 col-lg-6 col-md-12">
                     <div class="card mb-3 deflated" style="max-width: 540px;">
                         <div class="row no-gutters">
-                            <div class="col-md-1" style="background: ${pickColorFromStatusIndicator(response.data[i].status)}"></div>
+                            <div class="col-md-1" style="background: ${pickColorFromClosureIndicator(response.data[i].closure)}"></div>
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h5 class="card-title">${response.data[i].companyName}</h5>
                                     <p class="card-text"><small class="text-muted">${response.data[i].applicationSubmissionDate}</small></p>
                                     <p class="card-text">${response.data[i].jobTitle}</p>
-                                    <p class="card-text"><small class="text-muted">${response.data[i].status}</small></p>
+                                    <span class="card-text"><small class="text-muted">${response.data[i].closure}</small></span> | <span class="card-text"><small class="text-muted">${response.data[i].progress}</small></span>
                                 </div>
                             </div>
                             <div class="col-md-4 text-right">

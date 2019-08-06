@@ -77,38 +77,36 @@
             <input type="text" class="form-control" name='numberOfFeaturedProjectsAtTimeOfApplication' placeholder="">
         </div>
         <div class="col-12">
-            <label>Application Withdrawn?</label>
-            <input type="checkbox" class="form-control" name="applicationWithdrawn">
-        </div>
-        <div class="col-12">
-            <label>Interview Granted?</label>
-            <input type="checkbox" class="form-control" name="interviewGranted">
-        </div>
-        <div class="col-12">
-            <label>Denied Job?</label>
-            <input type="checkbox" class="form-control" name="deniedJob">
-        </div>
-        <div class="col-12">
-            <label>Offered Job?</label>
-            <input type="checkbox" class="form-control" name="offeredJob">
-        </div>
-        <div class="col-12">
             <label>Application URL</label>
             <input type="text" class="form-control" name="applicationURL">
         </div>
         <div class="col-12">
-            <label>Application Status</label>
-            <select class="form-control" name='status'>
-                <option value="Application Not Yet Submitted">Application Not Yet Submitted</option>
-                <option value="Awaiting Response">Awaiting Response</option>
-                <option value="Interview Granted">Interview Granted</option>
-                <option value="Denied With Interview Granted">Denied with Interview Granted</option>
-                <option value="Denied Without Interview Granted">Denied without Interview Granted
-                </option>
+            <label>Application Progress</label>
+            <select class="form-control" name='progress'>
+                <option value="Application Submitted">Application Submitted</option>
+                <option value="Resume Reviewed">Resume Reviewed</option>
+                <option value="Portfolio Referenced">Portfolio Referenced</option>
+                <option value="Interview Offered">Interview Offered</option>
+                <option value="Interview Completed">Interview Completed</option>
                 <option value="Job Offered">Job Offered</option>
                 <option value="Withdrawn">Withdrawn</option>
                 <option value="Application Lost">Application Lost</option>
             </select>
+        </div>
+        <div class="col-12">
+            <label>Closure</label>
+            <select class="form-control" name='closure'>
+                <option value="Outstanding">Outstanding</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Denied">Denied</option>
+                <option value="Withdrawn">Withdrawn</option>
+                <option value="Application Lost">Application Lost</option>
+                <option value="Never Responded">Never Responded</option>
+            </select>
+        </div>
+        <div class="col-12">
+            <label>Comments</label>
+            <input class="form-control" name='comments'></input>
         </div>
         <div class='text-right p-3'>
             <button class='btn btn-primary' type='submit'>Submit</button>

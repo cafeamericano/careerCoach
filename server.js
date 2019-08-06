@@ -37,7 +37,6 @@ app.get('/api/entries', (req, res) => {
         dbo.collection(entriesCollection).find({}).sort({applicationSubmissionDate: -1}).toArray(function (err, result) {
             if (err) throw err;
             db.close();
-            console.log(result)
             return res.json({
                 data: result
             })
@@ -52,7 +51,6 @@ app.get('/api/entries/:id', (req, res) => {
         var query = { _id: mongo.ObjectID(req.params.id) };
         console.log(query)
         dbo.collection(entriesCollection).find(query).toArray(function (err, result) {
-            console.log(result)
             if (err) throw err;
             return res.json({
                 data: result[0]
@@ -83,7 +81,6 @@ app.post('/edit_prompt', (req, res) => {
         var query = { _id: mongo.ObjectID(req.body.id) };
         console.log(query)
         dbo.collection(entriesCollection).find(query).toArray(function (err, result) {
-            console.log(result)
             if (err) throw err;
             res.render('editPrompt', {
                 data: result
