@@ -34,7 +34,7 @@ app.get('/api/entries', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({}).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({}).sort({applicationSubmissionDate: -1}).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             console.log(result)

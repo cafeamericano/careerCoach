@@ -1,4 +1,18 @@
-<div class='container'>
+{{!-- Page-Specific Style --}}
+<style>
+.inflated {
+    transform: scale(1.1);
+    transition: transform 250ms ease-in-out;
+}
+
+.deflated {
+    transform: scale(1.0);
+    transition: transform 250ms ease-in-out;
+}
+</style>
+
+{{!-- Page Content --}}
+<div class='container-fluid'>
     <div id='recordsContainer' class="row"></div>
 </div>
 
@@ -53,33 +67,33 @@
         for (i = 0; i < response.data.length; i++) {
             $('#recordsContainer').append(
                 `
-            <div class="col-6">
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row no-gutters">
-                        <div class="col-md-1" style="background: ${pickColorFromStatusIndicator(response.data[i].status)}"></div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <h5 class="card-title">${response.data[i].companyName}</h5>
-                                <p class="card-text"><small class="text-muted">${response.data[i].applicationSubmissionDate}</small></p>
-                                <p class="card-text">${response.data[i].jobTitle}</p>
-                                <p class="card-text"><small class="text-muted">${response.data[i].status}</small></p>
+                <div class="col-xl-4 col-lg-6 col-md-12">
+                    <div class="card mb-3 deflated" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-1" style="background: ${pickColorFromStatusIndicator(response.data[i].status)}"></div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h5 class="card-title">${response.data[i].companyName}</h5>
+                                    <p class="card-text"><small class="text-muted">${response.data[i].applicationSubmissionDate}</small></p>
+                                    <p class="card-text">${response.data[i].jobTitle}</p>
+                                    <p class="card-text"><small class="text-muted">${response.data[i].status}</small></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 text-right">
-                            <form action="/edit_prompt" method="post">
-                                <input readonly style="display: none" type="text" name="id" value="${response.data[i]._id}">
-                                <button type="submit" class="btn">
-                                      <i class="material-icons">view_quilt</i>
+                            <div class="col-md-4 text-right">
+                                <form action="/edit_prompt" method="post">
+                                    <input readonly style="display: none" type="text" name="id" value="${response.data[i]._id}">
+                                    <button type="submit" class="btn">
+                                        <i class="material-icons">view_quilt</i>
+                                    </button>
+                                </form>
+                                <button id=${response.data[i]._id} class='btn deleteRecordButton'>
+                                    <i class="material-icons">delete</i>
                                 </button>
-                            </form>
-                            <button id=${response.data[i]._id} class='btn deleteRecordButton'>
-                                <i class="material-icons">delete</i>
-                            </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        `
+                `
             )
         }
     }
@@ -88,11 +102,26 @@
 
 {{!-- Event Listeners --}}
 <script>
+
+    //Fade out card when record deleted
     $(document).on('click', '.deleteRecordButton', function () {
         let idToDelete = $(this).attr('id')
         deleteEntry(idToDelete)
         $(this).parent().parent().parent().fadeOut()
     })
+
+    //GIF mouseover effect
+    $(document).on("mouseover", ".card", function () {
+        $(this).removeClass('deflated');
+        $(this).addClass('inflated');
+    });
+
+    //GIF mouseout effect
+    $(document).on("mouseout", ".card", function () {
+        $(this).removeClass('inflated');
+        $(this).addClass('deflated');
+    });
+
 </script>
 
 {{!-- Run Program --}}

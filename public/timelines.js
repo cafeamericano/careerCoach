@@ -48,7 +48,8 @@ function applicationsPerDay(resObj) {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        stepSize: 1
+                        stepSize: 1,
+                        max: 5
                     }
                 }]
             }
