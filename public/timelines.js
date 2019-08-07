@@ -58,14 +58,19 @@ function applicationsPerDay(resObj) {
 
 }
 
-function pullEntryDataForChart() {
+function pullEntryDataForChart(x, y, z) {
     let queryURL = 'http://localhost:4000/api/entries'
     $.ajax({
         url: queryURL,
-        method: "GET"
+        method: "GET",
+        data: {
+            sortBy: x,
+            orderBy: y,
+            filterBy: z
+        }
     }).then(function (response) {
         applicationsPerDay(response.data)
     });
 }
 
-pullEntryDataForChart()
+pullEntryDataForChart('applicationSubmissionDate', -1, '')
