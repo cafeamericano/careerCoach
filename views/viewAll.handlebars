@@ -11,7 +11,19 @@
     }
 </style>
 
-{{!-- Page Content --}}
+{{!-- Content Control Buttons --}}
+<div class='container-fluid'>
+    <button id='y_ASC' class='btn btn-secondary mb-5 mr-2'>Sort by App Date
+        Ascending</button>
+    <button id='y_DESC' class='btn btn-secondary mb-5 mr-2'>Sort by App Date
+        Descending</button>
+    <button id='x_ASC' class='btn btn-secondary mb-5 mr-2'>Sort by Company Name
+        Ascending</button>
+    <button id='x_DESC' class='btn btn-secondary mb-5 mr-2'>Sort by Company Name
+        Descending</button>
+</div>
+
+{{!-- Records Container --}}
 <div class='container-fluid'>
     <div id='recordsContainer' class="row animated bounceInUp"></div>
 </div>
@@ -19,9 +31,11 @@
 {{!-- Functions --}}
 <script>
 
-    function grabEntries() {
+    function grabEntries(specifiedSortAndFilter) {
+        let query = `/api/entries/${specifiedSortAndFilter}`
+        console.log(query)
         $.ajax({
-            url: `/api/entries`,
+            url: query,
             method: "GET"
         }).then(function (response) {
             console.log(response.data)
@@ -99,12 +113,16 @@
 {{!-- Event Listeners --}}
 <script>
 
+    // DELETE RECORD CLICK ##############################################
+
     //Fade out card when record deleted
     $(document).on('click', '.deleteRecordButton', function () {
         let idToDelete = $(this).attr('id')
         deleteEntry(idToDelete)
         $(this).parent().parent().parent().fadeOut()
     })
+
+    // MOUSEOVER EFFECTS ################################################
 
     //Card mouseover effect
     $(document).on("mouseover", ".card", function () {
@@ -118,9 +136,35 @@
         $(this).addClass('deflated');
     });
 
+    // SORTS ############################################################
+
+    //Sort by Company Name Ascending
+    $(document).on("click", "#x_ASC", function () {
+        $('#recordsContainer').empty()
+        grabEntries('companyName/ascending')
+    });
+
+    //Sort by Company Name Ascending
+    $(document).on("click", "#x_DESC", function () {
+        $('#recordsContainer').empty()
+        grabEntries('companyName/descending')
+    });
+
+    //Sort by Company Name Ascending
+    $(document).on("click", "#y_ASC", function () {
+        $('#recordsContainer').empty()
+        grabEntries('applicationSubmissionDate/ascending')
+    });
+
+    //Sort by Company Name Ascending
+    $(document).on("click", "#y_DESC", function () {
+        $('#recordsContainer').empty()
+        grabEntries('applicationSubmissionDate/descending')
+    });
+
 </script>
 
 {{!-- Run Program --}}
 <script>
-    grabEntries()
+    grabEntries('applicationSubmissionDate/descending')
 </script>

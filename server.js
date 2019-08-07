@@ -34,7 +34,34 @@ app.get('/api/entries', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({}).sort({applicationSubmissionDate: -1}).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            return res.json({
+                data: result
+            })
+        });
+    })
+});
+
+app.get('/api/entries/:sort/:order', (req, res) => {
+
+    let sortField = req.params.sort
+    let sortOrder;
+
+    if (req.params.order === 'ascending') {
+        sortOrder = 1
+    } else if (req.params.order === 'descending') {
+        sortOrder = -1
+    }
+
+    console.log(sortField)
+    console.log(sortOrder)
+
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        dbo.collection(entriesCollection).find({}).sort({ [sortField]: sortOrder }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
