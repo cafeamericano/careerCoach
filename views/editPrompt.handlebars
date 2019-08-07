@@ -136,8 +136,8 @@
 {{!-- Functions --}}
 <script>
     function checkIfProgressSelected() {
-        let closureValue = $('#progress').attr('data-existing')
-        switch (closureValue) {
+        let progressValue = $('#progress').attr('data-existing')
+        switch (progressValue) {
             case 'Application Submitted':
                 return $('#progress_applicationSubmitted').attr('selected', 'selected');
             case 'Resume Reviewed':
