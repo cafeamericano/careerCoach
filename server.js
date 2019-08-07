@@ -52,20 +52,20 @@ app.post('/api/entries', (req, res) => {
     })
 });
 
-// app.get('/api/entries', (req, res) => {
-//     console.log(req.body)
-//     MongoClient.connect(url, function (err, db) {
-//         if (err) throw err;
-//         var dbo = db.db(databaseName);
-//         dbo.collection(entriesCollection).find({}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
-//             if (err) throw err;
-//             db.close();
-//             return res.json({
-//                 data: result
-//             })
-//         });
-//     })
-// });
+app.get('/api/entries', (req, res) => {
+    console.log(req.body)
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        dbo.collection(entriesCollection).find({}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            return res.json({
+                data: result
+            })
+        });
+    })
+});
 
 // app.get('/api/entries/:sort/:order', (req, res) => {
 

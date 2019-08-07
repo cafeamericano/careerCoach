@@ -1,6 +1,6 @@
-<div class='container card p-3'>
+<div class='container-fluid card p-3'>
 
-    <form action="/edit/process" method="POST">
+    <form action="/edit/process" method="POST" class="row">
 
         {{# each data}}
 
@@ -8,11 +8,11 @@
             <label>ID</label>
             <input type="text" class="form-control" name='id' value="{{this._id}}">
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label>Company Name</label>
             <input type="text" class="form-control" name='companyName' value="{{this.companyName}}">
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label>Job Title</label>
             <input type="text" class="form-control" name='jobTitle' value="{{this.jobTitle}}">
         </div>
@@ -20,44 +20,44 @@
             <label>Job Description</label>
             <input type="text" class="form-control" name='jobDescription' value="{{this.jobDescription}}">
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label>Job Level</label>
             <input type="text" class="form-control" name='jobLevel' value="{{this.jobLevel}}">
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label>Minimum Years Experience</label>
             <input type="text" class="form-control" name='minimumYearsExperience'
                 value="{{this.minimumYearsExperience}}">
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label>Desire Level</label>
             <input type="range" class="form-control slider" min="1" max="5" value="{{this.desireLevel}}"
                 name='desireLevel'>
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label>Confidence Level</label>
             <input type="range" class="form-control slider" min="1" max="5" value="{{this.confidenceLevel}}"
                 name='confidenceLevel'>
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label>Application Submission Date</label>
             <input type="date" class="form-control" name='applicationSubmissionDate'
                 value="{{this.applicationSubmissionDate}}">
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label>Date of First Response</label>
             <input type="date" class="form-control" name='dateOfFirstResponse' value="{{this.dateOfFirstResponse}}">
         </div>
-        <div class="col-12">
+        <div class="col-4">
             <label>Four Year Degree Required?</label>
             <input type="checkbox" class="form-control" name="fourYearDegreeRequired"
                 value="{{this.fourYearDegreeRequired}}">
         </div>
-        <div class="col-12">
+        <div class="col-4">
             <label>CS Degree Preferred?</label>
             <input type="checkbox" class="form-control" name="csDegreePreferred" value="{{this.csDegreePreferred}}">
         </div>
-        <div class="col-12">
+        <div class="col-4">
             <label>Major Corporation?</label>
             <input type="checkbox" class="form-control" name="majorCorporation" value="{{this.majorCorporation}}">
         </div>
@@ -65,28 +65,28 @@
             <label>Essential Skills</label>
             <input type="text" class="form-control" name='essentialSkills' value="{{this.essentialSkills}}">
         </div>
-        <div class="col-12">
+        <div class="col-4">
             <label>Location of Posting</label>
             <input type="text" class="form-control" name='locationOfPosting' value="{{this.locationOfPosting}}">
         </div>
-        <div class="col-12">
+        <div class="col-4">
             <label>Location of Submission</label>
             <input type="text" class="form-control" name='locationOfSubmission' value="{{this.locationOfSubmission}}">
         </div>
-        <div class="col-12">
+        <div class="col-4">
             <label>Easy Apply?</label>
             <input type="checkbox" class="form-control" name="easyApply" value="{{this.easyApply}}">
         </div>
-        <div class="col-12">
+        <div class="col-4">
             <label>Stack Type</label>
             <input type="text" class="form-control" name='stackType' value="{{this.stackType}}">
         </div>
-        <div class="col-12">
+        <div class="col-4">
             <label>Years Experience at Time of Application</label>
             <input type="text" class="form-control" name='yearsExperienceAtTimeOfApplication'
                 value="{{this.yearsExperienceAtTimeOfApplication}}">
         </div>
-        <div class="col-12">
+        <div class="col-4">
             <label>Number of Featured Projects at Time of Application</label>
             <input type="text" class="form-control" name='numberOfFeaturedProjectsAtTimeOfApplication'
                 value="{{this.numberOfFeaturedProjectsAtTimeOfApplication}}">
@@ -95,7 +95,7 @@
             <label>Application URL</label>
             <input type="text" class="form-control" name='applicationURL' value="{{this.applicationURL}}">
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label>Application Progress</label>
             <select class="form-control" id='progress' name='progress' data-existing='{{this.progress}}'>
                 <option id='progress_applicationSubmitted' value="Application Submitted">Application Submitted</option>
@@ -106,7 +106,7 @@
                 <option id='progress_jobOffered' value="Job Offered">Job Offered</option>
             </select>
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label>Closure</label>
             <select class="form-control" id='closure' name='closure' data-existing='{{this.closure}}'>
                 <option id='closure_outstanding' value="Outstanding">Outstanding</option>
