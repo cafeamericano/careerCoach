@@ -11,23 +11,84 @@
     }
 </style>
 
-{{!-- Content Control Buttons --}}
-<div class='container-fluid'>
-    <button id='y_ASC' class='btn btn-secondary mb-5 mr-2'>Sort by App Date
-        Ascending</button>
-    <button id='y_DESC' class='btn btn-secondary mb-5 mr-2'>Sort by App Date
-        Descending</button>
-    <button id='x_ASC' class='btn btn-secondary mb-5 mr-2'>Sort by Company Name
-        Ascending</button>
-    <button id='x_DESC' class='btn btn-secondary mb-5 mr-2'>Sort by Company Name
-        Descending</button>
-    <button id='z_DESC' class='btn btn-secondary mb-5 mr-2'>Limit to Outstanding Applications</button>
-</div>
-
 {{!-- Records Container --}}
 <div class='container-fluid'>
     <div id='recordsContainer' class="row animated bounceInUp"></div>
 </div>
+
+{{!-- Side Panel Preparation --}}
+<script>
+
+    //Add Button
+    $('#sidepanel').append(`
+        <a href='/add_prompt' >
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Add New
+            </li>
+        </a>
+    `)
+
+    //Only show outstanding applications
+    $('#sidepanel').append(`
+        <a id='z_DESC' style='cursor: pointer'>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Outstanding Applications <span id='outstandingBadgeValue' class="badge badge-primary badge-pill"></span>
+            </li>
+        </a>
+    `)
+
+    //Sort by App Date Ascending
+    $('#sidepanel').append(`
+        <a id='y_ASC' style='cursor: pointer'>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Date Asc
+            </li>
+        </a>
+    `)
+
+    //Sort by App Date Descending
+    $('#sidepanel').append(`
+        <a id='y_DESC' style='cursor: pointer'>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Date Desc
+            </li>
+        </a>
+    `)
+
+    //Sort by Company Name Ascending
+    $('#sidepanel').append(`
+        <a id='x_ASC' style='cursor: pointer'>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Name Asc
+            </li>
+        </a>
+    `)
+
+    //Sort by Company Name Descending
+    $('#sidepanel').append(`
+        <a id='x_DESC' style='cursor: pointer'>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Name Desc
+            </li>
+        </a>
+    `)
+
+</script>
+
+{{!-- Grab sidepanel badge values --}}
+<script>
+    $.ajax({
+        url: `/api/entries`,
+        method: "POST",
+        data: {
+            sortBy: 'applicationSubmissionDate',
+            orderBy: -1,
+            filterBy: 'Outstanding'
+        }
+    }).then(function (response) {
+        $('#outstandingBadgeValue').text(response.data.length)
+    })
+</script>
 
 {{!-- Functions --}}
 <script>
@@ -122,8 +183,7 @@
                 <div class="col-xl-4 col-lg-6 col-md-12">
                     <div class="card mb-3 deflated" style="max-width: 540px;">
                         <div class="row no-gutters">
-                            <div class="col-md-1" style="background: ${pickColorFromClosureIndicator(response.data[i].closure)}"></div>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <div class="card-body">
                                     <span style='font-size: 1.4em !important; font-weight: bolder' class="card-title">${response.data[i].companyName}</span>
                                     <br/>
@@ -208,7 +268,7 @@
         grabEntries('applicationSubmissionDate', -1)
     });
 
-    //Sort by Company Name Ascending
+    //Limit to oustanding items only
     $(document).on("click", "#z_DESC", function () {
         $('#recordsContainer').empty()
         grabEntries('applicationSubmissionDate', -1, 'Outstanding')
