@@ -13,7 +13,7 @@
 
 {{!-- Records Container --}}
 <div class='container-fluid'>
-    <div id='recordsContainer' class="row animated bounceInUp"></div>
+    <div id='recordsContainer' class="row"></div>
 </div>
 
 {{!-- Side Panel Preparation --}}
@@ -180,7 +180,7 @@
         for (i = 0; i < response.data.length; i++) {
             $('#recordsContainer').append(
                 `
-                <div class="col-xl-4 col-lg-6 col-md-12">
+                <div class="col-xl-4 col-lg-6 col-md-12  animated bounceInUp">
                     <div class="card mb-3 deflated" style="max-width: 540px;">
                         <div class="row no-gutters">
                             <div class="col-md-10">
