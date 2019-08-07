@@ -21,6 +21,7 @@
         Ascending</button>
     <button id='x_DESC' class='btn btn-secondary mb-5 mr-2'>Sort by Company Name
         Descending</button>
+    <button id='z_DESC' class='btn btn-secondary mb-5 mr-2'>Limit to Outstanding Applications</button>
 </div>
 
 {{!-- Records Container --}}
@@ -31,12 +32,17 @@
 {{!-- Functions --}}
 <script>
 
-    function grabEntries(specifiedSortAndFilter) {
-        let query = `/api/entries/${specifiedSortAndFilter}`
+    function grabEntries(x, y, z) {
+        let query = `/api/entries`
         console.log(query)
         $.ajax({
             url: query,
-            method: "GET"
+            method: "POST",
+            data: {
+                sortBy: x,
+                orderBy: y,
+                filterBy: z
+            }
         }).then(function (response) {
             console.log(response.data)
             drawAdvancedCards(response)
@@ -141,30 +147,36 @@
     //Sort by Company Name Ascending
     $(document).on("click", "#x_ASC", function () {
         $('#recordsContainer').empty()
-        grabEntries('companyName/ascending')
+        grabEntries('companyName', 1)
     });
 
     //Sort by Company Name Ascending
     $(document).on("click", "#x_DESC", function () {
         $('#recordsContainer').empty()
-        grabEntries('companyName/descending')
+        grabEntries('companyName', -1)
     });
 
     //Sort by Company Name Ascending
     $(document).on("click", "#y_ASC", function () {
         $('#recordsContainer').empty()
-        grabEntries('applicationSubmissionDate/ascending')
+        grabEntries('applicationSubmissionDate', 1)
     });
 
     //Sort by Company Name Ascending
     $(document).on("click", "#y_DESC", function () {
         $('#recordsContainer').empty()
-        grabEntries('applicationSubmissionDate/descending')
+        grabEntries('applicationSubmissionDate', -1)
+    });
+
+    //Sort by Company Name Ascending
+    $(document).on("click", "#z_DESC", function () {
+        $('#recordsContainer').empty()
+        grabEntries('applicationSubmissionDate', -1, 'Outstanding')
     });
 
 </script>
 
 {{!-- Run Program --}}
 <script>
-    grabEntries('applicationSubmissionDate/descending')
+    grabEntries('applicationSubmissionDate', -1, '')
 </script>
