@@ -97,26 +97,24 @@
         </div>
         <div class="col-12">
             <label>Application Progress</label>
-            <select class="form-control" name='progress'>
-                <option value="Application Submitted">Application Submitted</option>
-                <option value="Resume Reviewed">Resume Reviewed</option>
-                <option value="Portfolio Referenced">Portfolio Referenced</option>
-                <option value="Interview Offered">Interview Offered</option>
-                <option value="Interview Completed">Interview Completed</option>
-                <option value="Job Offered">Job Offered</option>
-                <option value="Withdrawn">Withdrawn</option>
-                <option value="Application Lost">Application Lost</option>
+            <select class="form-control" id='progress' name='progress' data-existing='{{this.progress}}'>
+                <option id='progress_applicationSubmitted' value="Application Submitted">Application Submitted</option>
+                <option id='progress_resumeReviewed' value="Resume Reviewed">Resume Reviewed</option>
+                <option id='progress_portfolioReferenced' value="Portfolio Referenced">Portfolio Referenced</option>
+                <option id='progress_interviewOffered' value="Interview Offered">Interview Offered</option>
+                <option id='progress_interviewCompleted' value="Interview Completed">Interview Completed</option>
+                <option id='progress_jobOffered' value="Job Offered">Job Offered</option>
             </select>
         </div>
         <div class="col-12">
             <label>Closure</label>
-            <select class="form-control" name='closure'>
-                <option value="Outstanding">Outstanding</option>
-                <option value="Accepted">Accepted</option>
-                <option value="Denied">Denied</option>
-                <option value="Withdrawn">Withdrawn</option>
-                <option value="Application Lost">Application Lost</option>
-                <option value="Never Responded">Never Responded</option>
+            <select class="form-control" id='closure' name='closure' data-existing='{{this.closure}}'>
+                <option id='closure_outstanding' value="Outstanding">Outstanding</option>
+                <option id='closure_accepted' value="Accepted">Accepted</option>
+                <option id='closure_denied' value="Denied">Denied</option>
+                <option id='closure_withdrawn' value="Withdrawn">Withdrawn</option>
+                <option id='closure_applicationLost' value="Application Lost">Application Lost</option>
+                <option id='closure_neverResponded' value="Never Responded">Never Responded</option>
             </select>
         </div>
         <div class="col-12">
@@ -127,9 +125,58 @@
         {{/each}}
 
         <div class='text-right p-3'>
+            <a href='/viewall'><button class='btn btn-secondary'>Cancel</button></a>
             <button class='btn btn-primary' type='submit'>Submit</button>
         </div>
 
     </form>
 
 </div>
+
+{{!-- Functions --}}
+<script>
+    function checkIfProgressSelected() {
+        let closureValue = $('#progress').attr('data-existing')
+        switch (closureValue) {
+            case 'Application Submitted':
+                return $('#progress_applicationSubmitted').attr('selected', 'selected');
+            case 'Resume Reviewed':
+                return $('#progress_resumeReviewed').attr('selected', 'selected');
+            case 'Portfolio Referenced':
+                return $('#progress_portfolioReferenced').attr('selected', 'selected');
+            case 'Interview Offered':
+                return $('#progress_interviewOffered').attr('selected', 'selected');
+            case 'Interview Completed':
+                return $('#progress_interviewCompleted').attr('selected', 'selected');
+            case 'Job Offered':
+                return $('#progress_jobOffered').attr('selected', 'selected');
+            default:
+                return;
+        }
+    };
+    function checkIfClosureSelected() {
+        let closureValue = $('#closure').attr('data-existing')
+        switch (closureValue) {
+            case 'Outstanding':
+                return $('#closure_outstanding').attr('selected', 'selected');
+            case 'Accepted':
+                return $('#closure_accepted').attr('selected', 'selected');
+            case 'Denied':
+                return $('#closure_denied').attr('selected', 'selected');
+            case 'Withdrawn':
+                return $('#closure_withdrawn').attr('selected', 'selected');
+            case 'Application Lost':
+                return $('#closure_applicationLost').attr('selected', 'selected');
+            case 'Never Responded':
+                return $('#closure_neverResponded').attr('selected', 'selected');
+            default:
+                return;
+        }
+    };
+</script>
+
+{{!-- Run Program --}}
+<script>
+    checkIfProgressSelected()
+    checkIfClosureSelected()
+</script>
