@@ -1,16 +1,20 @@
 //Add Button
 $('#sidepanel').append(`
+<br>
     <a href='/add_prompt' >
-        <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-            Add New
+        <li style='border-radius: 15px'>
+            <div class='text-center'>
+                <i style='font-size: 50px; color: white' class="material-icons">add_circle_outline</i>
+            </div>
         </li>
     </a>
+<br>
 `)
 
 //Show all applications
 $('#sidepanel').append(`
     <a id='allFilter' style='cursor: pointer'>
-        <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
+        <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link active">
             All Applications <span id='allApplicationsBadgeValue' class="badge badge-primary badge-pill"></span>
         </li>
     </a>
