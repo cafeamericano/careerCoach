@@ -56,23 +56,26 @@
         </div>
         <div class="col-4">
             <label>Four Year Degree Required?</label>
-            <select class="form-control" name="fourYearDegreeRequired" data-existing='{{this.fourYearDegreeRequired}}'>
-                <option id='fourYearDegreeRequired_Yes' value="Yes">Yes</option>
-                <option id='fourYearDegreeRequired_No' value="No">No</option>
+            <select class="form-control" id="fourYearDegreeRequired" name="fourYearDegreeRequired"
+                data-existing='{{this.fourYearDegreeRequired}}'>
+                <option id='fourYearDegreeRequired_yes' value="Yes">Yes</option>
+                <option id='fourYearDegreeRequired_no' value="No">No</option>
             </select>
         </div>
         <div class="col-4">
             <label>Degree in Preferred Major Held?</label>
-            <select class="form-control" name="preferredDegreeHeld" data-existing='{{this.preferredDegreeHeld}}'>
-                <option id='preferredDegreeHeld_Yes' value="Yes">Yes</option>
-                <option id='preferredDegreeHeld_No' value="No">No</option>
+            <select class="form-control" id="preferredDegreeHeld" name="preferredDegreeHeld"
+                data-existing='{{this.preferredDegreeHeld}}'>
+                <option id='preferredDegreeHeld_yes' value="Yes">Yes</option>
+                <option id='preferredDegreeHeld_no' value="No">No</option>
             </select>
         </div>
         <div class="col-4">
             <label>Major Corporation?</label>
-            <select class="form-control" name="majorCorporationRequired" data-existing='{{this.majorCorporation}}'>
-                <option id='majorCorporation_Yes' value="Yes">Yes</option>
-                <option id='majorCorporation_No' value="No">No</option>
+            <select class="form-control" id="majorCorporation" name="majorCorporation"
+                data-existing='{{this.majorCorporation}}'>
+                <option id='majorCorporation_yes' value="Yes">Yes</option>
+                <option id='majorCorporation_no' value="No">No</option>
             </select>
         </div>
         <div class="col-12">
@@ -81,7 +84,8 @@
         </div>
         <div class="col-4">
             <label>Location of Posting</label>
-            <select class="form-control" name="locationOfPosting" data-existing='{{this.locationOfPosting}}'>
+            <select class="form-control" id="locationOfPosting" name="locationOfPosting"
+                data-existing='{{this.locationOfPosting}}'>
                 <option id='locationOfPosting_linkedIn' value="LinkedIn">LinkedIn</option>
                 <option id='locationOfPosting_glassdoor' value="Glassdoor">Glassdoor</option>
                 <option id='locationOfPosting_indeed' value="Indeed">Indeed</option>
@@ -92,7 +96,8 @@
         </div>
         <div class="col-4">
             <label>Location of Submission</label>
-            <select class="form-control" name="locationOfSubmission" data-existing='{{this.locationOfSubmission}}'>
+            <select class="form-control" id="locationOfSubmission" name="locationOfSubmission"
+                data-existing='{{this.locationOfSubmission}}'>
                 <option id='locationOfSubmission_linkedIn' value="LinkedIn">LinkedIn</option>
                 <option id='locationOfSubmission_glassdoor' value="Glassdoor">Glassdoor</option>
                 <option id='locationOfSubmission_indeed' value="Indeed">Indeed</option>
@@ -103,17 +108,17 @@
         </div>
         <div class="col-4">
             <label>Easy Apply?</label>
-            <select class="form-control" name="stackType" data-existing='{{this.easyApply}}'>
+            <select class="form-control" id='easyApply' name="easyApply" data-existing='{{this.easyApply}}'>
                 <option id='easyApply_yes' value="Yes">Yes</option>
-                <option id='asyApply_no' value="No">No</option>
+                <option id='easyApply_no' value="No">No</option>
             </select>
         </div>
         <div class="col-4">
             <label>Stack Type</label>
-            <select class="form-control" name="stackType" data-existing='{{this.stackType}}'>
-                <option id='stackType_FrontEnd' value="Front End">Front End</option>
-                <option id='stackType_BackEnd' value="Back End">Back End</option>
-                <option id='stackType_FullStack' value="Full Stack">Full Stack</option>
+            <select class="form-control" id='stackType' name="stackType" data-existing='{{this.stackType}}'>
+                <option id='stackType_frontEnd' value="Front End">Front End</option>
+                <option id='stackType_backEnd' value="Back End">Back End</option>
+                <option id='stackType_fullStack' value="Full Stack">Full Stack</option>
             </select>
         </div>
         <div class="col-4">
@@ -173,7 +178,7 @@
 {{!-- Functions --}}
 <script>
     function prefillJobLevelValue() {
-        let x = $('#progress').attr('data-existing')
+        let x = $('#jobLevel').attr('data-existing')
         switch (x) {
             case 'Internship':
                 return $('#jobLevel_internship').attr('selected', 'selected');
@@ -188,25 +193,18 @@
         }
     };
     function prefillFourYearDegreeValue() {
-        let x = $('#progress').attr('data-existing')
+        let x = $('#fourYearDegreeRequired').attr('data-existing')
+        console.log('Four year degree val: ' + x)
         switch (x) {
-            case 'Application Submitted':
-                return $('#progress_applicationSubmitted').attr('selected', 'selected');
-            case 'Resume Reviewed':
-                return $('#progress_resumeReviewed').attr('selected', 'selected');
-            case 'Portfolio Referenced':
-                return $('#progress_portfolioReferenced').attr('selected', 'selected');
-            case 'Interview Offered':
-                return $('#progress_interviewOffered').attr('selected', 'selected');
-            case 'Interview Completed':
-                return $('#progress_interviewCompleted').attr('selected', 'selected');
-            case 'Job Offered':
-                return $('#progress_jobOffered').attr('selected', 'selected');
+            case 'Yes':
+                return $('#fourYearDegreeRequired_yes').attr('selected', 'selected');
+            case 'No':
+                return $('#fourYearDegreeRequired_no').attr('selected', 'selected');
             default:
                 return;
         }
     };
-    function prefillPreferredDegreeValue() {
+    function prefillProgressValue() {
         let x = $('#progress').attr('data-existing')
         switch (x) {
             case 'Application Submitted':
@@ -226,101 +224,89 @@
         }
     };
     function prefillMajorCorporationValue() {
-        let x = $('#progress').attr('data-existing')
+        let x = $('#majorCorporation').attr('data-existing')
         switch (x) {
-            case 'Application Submitted':
-                return $('#progress_applicationSubmitted').attr('selected', 'selected');
-            case 'Resume Reviewed':
-                return $('#progress_resumeReviewed').attr('selected', 'selected');
-            case 'Portfolio Referenced':
-                return $('#progress_portfolioReferenced').attr('selected', 'selected');
-            case 'Interview Offered':
-                return $('#progress_interviewOffered').attr('selected', 'selected');
-            case 'Interview Completed':
-                return $('#progress_interviewCompleted').attr('selected', 'selected');
-            case 'Job Offered':
-                return $('#progress_jobOffered').attr('selected', 'selected');
+            case 'Yes':
+                return $('#majorCorporation_yes').attr('selected', 'selected');
+            case 'No':
+                return $('#majorCorporation_no').attr('selected', 'selected');
             default:
                 return;
         }
     };
     function prefillLocationOfPostingValue() {
-        let x = $('#progress').attr('data-existing')
+        let x = $('#locationOfPosting').attr('data-existing')
         switch (x) {
-            case 'Application Submitted':
-                return $('#progress_applicationSubmitted').attr('selected', 'selected');
-            case 'Resume Reviewed':
-                return $('#progress_resumeReviewed').attr('selected', 'selected');
-            case 'Portfolio Referenced':
-                return $('#progress_portfolioReferenced').attr('selected', 'selected');
-            case 'Interview Offered':
-                return $('#progress_interviewOffered').attr('selected', 'selected');
-            case 'Interview Completed':
-                return $('#progress_interviewCompleted').attr('selected', 'selected');
-            case 'Job Offered':
-                return $('#progress_jobOffered').attr('selected', 'selected');
+            case 'LinkedIn':
+                return $('#locationOfPosting_linkedIn').attr('selected', 'selected');
+            case 'Glassdoor':
+                return $('#locationOfPosting_glassdoor').attr('selected', 'selected');
+            case 'Indeed':
+                return $('#locationOfPosting_indeed').attr('selected', 'selected');
+            case 'Monster':
+                return $('#locationOfPosting_monster').attr('selected', 'selected');
+            case 'Company Website':
+                return $('#locationOfPosting_companyWebsite').attr('selected', 'selected');
+            case 'Other':
+                return $('#locationOfPosting_other').attr('selected', 'selected');
             default:
                 return;
         }
     };
     function prefillLocationOfSubmissionValue() {
-        let x = $('#progress').attr('data-existing')
+        let x = $('#locationOfSubmission').attr('data-existing')
         switch (x) {
-            case 'Application Submitted':
-                return $('#progress_applicationSubmitted').attr('selected', 'selected');
-            case 'Resume Reviewed':
-                return $('#progress_resumeReviewed').attr('selected', 'selected');
-            case 'Portfolio Referenced':
-                return $('#progress_portfolioReferenced').attr('selected', 'selected');
-            case 'Interview Offered':
-                return $('#progress_interviewOffered').attr('selected', 'selected');
-            case 'Interview Completed':
-                return $('#progress_interviewCompleted').attr('selected', 'selected');
-            case 'Job Offered':
-                return $('#progress_jobOffered').attr('selected', 'selected');
+            case 'LinkedIn':
+                return $('#locationOfSubmission_linkedIn').attr('selected', 'selected');
+            case 'Glassdoor':
+                return $('#locationOfSubmission_glassdoor').attr('selected', 'selected');
+            case 'Indeed':
+                return $('#locationOfSubmission_indeed').attr('selected', 'selected');
+            case 'Monster':
+                return $('#locationOfSubmission_monster').attr('selected', 'selected');
+            case 'Company Website':
+                return $('#locationOfSubmission_companyWebsite').attr('selected', 'selected');
+            case 'Other':
+                return $('#locationOfSubmission_other').attr('selected', 'selected');
             default:
                 return;
         }
     };
     function prefillEasyApplyValue() {
-        let x = $('#progress').attr('data-existing')
+        let x = $('#easyApply').attr('data-existing')
         switch (x) {
-            case 'Application Submitted':
-                return $('#progress_applicationSubmitted').attr('selected', 'selected');
-            case 'Resume Reviewed':
-                return $('#progress_resumeReviewed').attr('selected', 'selected');
-            case 'Portfolio Referenced':
-                return $('#progress_portfolioReferenced').attr('selected', 'selected');
-            case 'Interview Offered':
-                return $('#progress_interviewOffered').attr('selected', 'selected');
-            case 'Interview Completed':
-                return $('#progress_interviewCompleted').attr('selected', 'selected');
-            case 'Job Offered':
-                return $('#progress_jobOffered').attr('selected', 'selected');
+            case 'Yes':
+                return $('#easyApply_yes').attr('selected', 'selected');
+            case 'No':
+                return $('#easyApply_no').attr('selected', 'selected');
+            default:
+                return;
+        }
+    };
+    function prefillStackTypeValue() {
+        let x = $('#stackType').attr('data-existing')
+        switch (x) {
+            case 'Front End':
+                return $('#stackType_frontEnd').attr('selected', 'selected');
+            case 'Back End':
+                return $('#stackType_backEnd').attr('selected', 'selected');
+            case 'Full Stack':
+                return $('#stackType_fullStack').attr('selected', 'selected');
             default:
                 return;
         }
     };
     function prefillPreferredDegreeValue() {
-        let x = $('#progress').attr('data-existing')
+        let x = $('#preferredDegreeHeld').attr('data-existing')
         switch (x) {
-            case 'Application Submitted':
-                return $('#progress_applicationSubmitted').attr('selected', 'selected');
-            case 'Resume Reviewed':
-                return $('#progress_resumeReviewed').attr('selected', 'selected');
-            case 'Portfolio Referenced':
-                return $('#progress_portfolioReferenced').attr('selected', 'selected');
-            case 'Interview Offered':
-                return $('#progress_interviewOffered').attr('selected', 'selected');
-            case 'Interview Completed':
-                return $('#progress_interviewCompleted').attr('selected', 'selected');
-            case 'Job Offered':
-                return $('#progress_jobOffered').attr('selected', 'selected');
+            case 'Yes':
+                return $('#preferredDegreeHeld_yes').attr('selected', 'selected');
+            case 'No':
+                return $('#preferredDegreeHeld_no').attr('selected', 'selected');
             default:
                 return;
         }
     };
-
     function prefillProgressValue() {
         let x = $('#progress').attr('data-existing')
         switch (x) {
@@ -363,6 +349,15 @@
 
 {{!-- Run Program --}}
 <script>
+    prefillJobLevelValue()
+    prefillFourYearDegreeValue()
+    prefillProgressValue()
+    prefillMajorCorporationValue()
+    prefillLocationOfPostingValue()
+    prefillLocationOfSubmissionValue()
+    prefillEasyApplyValue()
+    prefillStackTypeValue()
+    prefillPreferredDegreeValue()
     prefillProgressValue()
     prefillClosureValue()
 </script>

@@ -173,6 +173,7 @@ app.post('/edit/process', (req, res) => {
         var myquery = { _id: mongo.ObjectID(incomingObject.id) };
         console.log(myquery)
         delete incomingObject._id
+        delete incomingObject.id
         var newvalues = { $set: req.body };
         console.log(newvalues)
         dbo.collection(entriesCollection).updateOne(myquery, newvalues, function (err, res) {
