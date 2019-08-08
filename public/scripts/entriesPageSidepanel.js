@@ -1,56 +1,56 @@
 //Add Button
 $('#sidepanel').append(`
-        <a href='/add_prompt' >
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-                Add New
-            </li>
-        </a>
-    `)
+    <a href='/add_prompt' >
+        <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
+            Add New
+        </li>
+    </a>
+`)
+
+//Show all applications
+$('#sidepanel').append(`
+    <a id='allFilter' style='cursor: pointer'>
+        <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
+            All Applications <span id='allApplicationsBadgeValue' class="badge badge-primary badge-pill"></span>
+        </li>
+    </a>
+`)
 
 //Only show outstanding applications
 $('#sidepanel').append(`
-        <a id='z_DESC' style='cursor: pointer'>
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-                Outstanding Applications <span id='outstandingBadgeValue' class="badge badge-primary badge-pill"></span>
-            </li>
-        </a>
-    `)
+    <a id='outstandingFilter' style='cursor: pointer'>
+        <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
+            Outstanding Applications <span id='outstandingBadgeValue' class="badge badge-primary badge-pill"></span>
+        </li>
+    </a>
+`)
 
-//Sort by App Date Ascending
+//Only show upcoming interviews
 $('#sidepanel').append(`
-        <a id='y_ASC' style='cursor: pointer'>
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-                Date Asc
-            </li>
-        </a>
-    `)
+    <a id='interviewFilter' style='cursor: pointer'>
+        <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
+            Upcoming Interviews <span id='interviewsBadgeValue' class="badge badge-primary badge-pill"></span>
+        </li>
+    </a>
+`)
 
-//Sort by App Date Descending
+//Concluded applications
 $('#sidepanel').append(`
-        <a id='y_DESC' style='cursor: pointer'>
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link active">
-                Date Desc
-            </li>
-        </a>
-    `)
+    <a id='concludedFilter' style='cursor: pointer'>
+        <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
+            Concluded Applications <span id='concludedBadgeValue' class="badge badge-primary badge-pill"></span>
+        </li>
+    </a>
+`)
 
-//Sort by Company Name Ascending
+//Never responded applications
 $('#sidepanel').append(`
-        <a id='x_ASC' style='cursor: pointer'>
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-                Name Asc
-            </li>
-        </a>
-    `)
-
-//Sort by Company Name Descending
-$('#sidepanel').append(`
-        <a id='x_DESC' style='cursor: pointer'>
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-                Name Desc
-            </li>
-        </a>
-    `)
+    <a id='neverRespondedFilter' style='cursor: pointer'>
+        <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
+            Never Responded <span id='neverRespondedBadgeValue' class="badge badge-primary badge-pill"></span>
+        </li>
+    </a>
+`)
 
 // SET ACTIVE CLASS TO SIDE PANEL LINKS #############################
 

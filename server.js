@@ -52,6 +52,48 @@ app.post('/api/entries', (req, res) => {
     })
 });
 
+app.get('/api/entries/interviews', (req, res) => {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        dbo.collection(entriesCollection).find({progress: 'Interview Offered', closure: 'Outstanding'}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            return res.json({
+                data: result
+            })
+        });
+    })
+});
+
+app.get('/api/entries/concluded', (req, res) => {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        dbo.collection(entriesCollection).find({closure: {$ne: 'Outstanding'}}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            return res.json({
+                data: result
+            })
+        });
+    })
+});
+
+app.get('/api/entries/neverresponded', (req, res) => {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        dbo.collection(entriesCollection).find({closure: 'Never Responded'}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            return res.json({
+                data: result
+            })
+        });
+    })
+});
+
 app.get('/api/entries', (req, res) => {
     console.log(req.body)
     MongoClient.connect(url, function (err, db) {

@@ -15,6 +15,42 @@ function grabEntries(x, y, z) {
     })
 }
 
+function grabEntriesInterviews() {
+    let query = `/api/entries/interviews`
+    console.log(query)
+    $.ajax({
+        url: query,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response.data)
+        drawAdvancedCards(response)
+    })
+}
+
+function grabEntriesConcluded() {
+    let query = `/api/entries/concluded`
+    console.log(query)
+    $.ajax({
+        url: query,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response.data)
+        drawAdvancedCards(response)
+    })
+}
+
+function grabEntriesNeverResponded() {
+    let query = `/api/entries/neverresponded`
+    console.log(query)
+    $.ajax({
+        url: query,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response.data)
+        drawAdvancedCards(response)
+    })
+}
+
 function deleteEntry(id) {
     $.ajax({
         url: `/delete/process`,
