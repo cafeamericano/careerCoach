@@ -34,7 +34,7 @@ app.post('/api/entries', (req, res) => {
     console.log(req.body)
     let filterControl = []
     if (req.body.filterBy !== null && req.body.filterBy !== undefined && req.body.filterBy !== '') {
-        filterControl = {closure: req.body.filterBy}
+        filterControl = { closure: req.body.filterBy }
     } else {
         filterControl = {}
     }
@@ -42,7 +42,7 @@ app.post('/api/entries', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find(filterControl).sort({ [req.body.sortBy] : parseInt(req.body.orderBy) }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find(filterControl).sort({ [req.body.sortBy]: parseInt(req.body.orderBy) }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
@@ -186,17 +186,19 @@ app.post('/edit/process', (req, res) => {
 });
 
 app.post('/delete/process', (req, res) => {
+    console.log('DELETE REQUESTED ************')
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
         var myquery = { _id: mongo.ObjectID(req.body.id) }
-        console.log(myquery)
+        console.log('DELETE QUERY: ' + myquery)
         dbo.collection(entriesCollection).deleteOne(myquery, function (err, obj) {
             if (err) throw err;
             console.log("1 document deleted");
             db.close();
         });
     });
+    res.redirect('/viewall')
 });
 
 //START SERVER================================================================

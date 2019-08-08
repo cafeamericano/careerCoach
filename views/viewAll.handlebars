@@ -1,289 +1,32 @@
-{{!-- Page-Specific Style --}}
 <style>
     .inflated {
         transform: scale(1.1);
         transition: transform 250ms ease-in-out;
     }
-
     .deflated {
         transform: scale(1.0);
         transition: transform 250ms ease-in-out;
     }
 </style>
+<script src='scripts/ajaxCalls.js'></script>
+<script src='scripts/entriesPageSidepanel.js'></script>
+<script src='scripts/sidepanelBadges.js'></script>
+<script src='scripts/sorts.js'></script>
+<script src='scripts/cardRendering.js'></script>
+<script src='scripts/runProgram.js'></script>
 
 {{!-- Records Container --}}
 <div class='container-fluid'>
     <div id='recordsContainer' class="row"></div>
 </div>
 
-{{!-- Side Panel Preparation --}}
-<script>
-
-    //Add Button
-    $('#sidepanel').append(`
-        <a href='/add_prompt' >
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-                Add New
-            </li>
-        </a>
-    `)
-
-    //Only show outstanding applications
-    $('#sidepanel').append(`
-        <a id='z_DESC' style='cursor: pointer'>
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-                Outstanding Applications <span id='outstandingBadgeValue' class="badge badge-primary badge-pill"></span>
-            </li>
-        </a>
-    `)
-
-    //Sort by App Date Ascending
-    $('#sidepanel').append(`
-        <a id='y_ASC' style='cursor: pointer'>
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-                Date Asc
-            </li>
-        </a>
-    `)
-
-    //Sort by App Date Descending
-    $('#sidepanel').append(`
-        <a id='y_DESC' style='cursor: pointer'>
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link active">
-                Date Desc
-            </li>
-        </a>
-    `)
-
-    //Sort by Company Name Ascending
-    $('#sidepanel').append(`
-        <a id='x_ASC' style='cursor: pointer'>
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-                Name Asc
-            </li>
-        </a>
-    `)
-
-    //Sort by Company Name Descending
-    $('#sidepanel').append(`
-        <a id='x_DESC' style='cursor: pointer'>
-            <li class="list-group-item d-flex justify-content-between align-items-center side-panel-link">
-                Name Desc
-            </li>
-        </a>
-    `)
-
-</script>
-
-{{!-- Grab sidepanel badge values --}}
-<script>
-    $.ajax({
-        url: `/api/entries`,
-        method: "POST",
-        data: {
-            sortBy: 'applicationSubmissionDate',
-            orderBy: -1,
-            filterBy: 'Outstanding'
-        }
-    }).then(function (response) {
-        $('#outstandingBadgeValue').text(response.data.length)
-    })
-</script>
-
-{{!-- Functions --}}
-<script>
-
-    function grabEntries(x, y, z) {
-        let query = `/api/entries`
-        console.log(query)
-        $.ajax({
-            url: query,
-            method: "POST",
-            data: {
-                sortBy: x,
-                orderBy: y,
-                filterBy: z
-            }
-        }).then(function (response) {
-            console.log(response.data)
-            drawAdvancedCards(response)
-        })
-    }
-
-    function deleteEntry(id) {
-        $.ajax({
-            url: `/delete/process`,
-            method: "POST",
-            data: {
-                id: id
-            }
-        }).then(function (response) {
-            console.log(response)
-            console.log('Sent delete request.')
-        })
-    }
-
-    function pickColorFromClosureIndicator(closure) {
-        switch (closure) {
-            case 'Outstanding':
-                return 'yellow';
-            case 'Accepted':
-                return 'rgb(122, 173, 62)'
-            case 'Denied':
-                return 'rgb(207, 86, 50)';
-            case 'Withdrawn':
-                return '#474747';
-            case 'Never Responded':
-                return 'rgb(207, 86, 50)';
-            default:
-                return 'gray';
-        }
-    }
-
-    function pickProgressPercentage(progress) {
-        switch (progress) {
-            case 'Application Submitted':
-                return '17%'
-            case 'Resume Reviewed':
-                return '33%'
-            case 'Portfolio Referenced':
-                return '50%'
-            case 'Interview Offered':
-                return '67%'
-            case 'Interview Completed':
-                return '83%'
-            case 'Job Offered':
-                return '100%'
-            default:
-                return;
-        }
-    }
-
-    function pickProgressColor(closure) {
-        switch (closure) {
-            case 'Outstanding':
-                return 'success';
-            case 'Accepted':
-                return 'success'
-            case 'Denied':
-                return 'danger';
-            case 'Withdrawn':
-                return 'secondary';
-            case 'Never Responded':
-                return 'danger';
-            default:
-                return 'secondary';
-        }
-    }
-
-    function drawAdvancedCards(response) {
-        for (i = 0; i < response.data.length; i++) {
-            $('#recordsContainer').append(
-                `
-                <div class="col-xl-4 col-lg-6 col-md-12  animated bounceInUp">
-                    <div class="card mb-3 deflated" style="max-width: 540px;">
-                        <div class="row no-gutters">
-                            <div class="col-md-10">
-                                <div class="card-body">
-                                    <span style='font-size: 1.4em !important; font-weight: bolder' class="card-title">${response.data[i].companyName}</span>
-                                    <br/>
-                                    <span class="card-text ml"><small class="text-muted">${response.data[i].applicationSubmissionDate}</small></span>
-                                    <p class="card-text">${response.data[i].jobTitle}</p>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-${pickProgressColor(response.data[i].closure)}" role="progressbar" style="width: ${pickProgressPercentage(response.data[i].progress)}" ></div>
-                                    </div>
-                                    <span class="card-text"><small class="text-muted">${response.data[i].progress}</small></span> | <span class="card-text"><small class="text-muted">${response.data[i].closure}</small></span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <form action="/edit_prompt" method="post">
-                                    <input readonly style="display: none" type="text" name="id" value="${response.data[i]._id}">
-                                    <button type="submit" class="btn">
-                                        <i class="material-icons">view_quilt</i>
-                                    </button>
-                                </form>
-                                <button id=${response.data[i]._id} class='btn deleteRecordButton'>
-                                    <i class="material-icons">delete</i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `
-            )
-        }
-    }
-
-</script>
-
-{{!-- Event Listeners --}}
 <script>
 
     // DELETE RECORD CLICK ##############################################
-
     //Fade out card when record deleted
     $(document).on('click', '.deleteRecordButton', function () {
         let idToDelete = $(this).attr('id')
         deleteEntry(idToDelete)
         $(this).parent().parent().parent().fadeOut()
     })
-
-    // MOUSEOVER EFFECTS ################################################
-
-    //Card mouseover effect
-    $(document).on("mouseover", ".card", function () {
-        $(this).removeClass('deflated');
-        $(this).addClass('inflated');
-    });
-
-    //Card mouseout effect
-    $(document).on("mouseout", ".card", function () {
-        $(this).removeClass('inflated');
-        $(this).addClass('deflated');
-    });
-
-    // SET ACTIVE CLASS TO SIDE PANEL LINKS #############################
-
-    $(document).on("click", ".side-panel-link", function () {
-        $('.side-panel-link').removeClass('active');
-        $(this).addClass('active');
-    });
-
-    // SORTS ############################################################
-
-    //Sort by Company Name Ascending
-    $(document).on("click", "#x_ASC", function () {
-        $('#recordsContainer').empty()
-        grabEntries('companyName', 1)
-    });
-
-    //Sort by Company Name Ascending
-    $(document).on("click", "#x_DESC", function () {
-        $('#recordsContainer').empty()
-        grabEntries('companyName', -1)
-    });
-
-    //Sort by Company Name Ascending
-    $(document).on("click", "#y_ASC", function () {
-        $('#recordsContainer').empty()
-        grabEntries('applicationSubmissionDate', 1)
-    });
-
-    //Sort by Company Name Ascending
-    $(document).on("click", "#y_DESC", function () {
-        $('#recordsContainer').empty()
-        grabEntries('applicationSubmissionDate', -1)
-    });
-
-    //Limit to oustanding items only
-    $(document).on("click", "#z_DESC", function () {
-        $('#recordsContainer').empty()
-        grabEntries('applicationSubmissionDate', -1, 'Outstanding')
-    });
-
-</script>
-
-{{!-- Run Program --}}
-<script>
-    grabEntries('applicationSubmissionDate', -1, '')
 </script>
