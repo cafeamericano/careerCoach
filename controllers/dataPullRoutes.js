@@ -17,7 +17,7 @@ router.post('/api/entries/all', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({}).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder) }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({

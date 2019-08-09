@@ -1,1 +1,1 @@
-grabAllEntries()
+grabAllEntries(sort.column, sort.order)
