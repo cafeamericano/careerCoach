@@ -28,7 +28,6 @@ app.set('view engine', 'handlebars');
 app.use(require('./controllers/pageServeRoutes.js'))
 app.use(require('./controllers/dataPushRoutes.js'))
 app.use(require('./controllers/dataPullRoutes.js'))
-app.use(require('./controllers/editRecordRoute.js'))
 
 //START SERVER================================================================
 

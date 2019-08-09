@@ -1,4 +1,4 @@
-function grabAllEntries(sortColumn, sortOrder) {
+function grabAllEntries(sortColumn, sortOrder, forBadge) {
     let query = `/api/entries/all`
     console.log(query)
     $.ajax({
@@ -10,11 +10,15 @@ function grabAllEntries(sortColumn, sortOrder) {
         }
     }).then(function (response) {
         console.log(response.data)
-        drawAdvancedCards(response)
+        if (forBadge){
+            $('#allApplicationsBadgeValue').text(response.data.length)
+        } else {
+            drawAdvancedCards(response)
+        }
     })
 }
 
-function grabEntriesOutstanding(sortColumn, sortOrder) {
+function grabEntriesOutstanding(sortColumn, sortOrder, forBadge) {
     let query = `/api/entries/outstanding`
     console.log(query)
     $.ajax({
@@ -26,11 +30,15 @@ function grabEntriesOutstanding(sortColumn, sortOrder) {
         }
     }).then(function (response) {
         console.log(response.data)
-        drawAdvancedCards(response)
+        if (forBadge){
+            $('#outstandingBadgeValue').text(response.data.length)
+        } else {
+            drawAdvancedCards(response)
+        }
     })
 }
 
-function grabEntriesInterviews(sortColumn, sortOrder) {
+function grabEntriesInterviews(sortColumn, sortOrder, forBadge) {
     let query = `/api/entries/interviews`
     console.log(query)
     $.ajax({
@@ -42,11 +50,15 @@ function grabEntriesInterviews(sortColumn, sortOrder) {
         }
     }).then(function (response) {
         console.log(response.data)
-        drawAdvancedCards(response)
+        if (forBadge){
+            $('#interviewsBadgeValue').text(response.data.length)
+        } else {
+            drawAdvancedCards(response)
+        }
     })
 }
 
-function grabEntriesConcluded(sortColumn, sortOrder) {
+function grabEntriesConcluded(sortColumn, sortOrder, forBadge) {
     let query = `/api/entries/concluded`
     console.log(query)
     $.ajax({
@@ -58,11 +70,15 @@ function grabEntriesConcluded(sortColumn, sortOrder) {
         }
     }).then(function (response) {
         console.log(response.data)
-        drawAdvancedCards(response)
+        if (forBadge){
+            $('#concludedBadgeValue').text(response.data.length)
+        } else {
+            drawAdvancedCards(response)
+        }
     })
 }
 
-function grabEntriesNeverResponded(sortColumn, sortOrder) {
+function grabEntriesNeverResponded(sortColumn, sortOrder, forBadge) {
     let query = `/api/entries/neverresponded`
     console.log(query)
     $.ajax({
@@ -74,7 +90,11 @@ function grabEntriesNeverResponded(sortColumn, sortOrder) {
         }
     }).then(function (response) {
         console.log(response.data)
-        drawAdvancedCards(response)
+        if (forBadge){
+            $('#neverRespondedBadgeValue').text(response.data.length)
+        } else {
+            drawAdvancedCards(response)
+        }
     })
 }
 
