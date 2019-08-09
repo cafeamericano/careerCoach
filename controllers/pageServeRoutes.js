@@ -13,7 +13,7 @@ let url = dbImport.url
 //****************************************************
 
 router.get('/', (req, res) => {
-    res.redirect('/viewall')
+    res.render('login')
 });
 
 router.get('/viewall', (req, res) => {

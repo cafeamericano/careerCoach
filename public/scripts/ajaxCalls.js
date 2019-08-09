@@ -1,3 +1,4 @@
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////  GRAB FILTERED DATA FROM API   ////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5,12 +6,14 @@
 function grabAllEntries(sortColumn, sortOrder, forBadge) {
     let query = `/api/entries/all`
     console.log(query)
+    console.log(user.UID)
     $.ajax({
         url: query,
         method: "POST",
         data: {
             sortColumn: sortColumn,
-            sortOrder: sortOrder
+            sortOrder: sortOrder,
+            userUID: user.UID
         }
     }).then(function (response) {
         console.log(response.data)
@@ -30,7 +33,8 @@ function grabEntriesOutstanding(sortColumn, sortOrder, forBadge) {
         method: "POST",
         data: {
             sortColumn: sortColumn,
-            sortOrder: sortOrder
+            sortOrder: sortOrder,
+            userUID: user.UID
         }
     }).then(function (response) {
         console.log(response.data)
@@ -50,7 +54,8 @@ function grabEntriesInterviews(sortColumn, sortOrder, forBadge) {
         method: "POST",
         data: {
             sortColumn: sortColumn,
-            sortOrder: sortOrder
+            sortOrder: sortOrder,
+            userUID: user.UID
         }
     }).then(function (response) {
         console.log(response.data)
@@ -70,7 +75,8 @@ function grabEntriesConcluded(sortColumn, sortOrder, forBadge) {
         method: "POST",
         data: {
             sortColumn: sortColumn,
-            sortOrder: sortOrder
+            sortOrder: sortOrder,
+            userUID: user.UID
         }
     }).then(function (response) {
         console.log(response.data)
@@ -90,7 +96,8 @@ function grabEntriesNeverResponded(sortColumn, sortOrder, forBadge) {
         method: "POST",
         data: {
             sortColumn: sortColumn,
-            sortOrder: sortOrder
+            sortOrder: sortOrder,
+            userUID: user.UID
         }
     }).then(function (response) {
         console.log(response.data)
