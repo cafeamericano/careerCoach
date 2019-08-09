@@ -68,7 +68,7 @@ function drawAdvancedCards(response) {
                                     <div class="card-body" data-id=''>
                                         <span style='font-size: 1.4em !important; font-weight: bolder' class="card-title">${response.data[i].companyName}</span>
                                         <br/>
-                                        <span class="card-text ml"><small class="text-muted">${response.data[i].applicationSubmissionDate}</small></span>
+                                        <span class="card-text ml"><small class="text-muted">${response.data[i].applicationSubmissionDate}</small></span> <span class="card-text ml"><small class="text-muted">(${daysSince(response.data[i].applicationSubmissionDate)} days ago)</small></span>
                                         <p class="card-text">${response.data[i].jobTitle}</p>
                                         <div class="progress">
                                             <div class="progress-bar bg-${pickProgressColor(response.data[i].closure)}" role="progressbar" style="width: ${pickProgressPercentage(response.data[i].progress)}" ></div>
@@ -85,6 +85,15 @@ function drawAdvancedCards(response) {
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////  CALCULATE DAYS FROM PRESENT  ///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function daysSince(date){
+    var then = date;
+    var today = moment();
+    return today.diff(then, 'days')
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////  MOUSEOVER EFFECTS   //////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
