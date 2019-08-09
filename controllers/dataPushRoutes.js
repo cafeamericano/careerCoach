@@ -4,11 +4,12 @@ const express = require('express')
 const router = express.Router();
 
 //****************************************************
-var mongo = require('mongodb');
-let databaseName = 'career_coach';
-let entriesCollection = 'job_apps';
-var MongoClient = require('mongodb').MongoClient;
-var url = `mongodb://localhost:27017/${databaseName}`;
+const dbImport = require('../config/database.js')
+let mongo = dbImport.mongo
+let databaseName = dbImport.databaseName
+let entriesCollection = dbImport.entriesCollection
+let MongoClient = dbImport.MongoClient
+let url = dbImport.url
 //****************************************************
 
 router.post('/add/process', (req, res) => {

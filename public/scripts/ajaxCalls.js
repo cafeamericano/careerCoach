@@ -63,19 +63,6 @@ function grabEntriesNeverResponded() {
     })
 }
 
-function deleteEntry(id) {
-    $.ajax({
-        url: `/delete/process`,
-        method: "POST",
-        data: {
-            id: id
-        }
-    }).then(function (response) {
-        console.log(response)
-        console.log('Sent delete request.')
-    })
-}
-
 function openCardForEditing(id){
     $.ajax({
         url: `/edit_prompt`,
