@@ -56,6 +56,7 @@ function pickProgressColor(closure) {
 }
 
 function drawAdvancedCards(response) {
+    $('#recordsContainer').empty()
     for (i = 0; i < response.data.length; i++) {
         $('#recordsContainer').append(
             `

@@ -1,1 +1,1 @@
-grabEntries('applicationSubmissionDate', -1, '')
+grabAllEntries()

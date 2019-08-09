@@ -3,17 +3,36 @@
         transform: scale(1.1);
         transition: transform 250ms ease-in-out;
     }
+
     .deflated {
         transform: scale(1.0);
         transition: transform 250ms ease-in-out;
     }
 </style>
+<script src='scripts/sortObjectMaster.js'></script>
+<script src='scripts/chooseRouteToHitFromFilterBy.js'></script>
 <script src='scripts/ajaxCalls.js'></script>
 <script src='scripts/entriesPageSidepanel.js'></script>
 <script src='scripts/sidepanelBadges.js'></script>
 <script src='scripts/sorts.js'></script>
 <script src='scripts/cardRendering.js'></script>
 <script src='scripts/runProgram.js'></script>
+
+{{!-- Sort Dropdown --}}
+<div class='container-fluid text-right pb-3' style="padding-right: 30px">
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+            Sort Records
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a id='sort_appDateDesc' class="dropdown-item" href="#">Application Date, Newest First</a>
+            <a id='sort_appDateAsc'class="dropdown-item" href="#">Application Date, Oldest First</a>
+            <a id='sort_companyAsc' class="dropdown-item" href="#">Company Name, A to Z</a>
+            <a id='sort_companyDesc' class="dropdown-item" href="#">Company Name, Z to A</a>
+        </div>
+    </div>
+</div>
+
 
 {{!-- Records Container --}}
 <div class='container-fluid'>

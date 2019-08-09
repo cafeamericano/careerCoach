@@ -124,3 +124,37 @@ $(document).on("click", ".side-panel-link", function () {
     $('.side-panel-link').removeClass('active');
     $(this).addClass('active');
 });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////  DEFINE CLICK ACTIONS   /////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Show all
+$(document).on("click", "#allFilter", function () {
+    filter.by = 'all'
+    chooseRouteToHitFromFilterBy()
+});
+
+//Limit to oustanding items only
+$(document).on("click", "#outstandingFilter", function () {
+    filter.by = 'outstanding'
+    chooseRouteToHitFromFilterBy()
+});
+
+//Limit to upcoming interviews
+$(document).on("click", "#interviewFilter", function () {
+    filter.by = 'interview'
+    chooseRouteToHitFromFilterBy()
+});
+
+//Show concluded records
+$(document).on("click", "#concludedFilter", function () {
+    filter.by = 'concluded'
+    chooseRouteToHitFromFilterBy()
+});
+
+//Show concluded records
+$(document).on("click", "#neverRespondedFilter", function () {
+    filter.by = 'neverResponded'
+    chooseRouteToHitFromFilterBy()
+});

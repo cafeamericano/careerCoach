@@ -1,13 +1,12 @@
-function grabEntries(x, y, z) {
-    let query = `/api/entries`
+function grabAllEntries(sortColumn, sortOrder) {
+    let query = `/api/entries/all`
     console.log(query)
     $.ajax({
         url: query,
         method: "POST",
         data: {
-            sortBy: x,
-            orderBy: y,
-            filterBy: z
+            sortColumn: sortColumn,
+            sortOrder: sortOrder
         }
     }).then(function (response) {
         console.log(response.data)
@@ -15,55 +14,71 @@ function grabEntries(x, y, z) {
     })
 }
 
-function grabEntriesOutstanding() {
+function grabEntriesOutstanding(sortColumn, sortOrder) {
     let query = `/api/entries/outstanding`
     console.log(query)
     $.ajax({
         url: query,
-        method: "GET"
+        method: "POST",
+        data: {
+            sortColumn: sortColumn,
+            sortOrder: sortOrder
+        }
     }).then(function (response) {
         console.log(response.data)
         drawAdvancedCards(response)
     })
 }
 
-function grabEntriesInterviews() {
+function grabEntriesInterviews(sortColumn, sortOrder) {
     let query = `/api/entries/interviews`
     console.log(query)
     $.ajax({
         url: query,
-        method: "GET"
+        method: "POST",
+        data: {
+            sortColumn: sortColumn,
+            sortOrder: sortOrder
+        }
     }).then(function (response) {
         console.log(response.data)
         drawAdvancedCards(response)
     })
 }
 
-function grabEntriesConcluded() {
+function grabEntriesConcluded(sortColumn, sortOrder) {
     let query = `/api/entries/concluded`
     console.log(query)
     $.ajax({
         url: query,
-        method: "GET"
+        method: "POST",
+        data: {
+            sortColumn: sortColumn,
+            sortOrder: sortOrder
+        }
     }).then(function (response) {
         console.log(response.data)
         drawAdvancedCards(response)
     })
 }
 
-function grabEntriesNeverResponded() {
+function grabEntriesNeverResponded(sortColumn, sortOrder) {
     let query = `/api/entries/neverresponded`
     console.log(query)
     $.ajax({
         url: query,
-        method: "GET"
+        method: "POST",
+        data: {
+            sortColumn: sortColumn,
+            sortOrder: sortOrder
+        }
     }).then(function (response) {
         console.log(response.data)
         drawAdvancedCards(response)
     })
 }
 
-function openCardForEditing(id){
+function openCardForEditing(id) {
     $.ajax({
         url: `/edit_prompt`,
         method: "POST",
