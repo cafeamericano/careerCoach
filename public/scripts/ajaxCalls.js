@@ -15,6 +15,18 @@ function grabEntries(x, y, z) {
     })
 }
 
+function grabEntriesOutstanding() {
+    let query = `/api/entries/outstanding`
+    console.log(query)
+    $.ajax({
+        url: query,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response.data)
+        drawAdvancedCards(response)
+    })
+}
+
 function grabEntriesInterviews() {
     let query = `/api/entries/interviews`
     console.log(query)
@@ -62,4 +74,17 @@ function deleteEntry(id) {
         console.log(response)
         console.log('Sent delete request.')
     })
+}
+
+function openCardForEditing(id){
+    $.ajax({
+        url: `/edit_prompt`,
+        method: "POST",
+        data: {
+            id: id
+        }
+    }).then(function (response) {
+        console.log('Sent delete request.')
+    })
+    window.location.replace()
 }

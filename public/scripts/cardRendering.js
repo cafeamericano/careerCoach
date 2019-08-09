@@ -56,30 +56,22 @@ function drawAdvancedCards(response) {
         $('#recordsContainer').append(
             `
                 <div class="col-xl-4 col-lg-6 col-md-12  animated bounceInUp">
-                    <div class="card mb-3 deflated" style="max-width: 540px;">
+                    <div class="card mb-3 deflated" style="max-width: 540px; cursor: pointer">
                         <div class="row no-gutters">
-                            <div class="col-md-10">
-                                <div class="card-body">
-                                    <span style='font-size: 1.4em !important; font-weight: bolder' class="card-title">${response.data[i].companyName}</span>
-                                    <br/>
-                                    <span class="card-text ml"><small class="text-muted">${response.data[i].applicationSubmissionDate}</small></span>
-                                    <p class="card-text">${response.data[i].jobTitle}</p>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-${pickProgressColor(response.data[i].closure)}" role="progressbar" style="width: ${pickProgressPercentage(response.data[i].progress)}" ></div>
+                            <div class="col">
+                                <form method='post' action='/edit_prompt' class='openCardDetails'>
+                                    <input style='display: none' name='id' value='${response.data[i]._id}'/>
+                                    <div class="card-body" data-id=''>
+                                        <span style='font-size: 1.4em !important; font-weight: bolder' class="card-title">${response.data[i].companyName}</span>
+                                        <br/>
+                                        <span class="card-text ml"><small class="text-muted">${response.data[i].applicationSubmissionDate}</small></span>
+                                        <p class="card-text">${response.data[i].jobTitle}</p>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-${pickProgressColor(response.data[i].closure)}" role="progressbar" style="width: ${pickProgressPercentage(response.data[i].progress)}" ></div>
+                                        </div>
+                                        <span class="card-text"><small class="text-muted">${response.data[i].progress}</small></span> | <span class="card-text"><small class="text-muted">${response.data[i].closure}</small></span>
                                     </div>
-                                    <span class="card-text"><small class="text-muted">${response.data[i].progress}</small></span> | <span class="card-text"><small class="text-muted">${response.data[i].closure}</small></span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <form action="/edit_prompt" method="post">
-                                    <input readonly style="display: none" type="text" name="id" value="${response.data[i]._id}">
-                                    <button type="submit" class="btn">
-                                        <i class="material-icons">view_quilt</i>
-                                    </button>
                                 </form>
-                                <button id=${response.data[i]._id} class='btn deleteRecordButton'>
-                                    <i class="material-icons">delete</i>
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -103,3 +95,7 @@ $(document).on("mouseout", ".card", function () {
     $(this).addClass('deflated');
 });
 
+// CARD CLICK ################################################
+$(document).on("click", ".openCardDetails", function () {
+    $(this).submit()
+});

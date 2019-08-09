@@ -30,6 +30,23 @@ app.set('view engine', 'handlebars');
 
 // API (APPLICATION PROGRAMMING INTERFACE) FOR JSON RESPONSES //////////////////////////////////////
 
+//Find all entries
+app.get('/api/entries', (req, res) => {
+    console.log(req.body)
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        dbo.collection(entriesCollection).find({}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            return res.json({
+                data: result
+            })
+        });
+    })
+});
+
+//Find all entries that meet a specific filter or sort criteria
 app.post('/api/entries', (req, res) => {
     console.log(req.body)
     let filterControl = []
@@ -52,11 +69,27 @@ app.post('/api/entries', (req, res) => {
     })
 });
 
+//Find all applications where an interview is upcoming
+app.get('/api/entries/outstanding', (req, res) => {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        dbo.collection(entriesCollection).find({ closure: 'Outstanding' }).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+            if (err) throw err;
+            db.close();
+            return res.json({
+                data: result
+            })
+        });
+    })
+});
+
+//Find all applications where an interview is upcoming
 app.get('/api/entries/interviews', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({progress: 'Interview Offered', closure: 'Outstanding'}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({ progress: 'Interview Offered', closure: 'Outstanding' }).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
@@ -66,11 +99,12 @@ app.get('/api/entries/interviews', (req, res) => {
     })
 });
 
+//Find all concluded applications
 app.get('/api/entries/concluded', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({closure: {$ne: 'Outstanding'}}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({ closure: { $ne: 'Outstanding' } }).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
@@ -80,11 +114,12 @@ app.get('/api/entries/concluded', (req, res) => {
     })
 });
 
+//Find all applications that are marked as never responded
 app.get('/api/entries/neverresponded', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({closure: 'Never Responded'}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({ closure: 'Never Responded' }).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
@@ -94,48 +129,7 @@ app.get('/api/entries/neverresponded', (req, res) => {
     })
 });
 
-app.get('/api/entries', (req, res) => {
-    console.log(req.body)
-    MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({}).sort({ applicationSubmissionDate: -1 }).toArray(function (err, result) {
-            if (err) throw err;
-            db.close();
-            return res.json({
-                data: result
-            })
-        });
-    })
-});
-
-// app.get('/api/entries/:sort/:order', (req, res) => {
-
-//     let sortField = req.params.sort
-//     let sortOrder;
-
-//     if (req.params.order === 'ascending') {
-//         sortOrder = 1
-//     } else if (req.params.order === 'descending') {
-//         sortOrder = -1
-//     }
-
-//     console.log(sortField)
-//     console.log(sortOrder)
-
-//     MongoClient.connect(url, function (err, db) {
-//         if (err) throw err;
-//         var dbo = db.db(databaseName);
-//         dbo.collection(entriesCollection).find({}).sort({ [sortField]: sortOrder }).toArray(function (err, result) {
-//             if (err) throw err;
-//             db.close();
-//             return res.json({
-//                 data: result
-//             })
-//         });
-//     })
-// });
-
+//Find an application by its Mongo ID (specifically for editing a record)
 app.get('/api/entries/:id', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;

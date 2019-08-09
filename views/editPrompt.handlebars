@@ -7,9 +7,10 @@
 
 <div class='container-fluid card p-3 animated slideInRight'>
 
+    {{# each data}}
+
     <form action="/edit/process" method="POST" class="row">
 
-        {{# each data}}
 
         <div class="col-12" style='display: none'>
             <label>ID</label>
@@ -169,7 +170,6 @@
             <input class="form-control" name='comments' value="{{this.comments}}"></input>
         </div>
 
-        {{/each}}
 
         <div class='text-right p-3' style='width: 100%'>
             <a href='/viewall'>
@@ -179,6 +179,14 @@
         </div>
 
     </form>
+
+    <form method='post' action='/delete/process'>
+        <input style='display: none' name='id' value='{{this._id}}' />
+        <button class='btn btn-danger' type='submit'>Delete Record</button>
+    </form>
+
+    {{/each}}
+
 
 </div>
 

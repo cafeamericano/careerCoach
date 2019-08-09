@@ -33,7 +33,7 @@ $(document).on("click", "#allFilter", function () {
 //Limit to oustanding items only
 $(document).on("click", "#outstandingFilter", function () {
     $('#recordsContainer').empty()
-    grabEntries('applicationSubmissionDate', -1, 'Outstanding')
+    grabEntriesOutstanding()
 });
 
 //Limit to upcoming interviews
