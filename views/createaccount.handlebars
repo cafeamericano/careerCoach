@@ -1,7 +1,7 @@
-<h4>Login</h4>
+<h4>Create Account</h4>
 <br>
 
-<form id='loginForm'>
+<form id='newAccountForm'>
     <label>Username</label>
     <br>
     <input id='username'>
@@ -13,18 +13,16 @@
     <br>
     <button type="submit">Submit</button>
 </form>
-<br>
-<a href='/createaccount_prompt'>Create New Account</a>
 
 <script>
 
-    $(document).on("submit", "#loginForm", function () {
+    $(document).on("submit", "#newAccountForm", function () {
         event.preventDefault()
-        requestToLogin()
+        createNewAccount()
     });
 
-    function requestToLogin() {
-        let query = `/processlogin`
+    function createNewAccount() {
+        let query = `/createaccount_process`
         console.log(query)
         $.ajax({
             url: query,
@@ -34,12 +32,9 @@
                 password: $('#password').val().trim()
             }
         }).then(function (response) {
-            if (response.length === 0) {
-                alert('Fail.')
-            } else {
-                localStorage.setItem("active-user", response[0].uuid);
-                window.location.replace('/viewall')
-            }
+            console.log('Created account.')
+            window.location.replace('/')
         })
+        window.location.replace('/')
     }
 </script>

@@ -12,12 +12,12 @@ let MongoClient = dbImport.MongoClient
 let url = dbImport.url
 //****************************************************
 
-//Find all entries for everyone
-router.get('/api/entries/all', (req, res) => {
+//Find all entries
+router.get('/api/show-me-everything', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({}).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder) }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({}).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
@@ -27,13 +27,12 @@ router.get('/api/entries/all', (req, res) => {
     })
 });
 
-//Find all entries for user
+//Find all entries
 router.post('/api/entries/all', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        console.log(req.body.userUID)
-        dbo.collection(entriesCollection).find({userUID: req.body.userUID}).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder) }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({ uuid: req.body.token }).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder) }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
@@ -49,7 +48,7 @@ router.post('/api/entries/outstanding', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({ closure: 'Outstanding', userUID: req.body.userUID }).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder) }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({ closure: 'Outstanding', uuid: req.body.token }).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder) }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
@@ -64,7 +63,7 @@ router.post('/api/entries/interviews', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({ progress: 'Interview Offered', closure: 'Outstanding', userUID: req.bodyUID }).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder)  }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({ progress: 'Interview Offered', closure: 'Outstanding', uuid: req.body.token }).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder) }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
@@ -79,7 +78,7 @@ router.post('/api/entries/concluded', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({ closure: { $ne: 'Outstanding' }, userUID: req.bodyUID }).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder)  }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({ closure: { $ne: 'Outstanding' }, uuid: req.body.token }).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder) }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
@@ -94,7 +93,7 @@ router.post('/api/entries/neverresponded', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({ closure: 'Never Responded', userUID: req.bodyUID }).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder)  }).toArray(function (err, result) {
+        dbo.collection(entriesCollection).find({ closure: 'Never Responded', uuid: req.body.token }).sort({ [req.body.sortColumn]: parseInt(req.body.sortOrder) }).toArray(function (err, result) {
             if (err) throw err;
             db.close();
             return res.json({
@@ -104,4 +103,43 @@ router.post('/api/entries/neverresponded', (req, res) => {
     })
 });
 
+//Find an entry for the purpose of updating
+router.post('/edit_prompt', (req, res) => {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        var query = { _id: mongo.ObjectID(req.body.id) };
+        console.log(query)
+        dbo.collection(entriesCollection).find(query).toArray(function (err, result) {
+            if (err) throw err;
+            res.render('editPrompt', {
+                data: result
+            })
+        });
+    });
+});
+
 module.exports = router;
+
+//========================================================================================
+
+function authorize(token) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        var query = { uuid: token };
+        console.log(query)
+        console.log('AUTHORIZING********')
+        dbo.collection('users').find(query).toArray(function (err, result) {
+            if (err) throw err;
+            console.log(result)
+            if (result.length === 0) {
+                console.log('Returning false.')
+                return false;
+            } else {
+                console.log('Returning true.')
+                return true;
+            }
+        });
+    });
+}

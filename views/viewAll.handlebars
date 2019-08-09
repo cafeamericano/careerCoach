@@ -9,44 +9,7 @@
         transition: transform 250ms ease-in-out;
     }
 </style>
-<script src='scripts/userObjectMaster.js'></script>
 <script src='scripts/sortObjectMaster.js'></script>
-
-<script>
-    var firebaseConfig = {
-        apiKey: "AIzaSyAZip6sFehin_K3ByAKpabqOwnxD9OHZNg",
-        authDomain: "careercoach-52d3e.firebaseapp.com",
-        databaseURL: "https://careercoach-52d3e.firebaseio.com",
-        projectId: "careercoach-52d3e",
-        storageBucket: "",
-        messagingSenderId: "843759964171",
-        appId: "1:843759964171:web:65f8f3ab4bcd20ec"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    //Contain active user
-    let activeUser = ''
-
-    //Realtime listener
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-        if (firebaseUser) {
-            console.log(firebaseUser);
-            user.UID = firebaseUser.uid
-            console.log(user.UID)
-        } else {
-            console.log('not logged in')
-            window.location.replace("/");
-        };
-    })
-
-    //Log out button clicked
-    $(document).on('click', '#logoutButton', function () {
-        firebase.auth().signOut()
-    })
-</script>
-
 <script src='scripts/chooseRouteToHitFromFilterBy.js'></script>
 <script src='scripts/ajaxCalls.js'></script>
 <script src='scripts/entriesPageSidepanel.js'></script>
@@ -62,10 +25,9 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a id='sort_appDateDesc' class="dropdown-item" href="#">Application Date, Newest First</a>
-            <a id='sort_appDateAsc' class="dropdown-item" href="#">Application Date, Oldest First</a>
+            <a id='sort_appDateAsc'class="dropdown-item" href="#">Application Date, Oldest First</a>
             <a id='sort_companyAsc' class="dropdown-item" href="#">Company Name, A to Z</a>
             <a id='sort_companyDesc' class="dropdown-item" href="#">Company Name, Z to A</a>
-            <a id='logoutButton' class="dropdown-item" href="#">Logout</a>
         </div>
     </div>
 </div>
