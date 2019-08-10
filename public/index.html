@@ -50,7 +50,7 @@
 
 </head>
 
-<body class='container-fluid'>
+<body class='container-fluid' style="position: relative">
 
     <!-- Login Box -->
     <div class='row'>
@@ -70,8 +70,12 @@
     </div>
 
     <!-- Flashy Text -->
-    <div id='flashyText'></div>
+    <div style='font-family: Comfortaa; color: black; font-size: 30px' id='flashyText'></div>
 
+    <!-- Credit Badge -->
+    <div style='font-family: Comfortaa; color: black; font-size: 14px; position: fixed; bottom: 10px; left: 10px' > ©2019 MATTHEW FARMER</div>
+
+    <!-- Append Flashy Text -->
     <script>
         setTimeout(function () {
             $('#flashyText').append(`<div class='animated slideInLeft' style='font-family: Comfortaa; font-size: 70px; text-align: right; margin: 120px; font-weight: 600px'>Welcome.</div>`);
