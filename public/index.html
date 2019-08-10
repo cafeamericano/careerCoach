@@ -57,16 +57,28 @@
         <div class='col' style='padding: 0px !important'>
             <nav class="navbar navbar-dark bg-dark">
                 <a class="navbar-brand" style='font-family: Comfortaa; color: white; font-size: 30px'>Career Coach</a>
-                <a style='color: white' href='/createaccount_prompt'>Create New Account</a>
-                <form class="form-inline" id='loginForm'>
-                    <input class="form-control mr-sm-2" id='username' type="text" placeholder='Email'>
-                    <input class="form-control mr-sm-2" id='password' type='password' placeholder="Password">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit" id='loginButton'>Login</button>
-                </form>
+                <div class="form-inline">
+                    <form class="form-inline" id='loginForm'>
+                        <input class="form-control mr-sm-2" id='username' type="text" placeholder='Username'>
+                        <input class="form-control mr-sm-2" id='password' type='password' placeholder="Password">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit" id='loginButton'>Login</button>
+                    </form>
+                    <a style='color: white; padding-left: 25px' href='/createaccount_prompt'>Create Account</a>
+                </div>
             </nav>
         </div>
     </div>
 
+    <!-- Flashy Text -->
+    <div id='flashyText'></div>
+
+    <script>
+        setTimeout(function () {
+            $('#flashyText').append(`<div class='animated slideInLeft' style='font-family: Comfortaa; font-size: 70px; text-align: right; margin: 120px; font-weight: 600px'>Welcome.</div>`);
+        }, 500);
+    </script>
+
+    <!-- Process Login -->
     <script>
 
         $(document).on("submit", "#loginForm", function () {
