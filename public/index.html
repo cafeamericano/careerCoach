@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Career Coach</title>
+
+    <!-- Compiled and minified CSS -->
+    <style>
+        body {
+            background-image: url('loginbg.jpg');
+            background-size: cover;
+            background-repeat: repeat;
+            background-attachment: fixed;
+        }
+    </style>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!--Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body class='container-fluid'>
+
+    <!-- Header -->
+    <div class="row">
+        <p ID='creatorsBanner' style='text-align: center; margin-top: 20px'>CREATED BY MATTHEW FARMER</p>
+        <h1 style='font-size: 110px; font-weight: 600; text-align: center; margin-top: 80px'>Career Coach</h1>
+    </div>
+
+    <!-- Login Box -->
+    <div class='card' style='width: 350px; padding: 40px; margin: auto'>
+        <form id='loginForm'>
+            <input id='username' type="text" placeholder='Email'>
+            <input id='password' type='password' placeholder="Password">
+            <br><br>
+            <button id='loginButton' type='submit' class='btn btn-action' style='width: 100%'>Login</button>
+            <div style='margin-top: 20px; text-align: center'><a href='/createaccount_prompt'>Create New Account</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+        $(document).on("submit", "#loginForm", function () {
+            event.preventDefault()
+            requestToLogin()
+        });
+
+        function requestToLogin() {
+            let query = `/processlogin`
+            console.log(query)
+            $.ajax({
+                url: query,
+                method: "POST",
+                data: {
+                    username: $('#username').val().trim(),
+                    password: $('#password').val().trim()
+                }
+            }).then(function (response) {
+                if (response.length === 0) {
+                    alert('Incorrect username or password entered.')
+                } else {
+                    localStorage.setItem("active-user", response[0].uuid);
+                    window.location.replace('/viewall')
+                }
+            })
+        }
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-auth.js"></script>
+
+</body>
+
+</html>

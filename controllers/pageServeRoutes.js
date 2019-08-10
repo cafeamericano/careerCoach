@@ -15,7 +15,7 @@ let url = dbImport.url
 //****************************************************
 
 router.get('/', (req, res) => {
-    res.render('login')
+    res.sendFile('index.html')
 });
 
 router.get('/createaccount_prompt', (req, res) => {

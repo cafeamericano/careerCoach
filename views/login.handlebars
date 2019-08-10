@@ -14,32 +14,4 @@
     <button type="submit">Submit</button>
 </form>
 <br>
-<a href='/createaccount_prompt'>Create New Account</a>
 
-<script>
-
-    $(document).on("submit", "#loginForm", function () {
-        event.preventDefault()
-        requestToLogin()
-    });
-
-    function requestToLogin() {
-        let query = `/processlogin`
-        console.log(query)
-        $.ajax({
-            url: query,
-            method: "POST",
-            data: {
-                username: $('#username').val().trim(),
-                password: $('#password').val().trim()
-            }
-        }).then(function (response) {
-            if (response.length === 0) {
-                alert('Fail.')
-            } else {
-                localStorage.setItem("active-user", response[0].uuid);
-                window.location.replace('/viewall')
-            }
-        })
-    }
-</script>
