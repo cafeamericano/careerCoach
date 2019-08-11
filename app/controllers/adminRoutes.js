@@ -39,7 +39,7 @@ router.post('/insertmany', (req, res) => {
             if (err) throw err;
             console.log("Number of documents inserted: " + res.insertedCount);
             db.close();
-            res.end()
+            return res.json({})
         });
     });
 });

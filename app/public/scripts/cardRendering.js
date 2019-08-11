@@ -58,6 +58,16 @@ function pickProgressColor(closure) {
 function drawAdvancedCards(response) {
     $('#recordsContainer').empty()
     for (i = 0; i < response.data.length; i++) {
+
+        //Prevent NAN for records without application submission dates
+        let calculatedDaysSinceApplication;
+        if (response.data[i].applicationSubmissionDate === '') {
+            calculatedDaysSinceApplication = 'Application Date Not Provided'
+        } else {
+            calculatedDaysSinceApplication = `${daysSince(response.data[i].applicationSubmissionDate)} days ago`
+        }
+
+        //Put the card on the DOM
         $('#recordsContainer').append(
             `
                 <div class="col-xl-4 col-lg-6 col-md-12  animated bounceInUp">
@@ -69,7 +79,7 @@ function drawAdvancedCards(response) {
                                     <div class="card-body" data-id=''>
                                         <span style='font-size: 1.4em !important; font-weight: bolder' class="card-title">${response.data[i].companyName}</span>
                                         <br/>
-                                        <span class="card-text ml"><small class="text-muted">${response.data[i].applicationSubmissionDate}</small></span> <span class="card-text ml"><small class="text-muted">(${daysSince(response.data[i].applicationSubmissionDate)} days ago)</small></span>
+                                        <span class="card-text ml"><small class="text-muted">${response.data[i].applicationSubmissionDate}</small></span> <span class="card-text ml"><small class="text-muted">${calculatedDaysSinceApplication}</small></span>
                                         <p class="card-text">${response.data[i].jobTitle}</p>
                                         <div class="progress">
                                             <div class="progress-bar bg-${pickProgressColor(response.data[i].closure)}" role="progressbar" style="width: ${pickProgressPercentage(response.data[i].progress)}" ></div>
@@ -90,7 +100,7 @@ function drawAdvancedCards(response) {
 //////////////////////////////////////////  CALCULATE DAYS FROM PRESENT  ///////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function daysSince(date){
+function daysSince(date) {
     var then = date;
     var today = moment();
     return today.diff(then, 'days')

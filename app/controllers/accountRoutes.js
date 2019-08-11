@@ -29,9 +29,6 @@ router.post('/createaccount_process', (req, res) => {
         var myobj = req.body
         myobj.uuid = uuidv4()
         console.log(myobj)
-        if (myobj.profilePhotoURL === '' || myobj.profilePhotoURL === undefined) {
-            myobj.profilePhotoURL = 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Portrait_Placeholder_Square.png'
-        }
         dbo.collection('users').insertOne(myobj, function (err, res) {
             if (err) throw err;
             console.log("1 document inserted");
@@ -51,6 +48,20 @@ router.post('/processlogin', (req, res) => {
             if (err) throw err;
             console.log(result)
             res.json(result)
+        });
+    });
+});
+
+router.post('/grabprofilephoto', (req, res) => {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        var query = { uuid: req.body.token };
+        console.log(query)
+        dbo.collection('users').find(query).toArray(function (err, result) {
+            if (err) throw err;
+            console.log(result)
+            res.json(result[0])
         });
     });
 });

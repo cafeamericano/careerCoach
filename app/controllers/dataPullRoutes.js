@@ -104,27 +104,18 @@ router.post('/edit_prompt', (req, res) => {
     });
 });
 
-module.exports = router;
-
-//========================================================================================
-
-function authorize(token) {
+router.post('/authorize_user', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        var query = { uuid: token };
+        var query = { uuid: req.body.token };
         console.log(query)
         console.log('AUTHORIZING********')
         dbo.collection('users').find(query).toArray(function (err, result) {
             if (err) throw err;
-            console.log(result)
-            if (result.length === 0) {
-                console.log('Returning false.')
-                return false;
-            } else {
-                console.log('Returning true.')
-                return true;
-            }
+            res.json(result)
         });
     });
-}
+});
+
+module.exports = router;
