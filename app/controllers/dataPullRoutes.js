@@ -12,22 +12,7 @@ let MongoClient = dbImport.MongoClient
 let url = dbImport.url
 //****************************************************
 
-//Find all entries
-router.get('/api/show-me-everything', (req, res) => {
-    MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbo = db.db(databaseName);
-        dbo.collection(entriesCollection).find({}).toArray(function (err, result) {
-            if (err) throw err;
-            db.close();
-            return res.json({
-                data: result
-            })
-        });
-    })
-});
-
-//Find all entries
+//Find all entries for the user
 router.post('/api/entries/all', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
