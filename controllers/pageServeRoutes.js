@@ -29,6 +29,9 @@ router.post('/createaccount_process', (req, res) => {
         var myobj = req.body
         myobj.uuid = uuidv4()
         console.log(myobj)
+        if (myobj.profilePhotoURL === '' || myobj.profilePhotoURL === undefined) {
+            myobj.profilePhotoURL = 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Portrait_Placeholder_Square.png'
+        }
         dbo.collection('users').insertOne(myobj, function (err, res) {
             if (err) throw err;
             console.log("1 document inserted");
@@ -61,3 +64,17 @@ router.get('/add_prompt', (req, res) => {
 });
 
 module.exports = router;
+
+router.post('/insertmany', (req, res) => {
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db(databaseName);
+        var myobj = req.body; //Where req.body is an array of objects
+        dbo.collection(entriesCollection).insertMany(myobj, function (err, res) {
+            if (err) throw err;
+            console.log("Number of documents inserted: " + res.insertedCount);
+            db.close();
+            res.send('Documents added')
+        });
+    });
+});
