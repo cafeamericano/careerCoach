@@ -19,15 +19,16 @@ router.get('/', (req, res) => {
 });
 
 router.get('/createaccount_prompt', (req, res) => {
-    res.render('createaccount')
+    res.sendFile('createaccount.html', { root: __dirname + '/../public' })
 });
 
 router.post('/createaccount_process', (req, res) => {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        console.log(req.body)
-        var myobj = {username: req.body.username, password: req.body.password, uuid: uuidv4()};
+        var myobj = req.body
+        myobj.uuid = uuidv4()
+        console.log(myobj)
         dbo.collection('users').insertOne(myobj, function (err, res) {
             if (err) throw err;
             console.log("1 document inserted");
