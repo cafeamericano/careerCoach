@@ -8,7 +8,7 @@ $('#sidepanel').append(`
     <a href='/add_prompt' >
         <li style='border-radius: 15px'>
             <div class='text-center'>
-                <i style='font-size: 50px; color: white' class="material-icons">add_circle_outline</i>
+                <i style='font-size: 50px' class="material-icons">add_circle_outline</i>
             </div>
         </li>
     </a>

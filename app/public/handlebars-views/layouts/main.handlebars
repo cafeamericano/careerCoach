@@ -48,41 +48,38 @@
 
 <body style="position: relative">
 
-    <br>
-
     <!-- NAVIGATION BAR ############################################################################################################################## -->
-    <div class='row'>
-        <div class='col' style='padding: 0px !important'>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: relative">
 
-                <div class="navbar-brand" style='font-family: Comfortaa; color: white; font-size: 30px'>Career Coach
-                </div>
+    <nav class="navbar fixed-top navbar-dark bg-dark" style="height: 70px !important; margin-top: 20px">
 
-                <div class="dropdown" style="position: absolute; right: 30px">
-                    <div id='profilePhoto' data-toggle="dropdown"
-                        style='height: 50px; width: 50px; border-radius: 100%; background-color: gray; background-size: cover'>
-                    </div>
-                    <div class="dropdown-menu" style="left: -100px">
-                        <a id='logoutButton' style='cursor: pointer' class="dropdown-item">Logout</a>
-                    </div>
-                </div>
-
-            </nav>
+        <div class="navbar-brand" style='font-family: Comfortaa; color: white; font-size: 30px'>Career Coach
         </div>
-    </div>
+
+        <div class="dropdown" style="position: absolute; right: 30px">
+            <div id='profilePhoto' data-toggle="dropdown"
+                style='height: 50px; width: 50px; border-radius: 100%; background-color: gray; background-size: cover'>
+            </div>
+            <div class="dropdown-menu" style="left: -100px">
+                <a id='logoutButton' style='cursor: pointer' class="dropdown-item">Logout</a>
+            </div>
+        </div>
+
+    </nav>
 
     <!-- BODY ############################################################################################################################## -->
 
-    <main class="row" style="min-height: 100%">
-        <div class='col-2 bg-secondary' style="min-height: 100%; padding: 0px !important">
+    <main class="row" style="min-height: 100%; margin-top: 90px">
+        <div class='col-xl-2 col-lg-3 bg-light' style="min-height: 100%; padding: 0px !important">
             <ul class="list-group" id='sidepanel'></ul>
         </div>
-        <div class='col-10 p-4'>
+        <div class='col-xl-10 col-lg-9 p-4'>
             {{{body}}}
         </div>
     </main>
 
 </body>
+
+<!-- SCRIPTS ############################################################################################################################## -->
 
 {{!-- Log Out Button --}}
 <script>
