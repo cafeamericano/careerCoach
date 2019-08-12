@@ -67,7 +67,7 @@
     <div class='animated flipInY'
         style="display: flex; justify-content: center; align-items: center; padding-top: 40px">
         <div class="card">
-                <h3 class='text-dark text-center p-3'>Sign Up.</h3>
+            <h3 class='text-dark text-center p-3'>Sign Up.</h3>
 
             <div class="card-body">
                 <form id='newAccountForm'>
@@ -144,18 +144,62 @@
                 data: {
                     username: $('#username').val().trim(),
                     password: $('#password').val().trim(),
-                    email: $('#email').val().trim()
+                    firstName: $('#firstName').val().trim(),
+                    lastName: $('#lastName').val().trim(),
+                    email: $('#email').val().trim(),
+                    profilePhotoURL: $('#profilePhotoURL').val().trim()
                 }
             }).then(function (response) {
                 console.log(response)
-                if (response === 'Failure') {
+                if (response === 'Username taken') {
                     $('#alertBox').empty()
                     $('#alertBox').append(`
                         <div class="alert alert-danger" role="alert">
                             This username has already been taken.
                         </div>
                     `)
-                } else {
+                }
+                else if (response === 'Invalid username') {
+                    $('#alertBox').empty()
+                    $('#alertBox').append(`
+                        <div class="alert alert-danger" role="alert">
+                            Usernames must be six or more characters.
+                        </div>
+                    `)
+                }
+                else if (response === 'Invalid password') {
+                    $('#alertBox').empty()
+                    $('#alertBox').append(`
+                        <div class="alert alert-danger" role="alert">
+                            Passwords must be six or more characters.
+                        </div>
+                    `)
+                }
+                else if (response === 'Invalid first name') {
+                    $('#alertBox').empty()
+                    $('#alertBox').append(`
+                        <div class="alert alert-danger" role="alert">
+                            Please provide a value for first name.
+                        </div>
+                    `)
+                }
+                else if (response === 'Invalid last name') {
+                    $('#alertBox').empty()
+                    $('#alertBox').append(`
+                        <div class="alert alert-danger" role="alert">
+                            Please provide a value for last name.
+                        </div>
+                    `)
+                }
+                else if (response === 'Invalid email') {
+                    $('#alertBox').empty()
+                    $('#alertBox').append(`
+                        <div class="alert alert-danger" role="alert">
+                            Please provide a valid email address.
+                        </div>
+                    `)
+                }
+                else {
                     $('#alertBox').empty()
                     $('#alertBox').append(`
                         <div class="alert alert-success" role="alert">

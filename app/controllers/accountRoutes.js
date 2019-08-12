@@ -29,15 +29,31 @@ router.post('/createaccount_process', (req, response) => {
         var dbo = db.db(databaseName);
         var query = { username: req.body.username };
         console.log(query)
-
+        console.log(req.body)
         //Make sure no other users have this username
         dbo.collection('users').find(query).toArray(function (err, result) {
             if (err) throw err;
             console.log(result)
-            if (result.length !== 0) {
+            if (req.body.username.length < 6) {
+                response.send('Invalid username')
+            }
+            else if (result.length !== 0) {
                 //Notify requestor that this username is taken
-                response.send('Failure')
-            } else {
+                response.send('Username taken')
+            } 
+            else if (req.body.password === undefined || req.body.password.length < 6) {
+                response.send('Invalid password')
+            }
+            else if (req.body.firstName === undefined || req.body.firstName.length < 1) {
+                response.send('Invalid first name')
+            }
+            else if (req.body.lastName === undefined || req.body.lastName.length < 1) {
+                response.send('Invalid last name')
+            }
+            else if (req.body.email === undefined || req.body.email.length < 8) {
+                response.send('Invalid email')
+            }
+            else {
                 //If username unique, proceed with account creation
                 var dbo = db.db(databaseName);
                 var myobj = req.body
