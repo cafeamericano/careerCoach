@@ -31,7 +31,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
     <!-- {{!-- Animate CSS --}} -->
     <link rel="stylesheet" type="text/css" href='animate.css' />
@@ -58,15 +58,17 @@
     <div class='row'>
         <div class='col' style='padding: 0px !important'>
             <nav class="navbar navbar-dark bg-dark">
-                <a class="navbar-brand" style='font-family: Comfortaa; color: white; font-size: 30px'>Career Coach</a>
+                <a class="navbar-brand" style='font-family: Roboto; color: white; font-size: 30px'>Career Coach</a>
             </nav>
         </div>
     </div>
 
     <!-- Create account box -->
     <div class='animated flipInY'
-        style="display: flex; justify-content: center; align-items: center; padding-top: 70px">
+        style="display: flex; justify-content: center; align-items: center; padding-top: 40px">
         <div class="card">
+                <h3 class='text-dark text-center p-3'>Sign Up.</h3>
+
             <div class="card-body">
                 <form id='newAccountForm'>
                     <div class="form-row">
@@ -100,6 +102,7 @@
                                 placeholder="Profile photo link (optional)">
                         </div>
                     </div>
+                    <div id='alertBox'></div>
                     <div class="form-row">
                         <div class="form-group col-md-12 text-right">
                             <a href='/'>
@@ -114,13 +117,13 @@
     </div>
 
     <!-- Credit Badge -->
-    <div style='font-family: Comfortaa; color: black; font-size: 14px; position: fixed; bottom: 10px; left: 10px'> ©2019
+    <div style='font-family: Roboto; color: black; font-size: 14px; position: fixed; bottom: 10px; left: 10px'> ©2019
         MATTHEW FARMER</div>
 
     <!-- Append Flashy Text -->
     <script>
         setTimeout(function () {
-            $('#flashyText').append(`<div class='animated slideInLeft' style='font-family: Comfortaa; font-size: 70px; text-align: right; margin: 120px; font-weight: 600px'>Create account.</div>`);
+            $('#flashyText').append(`<div class='animated slideInLeft' style='font-family: Roboto; font-size: 70px; text-align: right; margin: 120px; font-weight: 600px'>Create account.</div>`);
         }, 500);
     </script>
 
@@ -146,9 +149,22 @@
             }).then(function (response) {
                 console.log(response)
                 if (response === 'Failure') {
-                    alert('Username taken')
+                    $('#alertBox').empty()
+                    $('#alertBox').append(`
+                        <div class="alert alert-danger" role="alert">
+                            This username has already been taken.
+                        </div>
+                    `)
                 } else {
-                    window.location.replace('/')
+                    $('#alertBox').empty()
+                    $('#alertBox').append(`
+                        <div class="alert alert-success" role="alert">
+                            Account created! Returning to login page...
+                        </div>
+                    `)
+                    setTimeout(function () {
+                        window.location.replace('/')
+                    }, 2000);
                 }
             })
         }

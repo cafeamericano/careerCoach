@@ -53,7 +53,7 @@
 <body class='container-fluid' style="position: relative">
 
     <br>
-    
+
     <!-- Login Box -->
     <div class='row'>
         <div class='col' style='padding: 0px !important'>
@@ -75,7 +75,8 @@
     <div style='font-family: Roboto; color: black; padding-top: 60px' id='flashyText'></div>
 
     <!-- Credit Badge -->
-    <div style='font-family: Roboto; color: black; font-size: 14px; position: fixed; bottom: 10px; left: 10px' > ©2019 MATTHEW FARMER</div>
+    <div style='font-family: Roboto; color: black; font-size: 14px; position: fixed; bottom: 10px; left: 10px'> ©2019
+        MATTHEW FARMER</div>
 
     <!-- Append Flashy Text -->
     <script>
@@ -88,6 +89,25 @@
         setTimeout(function () {
             $('#flashyText').append(`<div class='animated fadeInUpBig' style='font-size: 100px; text-align: center; margin-right: 100px; font-weight: 800px'>Accept.</div>`);
         }, 1500);
+        setTimeout(function () {
+            $('#flashyText').fadeOut();
+        }, 2500);
+        setTimeout(function () {
+            $('#flashyText').empty();
+            $('#flashyText').fadeIn();
+        }, 3000);
+        setTimeout(function () {
+            $('#flashyText').append(`
+                <div class='animated fadeInUpBig' style='line-height: 0.9'> 
+                    <div style='font-size: 50px; text-align: left; margin-left: 130px; font-weight: 800px'>
+                        Welcome to
+                    </div>
+                    <div style='font-size: 100px; text-align: left; margin-left: 150px; font-weight: 800px'>
+                        Career Coach
+                    </div>
+                </div>
+            `);
+        }, 3100);
     </script>
 
     <!-- Process Login -->
