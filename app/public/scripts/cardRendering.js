@@ -70,7 +70,7 @@ function drawAdvancedCards(response) {
         //Put the card on the DOM
         $('#recordsContainer').append(
             `
-                <div class="col-xl-4 col-lg-6 col-md-12  animated bounceInUp">
+                <div class="col-xl-4 col-lg-6 col-md-12 animated bounceInUp">
                     <div class="card mb-3 deflated" style="max-width: 540px; cursor: pointer">
                         <div class="row no-gutters">
                             <div class="col">

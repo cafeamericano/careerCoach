@@ -39,12 +39,13 @@ function grabAllEntries(sortColumn, sortOrder, forBadge) {
         }
     }).then(function (response) {
         console.log(response.data)
-        if (forBadge) {
-            if (response.data.length !== 0) {
+        if (response.data.length !== 0) {
+            drawAdvancedCards(response)
+            if (forBadge) {
                 $('#allApplicationsBadgeValue').text(response.data.length)
             }
         } else {
-            drawAdvancedCards(response)
+            notifyNoResults()
         }
     })
 }
@@ -62,13 +63,14 @@ function grabEntriesOutstanding(sortColumn, sortOrder, forBadge) {
             token: localStorage.getItem("active-user")
         }
     }).then(function (response) {
-        console.log(response.data)
-        if (forBadge) {
-            if (response.data.length !== 0) {
+        if (response.data.length !== 0) {
+            drawAdvancedCards(response)
+            console.log(response.data)
+            if (forBadge) {
                 $('#outstandingBadgeValue').text(response.data.length)
             }
         } else {
-            drawAdvancedCards(response)
+            notifyNoResults()
         }
     })
 }
@@ -87,12 +89,13 @@ function grabEntriesInterviews(sortColumn, sortOrder, forBadge) {
         }
     }).then(function (response) {
         console.log(response.data)
-        if (forBadge) {
-            if (response.data.length !== 0) {
+        if (response.data.length !== 0) {
+            drawAdvancedCards(response)
+            if (forBadge) {
                 $('#interviewsBadgeValue').text(response.data.length)
             }
         } else {
-            drawAdvancedCards(response)
+            notifyNoResults()
         }
     })
 }
@@ -111,12 +114,13 @@ function grabEntriesConcluded(sortColumn, sortOrder, forBadge) {
         }
     }).then(function (response) {
         console.log(response.data)
-        if (forBadge) {
-            if (response.data.length !== 0) {
+        if (response.data.length !== 0) {
+            drawAdvancedCards(response)
+            if (forBadge) {
                 $('#concludedBadgeValue').text(response.data.length)
             }
         } else {
-            drawAdvancedCards(response)
+            notifyNoResults()
         }
     })
 }
@@ -135,12 +139,13 @@ function grabEntriesNeverResponded(sortColumn, sortOrder, forBadge) {
         }
     }).then(function (response) {
         console.log(response.data)
-        if (forBadge) {
-            if (response.data.length !== 0) {
+        if (response.data.length !== 0) {
+            drawAdvancedCards(response)
+            if (forBadge) {
                 $('#neverRespondedBadgeValue').text(response.data.length)
             }
         } else {
-            drawAdvancedCards(response)
+            notifyNoResults()
         }
     })
 }
@@ -160,4 +165,14 @@ function openCardForEditing(id) {
         console.log('Sent delete request.')
     })
     window.location.replace()
+}
+
+function notifyNoResults() {
+    console.log('No results for this filter.')
+    $('#recordsContainer').empty()
+    $('#recordsContainer').append(`
+        <div class="alert alert-light animated bounceInUp" style='width: 100%' role="alert">
+            No job applications match this filter yet.
+        </div>
+    `)
 }
