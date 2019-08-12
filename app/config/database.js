@@ -3,13 +3,19 @@
 //****************************************************
 
 var mongo = require('mongodb');
-//var databaseName = 'career_coach'
-var databaseName = process.env.DATABASE_NAME
 let entriesCollection = 'job_apps';
 var MongoClient = require('mongodb').MongoClient;
 
-//var url = `mongodb://localhost:27017/${databaseName}`
-var url = process.env.MONGODB_URI;
+var databaseName;
+var url;
+
+if (process.env.DATABASE_NAME) {
+    databaseName = process.env.DATABASE_NAME
+    url = process.env.MONGODB_URI;
+} else {
+    databaseName = 'career_coach'
+    url = `mongodb://localhost:27017/${databaseName}`
+};
 
 //****************************************************
 
