@@ -46,6 +46,22 @@
             background-repeat: repeat;
             background-attachment: fixed;
         }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        a:active {
+            text-decoration: none;
+        }
     </style>
 
 </head>
@@ -60,6 +76,7 @@
             <nav class="navbar navbar-dark bg-dark">
                 <a class="navbar-brand" style='font-family: Roboto; color: white; font-size: 30px'>Career Coach</a>
                 <div class="form-inline">
+                    <div id='failedCredentialsDiv'></div>
                     <form class="form-inline" id='loginForm'>
                         <input class="form-control mr-sm-2" id='username' type="text" placeholder='Username'>
                         <input class="form-control mr-sm-2" id='password' type='password' placeholder="Password">
@@ -130,7 +147,12 @@
                 }
             }).then(function (response) {
                 if (response.length === 0) {
-                    alert('Incorrect username or password entered.')
+                    $('#loginForm').addClass('animated shake')
+                    setTimeout(function () {
+                        $('#loginForm').removeClass('animated shake')
+                    }, 1000);
+                    //$('#failedCredentialsDiv').empty()
+                    //$('#failedCredentialsDiv').append(`<div class="alert alert-danger animated fadeIn" style='height: 38px !important; margin: 0px 10px; padding: 5px' role="alert">Invalid username or password.</div>`)
                 } else {
                     localStorage.setItem("active-user", response[0].uuid);
                     window.location.replace('/viewall')
