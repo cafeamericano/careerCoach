@@ -22,18 +22,35 @@ router.get('/createaccount_prompt', (req, res) => {
     res.sendFile('createaccount.html', { root: __dirname + '/../public' })
 });
 
-router.post('/createaccount_process', (req, res) => {
+router.post('/createaccount_process', (req, response) => {
+    console.log('#########################################')
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db(databaseName);
-        var myobj = req.body
-        myobj.uuid = uuidv4()
-        console.log(myobj)
-        dbo.collection('users').insertOne(myobj, function (err, res) {
+        var query = { username: req.body.username };
+        console.log(query)
+
+        //Make sure no other users have this username
+        dbo.collection('users').find(query).toArray(function (err, result) {
             if (err) throw err;
-            console.log("1 document inserted");
-            console.log(myobj)
-            db.close();
+            console.log(result)
+            if (result.length !== 0) {
+                //Notify requestor that this username is taken
+                response.send('Failure')
+            } else {
+                //If username unique, proceed with account creation
+                var dbo = db.db(databaseName);
+                var myobj = req.body
+                myobj.uuid = uuidv4()
+                console.log(myobj)
+                dbo.collection('users').insertOne(myobj, function (err, res) {
+                    if (err) throw err;
+                    console.log("1 document inserted");
+                    console.log(myobj)
+                    db.close();
+                    response.send('Success')
+                });
+            }
         });
     });
 });

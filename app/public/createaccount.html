@@ -64,7 +64,8 @@
     </div>
 
     <!-- Create account box -->
-    <div class='animated flipInY' style="display: flex; justify-content: center; align-items: center; padding-top: 70px">
+    <div class='animated flipInY'
+        style="display: flex; justify-content: center; align-items: center; padding-top: 70px">
         <div class="card">
             <div class="card-body">
                 <form id='newAccountForm'>
@@ -95,12 +96,15 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="profilePhotoURL">Profile Photo URL</label>
-                            <input type="text" class="form-control" id="profilePhotoURL" placeholder="Profile photo link (optional)">
+                            <input type="text" class="form-control" id="profilePhotoURL"
+                                placeholder="Profile photo link (optional)">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12 text-right">
-                            <a href='/'><div class="btn btn-secondary">Cancel</div></a>
+                            <a href='/'>
+                                <div class="btn btn-secondary">Cancel</div>
+                            </a>
                             <button type="submit" class="btn btn-primary">Create Account</button>
                         </div>
                     </div>
@@ -140,10 +144,13 @@
                     email: $('#email').val().trim()
                 }
             }).then(function (response) {
-                console.log('Created account.')
+                console.log(response)
+                if (response === 'Failure') {
+                    alert('Username taken')
+                } else {
+                    window.location.replace('/')
+                }
             })
-            alert('Account created!')
-            window.location.replace('/')
         }
     </script>
 
