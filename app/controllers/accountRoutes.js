@@ -58,8 +58,6 @@ router.post('/createaccount_process', (req, response) => {
                 var dbo = db.db(databaseName);
                 var myobj = req.body
                 myobj.uuid = uuidv4()
-                myobj.password = process.env.ENCRYPT.call(req.body.password)
-                console.log(myobj.password)
                 console.log(myobj)
                 dbo.collection('users').insertOne(myobj, function (err, res) {
                     if (err) throw err;
