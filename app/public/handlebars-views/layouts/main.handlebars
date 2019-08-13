@@ -44,14 +44,6 @@
     {{!-- Custom CSS --}}
     <link rel="stylesheet" type="text/css" href='style.css' />
 
-    {{!-- Custom Scripts --}}
-    <script src='scripts/sortObjectMaster.js'></script>
-    <script src='scripts/chooseRouteToHitFromFilterBy.js'></script>
-    <script src='scripts/ajaxCalls.js'></script>
-    <script src='scripts/entriesPageSidepanel.js'></script>
-    <script src='scripts/cardRendering.js'></script>
-    <script src='scripts/runProgram.js'></script>
-
 </head>
 
 <body style="position: relative">
@@ -89,6 +81,14 @@
 
 <!-- SCRIPTS ############################################################################################################################## -->
 
+{{!-- Custom Scripts --}}
+<script src='scripts/sortObjectMaster.js'></script>
+<script src='scripts/chooseRouteToHitFromFilterBy.js'></script>
+<script src='scripts/ajaxCalls.js'></script>
+<script src='scripts/entriesPageSidepanel.js'></script>
+<script src='scripts/cardRendering.js'></script>
+<script src='scripts/runProgram.js'></script>
+
 {{!-- Log Out Button --}}
 <script>
     $(document).on("click", "#logoutButton", function () {
@@ -97,6 +97,7 @@
     });
 </script>
 
+{{!-- Grab Profile Photo --}}
 <script>
     $.ajax({
         url: 'grabprofilephoto',
