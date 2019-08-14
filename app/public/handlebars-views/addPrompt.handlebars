@@ -71,6 +71,7 @@
                 data-existing='{{this.preferredDegreeHeld}}'>
                 <option id='preferredDegreeHeld_yes' value="Yes">Yes</option>
                 <option id='preferredDegreeHeld_no' value="No">No</option>
+                <option id='preferredDegreeHeld_notApplicable' value="Not Applicable">Not Applicable</option>
             </select>
         </div>
         <div class="col-4">
@@ -177,7 +178,7 @@
 </div>
 
 <script>
-    function setUUIDforRecord(){
+    function setUUIDforRecord() {
         $('#uuid').val(localStorage.getItem("active-user"))
     }
     setUUIDforRecord()

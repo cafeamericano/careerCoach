@@ -124,6 +124,8 @@ function prefillPreferredDegreeValue() {
             return $('#preferredDegreeHeld_yes').attr('selected', 'selected');
         case 'No':
             return $('#preferredDegreeHeld_no').attr('selected', 'selected');
+        case 'Not Applicable':
+            return $('#preferredDegreeHeld_notApplicable').attr('selected', 'selected');
         default:
             return;
     }
