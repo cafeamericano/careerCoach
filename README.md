@@ -19,10 +19,10 @@ The outstanding applications filter. By clicking this link on the left side of t
 ![outstandingApps](/app/public/demoMedia/outstandingApps.png)
 
 The form for recording a new job application. Input validation (particularly in the form of dropdown boxes) is utilized here to accept input where appropriate.
-![add](/app/public/demoMedia/add.png)
+![add](/app/public/demoMedia/addRecord.png)
 
 The form for editing the an existing record for a job application. Input validation (particularly in the form of dropdown boxes) is utilized here to accept input where appropriate. Users also have the ability to delete records from this page.
-![edit](/app/public/demoMedia/edit.png)
+![edit](/app/public/demoMedia/editRecord.png)
 
 ## Technologies Used
 
