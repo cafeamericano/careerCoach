@@ -21,6 +21,8 @@ function prefillFourYearDegreeValue() {
             return $('#fourYearDegreeRequired_yes').attr('selected', 'selected');
         case 'No':
             return $('#fourYearDegreeRequired_no').attr('selected', 'selected');
+        case 'Not Indicated':
+            return $('#fourYearDegreeRequired_notIndicated').attr('selected', 'selected');
         default:
             return;
     }
