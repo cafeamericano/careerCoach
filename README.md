@@ -1,5 +1,12 @@
 # **Career Coach**
-> Created by Matthew Farmer
+
+## Credits
+
+©2019 Matthew Farmer
+
+## Application Link
+
+http://careercoach.herokuapp.com/
 
 ## About
 Career Coach is an application created to allow users to simultaneously track the status of multiple job applications. Job applications are represented as cards on the home screen with easy-to-understand progress indicators, and these cards may be sorted/filtered by the user's specified criteria. ©2019 Matthew Farmer
