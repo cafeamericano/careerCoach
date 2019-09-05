@@ -23,9 +23,9 @@ function pickProgressPercentage(progress) {
     switch (progress) {
         case 'Application Submitted':
             return '17%'
-        case 'Resume Reviewed':
+        case 'Outstanding Less Than 1 Week':
             return '33%'
-        case 'Portfolio Referenced':
+        case 'Outstanding 1 or More Weeks':
             return '50%'
         case 'Interview Offered':
             return '67%'
