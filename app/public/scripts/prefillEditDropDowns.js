@@ -137,10 +137,10 @@ function prefillProgressValue() {
     switch (x) {
         case 'Application Submitted':
             return $('#progress_applicationSubmitted').attr('selected', 'selected');
-        case 'Resume Reviewed':
-            return $('#progress_resumeReviewed').attr('selected', 'selected');
-        case 'Portfolio Referenced':
-            return $('#progress_portfolioReferenced').attr('selected', 'selected');
+        case 'Outstanding Less Than 1 Week':
+            return $('#progress_oustandingLessThan1Week').attr('selected', 'selected');
+        case 'Outstanding 1 or More Weeks':
+            return $('#progress_oustandingMoreThan1Week').attr('selected', 'selected');
         case 'Interview Offered':
             return $('#progress_interviewOffered').attr('selected', 'selected');
         case 'Interview Completed':
