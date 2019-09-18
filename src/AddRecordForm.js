@@ -28,7 +28,7 @@ class AddRecordForm extends Component {
 
   render() {
     return (
-      <form className='card p-1' onChange={this.processInput} onSubmit={this.submitForm}>
+      <form className='card shadow p-2 animated slideInRight' onChange={this.processInput} onSubmit={this.submitForm}>
         <h3 className='text-center'>Add a New Application</h3>
         <hr></hr>
         <label>Company Name</label>

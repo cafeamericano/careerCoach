@@ -83,7 +83,7 @@ class App extends Component {
               records={this.state.records}
             />
           </div>
-          <div className="col-3 bg-light p-3">
+          <div className="col-3 p-3">
             <AddRecordForm updateParentState={this.updateMyState} />
           </div>
         </section>
