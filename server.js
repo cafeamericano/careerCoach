@@ -40,6 +40,17 @@ app.get("/all", (req, res) => {
     });
 });
 
+app.post("/add", (req, res) => {
+  console.log(req.body)
+  db.JobApplication.create(req.body)
+    .then(function() {
+      res.send("Record added");
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+
 // app.use(require("./controllers/dataPullRoutes.js"));
 // app.use(require("./controllers/dataPushRoutes.js"));
 // app.use(require("./controllers/adminRoutes.js"));

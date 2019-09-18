@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AddRecordForm from "./AddRecordForm";
 import JobCard from "./JobCard";
 
 class Container extends Component {
@@ -15,6 +16,7 @@ class Container extends Component {
       ));
       return (
         <main className="container p-3">
+          <AddRecordForm />
           <div className="row">{jobs}</div>
         </main>
       );

@@ -21,7 +21,8 @@ var JobApplicationSchema = new Schema({
   },
   isMajorCorporation: {
     type: Boolean,
-    required: true
+    required: false,
+    default: false
   },
   progress: {
     type: String,
