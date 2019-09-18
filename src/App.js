@@ -16,6 +16,7 @@ class App extends Component {
     fetch("/all")
       .then(response => response.json())
       .then(response => {
+        console.log(response)
         this.setState({ records: response });
       });
     console.log("fetched");
@@ -30,7 +31,7 @@ class App extends Component {
         <section className="row">
           <div className="col-3 bg-secondary"></div>
           <div className="col-9">
-            <Container records={this.state.records.data} />
+            <Container records={this.state.records} />
           </div>
         </section>
       </div>

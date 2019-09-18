@@ -2,35 +2,63 @@
 
 const express = require("express");
 var bodyParser = require("body-parser");
-var handlebars = require("express-handlebars");
+var mongoose = require("mongoose");
 var path = require("path");
 var app = express();
 
 var PORT = process.env.PORT || 4000;
 
+//DATABASE SETUP WITH MONGOOSE================================================================
+
+//Import DB models
+var db = require("./models");
+
+//Connect to database
+var dbURL = process.env.MONGODB_URI || "mongodb://localhost/careercoachdb";
+mongoose.connect(dbURL, {
+  useNewUrlParser: true
+});
+
 //EXPRESS PUBLIC FOLDER================================================================
 
-app.use(express.static(__dirname + "/app/public")); //This is what the html in the HTML and Handlebars files use
+app.use(express.static(__dirname + "/public"));
 
 //BODY PARSER MIDDLEWARE================================================================
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//HANDLEBARS================================================================
-
-app.set("views", path.join(__dirname, "./public"));
-app.engine("handlebars", handlebars({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
 //ROUTES================================================================
 
-app.use(require('./controllers/dataPullRoutes.js'))
-app.use(require('./controllers/dataPushRoutes.js'))
-app.use(require('./controllers/adminRoutes.js'))
-app.use(require('./controllers/accountRoutes.js'))
+app.get("/all", (req, res) => {
+  db.JobApplication.find({})
+    .then(function(queryResult) {
+      res.json(queryResult);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+
+// app.use(require("./controllers/dataPullRoutes.js"));
+// app.use(require("./controllers/dataPushRoutes.js"));
+// app.use(require("./controllers/adminRoutes.js"));
+// app.use(require("./controllers/accountRoutes.js"));
 
 //START SERVER================================================================
+
+// let Relias = {
+//   companyName: "Relias",
+//   jobTitle: "Junior Frontend Developer",
+//   applicationDate: "2019-07-20",
+//   firstResponseDate: "2019-08-20",
+//   isMajorCorporation: false,
+//   progress: "Outstanding 1 or More Weeks",
+//   closure: "Denied",
+//   comments: ""
+// };
+
+// db.JobApplication.create(Relias);
 
 app.listen(PORT, function() {
   console.log(`Server listening on Port ${PORT}...`);
