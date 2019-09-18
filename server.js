@@ -32,8 +32,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/all", (req, res) => {
   db.JobApplication.find({})
+    .sort({ applicationDate: -1 })
     .then(function(queryResult) {
-      console.log(queryResult)
+      console.log(queryResult);
       res.json(queryResult);
     })
     .catch(function(err) {
@@ -42,7 +43,7 @@ app.get("/all", (req, res) => {
 });
 
 app.post("/add", (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   db.JobApplication.create(req.body)
     .then(function() {
       res.send("Record added");

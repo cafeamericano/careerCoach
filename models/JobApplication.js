@@ -20,17 +20,19 @@ var JobApplicationSchema = new Schema({
     required: false
   },
   isMajorCorporation: {
-    type: Boolean,
+    type: String,
     required: false,
     default: false
   },
   progress: {
     type: String,
-    required: true
+    default: 'Application Submitted',
+    required: false
   },
   closure: {
     type: String,
-    required: true
+    default: 'Outstanding',
+    required: false
   },
   comments: {
     type: String,
