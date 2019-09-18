@@ -1,36 +1,68 @@
-# **Career Coach**
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Credits
+## Available Scripts
 
-©2019 Matthew Farmer
+In the project directory, you can run:
 
-## Application Link
+### `npm start`
 
-http://careercoach.herokuapp.com/
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## About
-Career Coach is an application created to allow users to simultaneously track the status of multiple job applications. Job applications are represented as cards on the home screen with easy-to-understand progress indicators, and these cards may be sorted/filtered by the user's specified criteria. ©2019 Matthew Farmer
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-## Walkthrough
+### `npm test`
 
-The login screen. From here, users may enter their credentials into the form at the top of the page to sign in. If users do not already have an account, they may create one by clicking on 'Create Account'.
-![login](/app/public/demoMedia/login.png)
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-The form for creating a new account. Users are to provide their first name, last name, email address, desired username and password, and a link to a profile picture (if desired). If users fail to provide any mandatory information, choose a username that has already been taken, or provide less than six characters for their username or password, a notification will appear to alert the user of what changes must be made before an account can be created.
-![createAccount](/app/public/demoMedia/createAccount.png)
+### `npm run build`
 
-The screen with which a user is presented upon login. This screen lists all job applications that a user has submitted in the form of informative cards. Each card indicates the name of the company, the job position, the number of days since the application was submitted, and a progress bar indicating where at in the job hunting process a user is for a particular position. By default, applications are listed in chronological descending order. However, users may sort this data by date or name and in either ascending or descending order by clicking the 'Sort Records' button at the top of the page. Likewise, a user may select a filter from the left side of the screen to limit results to applications that meet a specified criteria.
-![allApps](/app/public/demoMedia/allApps.png)
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The outstanding applications filter. By clicking this link on the left side of the screen, users may limit the visible job applications to only those that have not been denied, accepted, withdrawn, or otherwise concluded.
-![outstandingApps](/app/public/demoMedia/outstandingApps.png)
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-The form for recording a new job application. Input validation (particularly in the form of dropdown boxes) is utilized here to accept input where appropriate.
-![add](/app/public/demoMedia/addRecord.png)
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-The form for editing the an existing record for a job application. Input validation (particularly in the form of dropdown boxes) is utilized here to accept input where appropriate. Users also have the ability to delete records from this page.
-![edit](/app/public/demoMedia/editRecord.png)
+### `npm run eject`
 
-## Technologies Used
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-This application is built on NodeJS and hosted via Heroku. It uses MongoDB for its database and Express for routing. HandlebarsJS serves as the templating engine; jQuery and AJAX calls are heavily used throughout the application.
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
