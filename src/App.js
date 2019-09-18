@@ -39,6 +39,9 @@ class App extends Component {
   };
 
   render() {
+    let outstandingApps = this.state.records.filter(item => item.closure === "Outstanding")
+    let deniedApps = this.state.records.filter(item => item.closure === "Denied")
+
     return (
       <div>
         <nav class="navbar navbar-dark bg-info">
@@ -60,14 +63,14 @@ class App extends Component {
               name="Outstanding"
               onClick={this.setActiveList_Outstanding}
             >
-              Outstanding
+              Outstanding {outstandingApps.length}
             </div>
             <div
               className="btn btn-primary"
               name="Denied"
               onClick={this.setActiveList_Denied}
             >
-              Denied
+              Denied {deniedApps.length}
             </div>
           </div>
         </section>
