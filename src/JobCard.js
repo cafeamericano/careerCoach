@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 
+const style = {
+  title: {
+    fontSize: "1.4em !important",
+    fontWeight: "bolder"
+  }
+};
+
 class JobCard extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +36,7 @@ class JobCard extends Component {
 
   render() {
     //Define progress percentage
-    let progressStyle = { width: `${this.state.progressPercentage}%` };
+    let progressStyle = { width: `{this.state.progressPercentage}%` };
 
     //Define the front side of the card
     let frontSide = (
@@ -39,17 +46,34 @@ class JobCard extends Component {
           onMouseEnter={this.inflate}
           onMouseLeave={this.deflate}
         >
-          <p>{this.props.data.companyName}</p>
-          <p>{this.props.data.applicationDate}</p>
-          <p>{this.props.data.jobTitle}</p>
-          <p>{this.props.data.progress}</p>
-          <p>{this.props.data.closure}</p>
-          <div class="progress">
-            <div
-              class="progress-bar"
-              role="progressbar"
-              style={progressStyle}
-            ></div>
+          <div class="card-body">
+            <span style={style.title} class="card-title">
+              {this.props.data.companyName}
+            </span>
+            <br />
+            <span class="card-text ml">
+              <small class="text-muted">
+                {this.props.data.applicationDate}
+              </small>
+            </span>{" "}
+            <span class="card-text ml">
+              <small class="text-muted">*** Days Since N/A***</small>
+            </span>
+            <p class="card-text">{this.props.data.jobTitle}</p>
+            <div className="progress">
+              <div
+                class="progress-bar"
+                role="progressbar"
+                style={progressStyle}
+              ></div>
+            </div>
+            <span class="card-text">
+              <small class="text-muted">{this.props.data.progress}</small>
+            </span>{" "}
+            |{" "}
+            <span class="card-text">
+              <small class="text-muted">{this.props.data.closure}</small>
+            </span>
           </div>
         </div>
       </div>

@@ -29,39 +29,41 @@ class AddRecordForm extends Component {
   render() {
     return (
       <form className='card p-1' onChange={this.processInput} onSubmit={this.submitForm}>
+        <h3 className='text-center'>Add a New Application</h3>
+        <hr></hr>
         <label>Company Name</label>
-        <input name="companyName" placeholder="Company name"></input>
+        <input class="form-control" name="companyName" placeholder="Company name"></input>
         <br />
 
         <label>Job Title</label>
-        <input name="jobTitle" placeholder="Job title"></input>
+        <input class="form-control" name="jobTitle" placeholder="Job title"></input>
         <br />
 
         <label>Application Date</label>
-        <input name="applicationDate" type="date"></input>
+        <input class="form-control" name="applicationDate" type="date"></input>
         <br />
 
         <label>First Response Date</label>
-        <input name="firstResponseDate" type="date"></input>
+        <input class="form-control" name="firstResponseDate" type="date"></input>
         <br />
 
         <label>Is Major Corporation</label>
-        <input name="isMajorCorporation" type="text"></input>
+        <input class="form-control" name="isMajorCorporation" type="text"></input>
         <br />
 
         <label>Progress</label>
-        <input name="progress" type="text"></input>
+        <input class="form-control" name="progress" type="text"></input>
         <br />
 
         <label>Closure</label>
-        <input name="closure" type="text"></input>
+        <input class="form-control" name="closure" type="text"></input>
         <br />
 
         <label>Comments</label>
-        <input name="comments" type="text"></input>
+        <input class="form-control" name="comments" type="text"></input>
         <br />
 
-        <button type="submit">Submit</button>
+        <button className='btn btn-primary' type="submit">Submit</button>
       </form>
     );
   }

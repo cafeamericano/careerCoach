@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import Container from "./Container";
 import AddRecordForm from "./AddRecordForm";
+import Background from "./background.jpg";
+
+let appStyle = {
+  backgroundImage: `url(${Background})`,
+  backgroundSize: "cover",
+  backgroundRepeat: "repeat",
+  backgroundAttachment: "fixed"
+};
 
 class App extends Component {
   constructor(props) {
@@ -47,28 +55,29 @@ class App extends Component {
     );
 
     return (
-      <div>
+      <div style={appStyle}>
         <nav class="navbar navbar-dark bg-info">
           <span class="navbar-brand mb-0 h1">Navbar</span>
         </nav>
         <section className="row">
-          <div className="col-3 bg-secondary p-3">
+          <div className="col-2 bg-secondary p-3">
             <div
-              className="btn btn-primary"
+              className="btn btn-primary mb-1"
               name="Outstanding"
               onClick={this.setActiveList_Outstanding}
             >
               Outstanding {outstandingApps.length}
             </div>
+            <br></br>
             <div
-              className="btn btn-primary"
+              className="btn btn-primary mb-1"
               name="Denied"
               onClick={this.setActiveList_Denied}
             >
               Denied {deniedApps.length}
             </div>
           </div>
-          <div className="col-6">
+          <div className="col-7">
             <Container
               activeList={this.state.activeList}
               records={this.state.records}
