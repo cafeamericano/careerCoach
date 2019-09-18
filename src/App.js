@@ -7,11 +7,17 @@ class App extends Component {
     super(props);
     this.state = {
       records: [],
-      activeList: "Outstanding"
+      activeList: "Outstanding",
+      clickCounter: 0
     };
   }
-  componentDidMount = () => {
+  componentWillMount = () => {
     this.pullRecords();
+  };
+
+  updateMyState = () => {
+    this.pullRecords()
+    this.setState({ clickCounter: (this.state.clickCounter += 1) });
   };
 
   pullRecords = () => {
@@ -24,6 +30,14 @@ class App extends Component {
     console.log("fetched");
   };
 
+  setActiveList_Outstanding = () => {
+    this.setState({ activeList: "Outstanding" });
+  };
+
+  setActiveList_Denied = () => {
+    this.setState({ activeList: "Denied" });
+  };
+
   render() {
     return (
       <div>
@@ -32,7 +46,7 @@ class App extends Component {
         </nav>
         <section className="row">
           <div className="col-3 bg-secondary p-3">
-            <AddRecordForm />
+            <AddRecordForm updateParentState={this.updateMyState} />
           </div>
           <div className="col-6">
             <Container
@@ -41,7 +55,20 @@ class App extends Component {
             />
           </div>
           <div className="col-3 bg-secondary p-3">
-
+            <div
+              className="btn btn-primary"
+              name="Outstanding"
+              onClick={this.setActiveList_Outstanding}
+            >
+              Outstanding
+            </div>
+            <div
+              className="btn btn-primary"
+              name="Denied"
+              onClick={this.setActiveList_Denied}
+            >
+              Denied
+            </div>
           </div>
         </section>
       </div>

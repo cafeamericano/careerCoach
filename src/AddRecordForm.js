@@ -23,6 +23,7 @@ class AddRecordForm extends Component {
       },
       body: JSON.stringify(allCollectedData)
     });
+    this.props.updateParentState()
   };
 
   render() {
