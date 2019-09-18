@@ -14,7 +14,7 @@ class Container extends Component {
         <JobCard key={item._id} data={item} />
       ));
       return (
-        <main className="container p-3">
+        <main className="container p-3 animated bounceInUp">
           <div className="row">{jobCardComponents}</div>
         </main>
       );

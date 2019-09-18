@@ -56,26 +56,28 @@ class App extends Component {
 
     return (
       <div style={appStyle}>
-        <nav class="navbar navbar-dark bg-info">
-          <span class="navbar-brand mb-0 h1">Navbar</span>
+        <nav class="navbar navbar-dark bg-dark">
+          <span class="navbar-brand mb-0 h1">Career Coach</span>
         </nav>
         <section className="row">
           <div className="col-2 bg-secondary p-3">
-            <div
-              className="btn btn-primary mb-1"
-              name="Outstanding"
-              onClick={this.setActiveList_Outstanding}
-            >
-              Outstanding {outstandingApps.length}
-            </div>
-            <br></br>
-            <div
-              className="btn btn-primary mb-1"
-              name="Denied"
-              onClick={this.setActiveList_Denied}
-            >
-              Denied {deniedApps.length}
-            </div>
+            <ul class="list-group">
+              <li
+                class="list-group-item"
+                onClick={this.setActiveList_Outstanding}
+              >
+                Outstanding{" "}
+                <span className="badge badge-primary float-right">
+                  {outstandingApps.length}
+                </span>
+              </li>
+              <li class="list-group-item" onClick={this.setActiveList_Denied}>
+                Denied{" "}
+                <span className="badge badge-primary float-right">
+                  {deniedApps.length}
+                </span>
+              </li>
+            </ul>
           </div>
           <div className="col-7">
             <Container
