@@ -16,7 +16,7 @@ class App extends Component {
   };
 
   updateMyState = () => {
-    this.pullRecords()
+    this.pullRecords();
     this.setState({ clickCounter: (this.state.clickCounter += 1) });
   };
 
@@ -39,8 +39,12 @@ class App extends Component {
   };
 
   render() {
-    let outstandingApps = this.state.records.filter(item => item.closure === "Outstanding")
-    let deniedApps = this.state.records.filter(item => item.closure === "Denied")
+    let outstandingApps = this.state.records.filter(
+      item => item.closure === "Outstanding"
+    );
+    let deniedApps = this.state.records.filter(
+      item => item.closure === "Denied"
+    );
 
     return (
       <div>
@@ -48,15 +52,6 @@ class App extends Component {
           <span class="navbar-brand mb-0 h1">Navbar</span>
         </nav>
         <section className="row">
-          <div className="col-3 bg-secondary p-3">
-            <AddRecordForm updateParentState={this.updateMyState} />
-          </div>
-          <div className="col-6">
-            <Container
-              activeList={this.state.activeList}
-              records={this.state.records}
-            />
-          </div>
           <div className="col-3 bg-secondary p-3">
             <div
               className="btn btn-primary"
@@ -72,6 +67,15 @@ class App extends Component {
             >
               Denied {deniedApps.length}
             </div>
+          </div>
+          <div className="col-6">
+            <Container
+              activeList={this.state.activeList}
+              records={this.state.records}
+            />
+          </div>
+          <div className="col-3 bg-light p-3">
+            <AddRecordForm updateParentState={this.updateMyState} />
           </div>
         </section>
       </div>

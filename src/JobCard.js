@@ -4,7 +4,8 @@ class JobCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      progressPercentage: 0
+      progressPercentage: 0,
+      activeClass: "card p-2 mb-3 shadow"
     };
   }
 
@@ -18,6 +19,14 @@ class JobCard extends Component {
     }
   };
 
+  inflate = () => {
+    this.setState({ activeClass: "card p-2 mb-3 shadow animated pulse" });
+  };
+
+  deflate = () => {
+    this.setState({ activeClass: "card p-2 mb-3 shadow" });
+  };
+
   render() {
     //Define progress percentage
     let progressStyle = { width: `${this.state.progressPercentage}%` };
@@ -25,7 +34,11 @@ class JobCard extends Component {
     //Define the front side of the card
     let frontSide = (
       <div className="col-6">
-        <div className="card p-2 mb-3 shadow">
+        <div
+          className={this.state.activeClass}
+          onMouseEnter={this.inflate}
+          onMouseLeave={this.deflate}
+        >
           <p>{this.props.data.companyName}</p>
           <p>{this.props.data.applicationDate}</p>
           <p>{this.props.data.jobTitle}</p>
