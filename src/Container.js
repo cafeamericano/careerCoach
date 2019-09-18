@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AddRecordForm from "./AddRecordForm";
 import JobCard from "./JobCard";
 
 class Container extends Component {
@@ -8,16 +7,15 @@ class Container extends Component {
   }
 
   render() {
-    let x = this.props.records;
-    console.log(x);
     if (this.props.records !== undefined) {
-      let jobs = this.props.records.map(item => (
+      let allRecords = this.props.records;
+      let itemsToReturn = allRecords.filter( element => element.closure === "Denied")
+      let jobCardComponents = itemsToReturn.map(item => (
         <JobCard key={item._id} data={item} />
       ));
       return (
         <main className="container p-3">
-          <AddRecordForm />
-          <div className="row">{jobs}</div>
+          <div className="row">{jobCardComponents}</div>
         </main>
       );
     } else {

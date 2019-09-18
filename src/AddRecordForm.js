@@ -27,7 +27,7 @@ class AddRecordForm extends Component {
 
   render() {
     return (
-      <form onChange={this.processInput} onSubmit={this.submitForm}>
+      <form className='card p-1' onChange={this.processInput} onSubmit={this.submitForm}>
         <label>Company Name</label>
         <input name="companyName" placeholder="Company name"></input>
         <br />

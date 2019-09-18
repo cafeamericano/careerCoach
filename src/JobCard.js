@@ -24,7 +24,7 @@ class JobCard extends Component {
 
     //Define the front side of the card
     let frontSide = (
-      <div className="col-4">
+      <div className="col-6">
         <div className="card p-2 mb-3 shadow">
           <p>{this.props.data.companyName}</p>
           <p>{this.props.data.applicationDate}</p>
@@ -44,7 +44,7 @@ class JobCard extends Component {
 
     //Define the back side of the card
     let backSide = (
-      <div className="col-4">
+      <div className="col-6">
         <div className="card p-2 mb-3 shadow">
           <p>{this.props.data.companyName}</p>
         </div>

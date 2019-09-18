@@ -33,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get("/all", (req, res) => {
   db.JobApplication.find({})
     .then(function(queryResult) {
+      console.log(queryResult)
       res.json(queryResult);
     })
     .catch(function(err) {
