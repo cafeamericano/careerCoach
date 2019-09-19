@@ -34,7 +34,7 @@ router.get("/touslesrecords", (req, res) => {
           modObj.firstResponseDate = result[i].dateOfFirstResponse;
           modObj.isMajorCorporation = result[i].majorCorporation;
           modObj.progress = result[i].progress;
-          modObj.closure = result[i].close;
+          modObj.closure = result[i].closure;
           modObj.comments = result[i].comments;
           modifiedResponseArray.push(modObj);
         }
