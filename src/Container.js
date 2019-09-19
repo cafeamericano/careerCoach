@@ -9,7 +9,14 @@ class Container extends Component {
   render() {
     if (this.props.records !== undefined) {
       let allRecords = this.props.records;
-      let itemsToReturn = allRecords.filter( element => element.closure === this.props.activeList)
+      let itemsToReturn;
+      if (this.props.activeList !== "All") {
+        itemsToReturn = allRecords.filter(
+          element => element.closure === this.props.activeList
+        );
+      } else {
+        itemsToReturn = allRecords;
+      }
       let jobCardComponents = itemsToReturn.map(item => (
         <JobCard key={item._id} data={item} />
       ));

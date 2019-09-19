@@ -15,7 +15,7 @@ class App extends Component {
     super(props);
     this.state = {
       records: [],
-      activeList: "Outstanding",
+      activeList: "All",
       clickCounter: 0
     };
   }
@@ -38,20 +38,53 @@ class App extends Component {
     console.log("fetched");
   };
 
+  setActiveList_All = () => {
+    this.setState({ activeList: "All" });
+  };
+
   setActiveList_Outstanding = () => {
     this.setState({ activeList: "Outstanding" });
+  };
+
+  setActiveList_Withdrawn = () => {
+    this.setState({ activeList: "Withdrawn" });
+  };
+
+  setActiveList_ApplicationLost = () => {
+    this.setState({ activeList: "Application Lost" });
+  };
+
+  setActiveList_NeverResponded = () => {
+    this.setState({ activeList: "Never Responded" });
   };
 
   setActiveList_Denied = () => {
     this.setState({ activeList: "Denied" });
   };
 
+  setActiveList_Accepted = () => {
+    this.setState({ activeList: "Accepted" });
+  };
+
   render() {
+    let allApps = this.state.records;
     let outstandingApps = this.state.records.filter(
       item => item.closure === "Outstanding"
     );
+    let withdrawnApps = this.state.records.filter(
+      item => item.closure === "Withdrawn"
+    );
+    let applicationLostApps = this.state.records.filter(
+      item => item.closure === "Application Lost"
+    );
+    let neverRespondedApps = this.state.records.filter(
+      item => item.closure === "Never Responded"
+    );
     let deniedApps = this.state.records.filter(
       item => item.closure === "Denied"
+    );
+    let acceptedApps = this.state.records.filter(
+      item => item.closure === "Accepted"
     );
 
     return (
@@ -62,6 +95,12 @@ class App extends Component {
         <section className="row">
           <div className="col-2 bg-secondary p-3">
             <ul class="list-group">
+              <li class="list-group-item" onClick={this.setActiveList_All}>
+                All{" "}
+                <span className="badge badge-primary float-right">
+                  {allApps.length}
+                </span>
+              </li>
               <li
                 class="list-group-item"
                 onClick={this.setActiveList_Outstanding}
@@ -71,10 +110,43 @@ class App extends Component {
                   {outstandingApps.length}
                 </span>
               </li>
+              <li
+                class="list-group-item"
+                onClick={this.setActiveList_Withdrawn}
+              >
+                Withdrawn{" "}
+                <span className="badge badge-primary float-right">
+                  {withdrawnApps.length}
+                </span>
+              </li>
+              <li
+                class="list-group-item"
+                onClick={this.setActiveList_ApplicationLost}
+              >
+                Application Lost{" "}
+                <span className="badge badge-primary float-right">
+                  {applicationLostApps.length}
+                </span>
+              </li>
+              <li
+                class="list-group-item"
+                onClick={this.setActiveList_NeverResponded}
+              >
+                Never Responded{" "}
+                <span className="badge badge-primary float-right">
+                  {neverRespondedApps.length}
+                </span>
+              </li>
               <li class="list-group-item" onClick={this.setActiveList_Denied}>
                 Denied{" "}
                 <span className="badge badge-primary float-right">
                   {deniedApps.length}
+                </span>
+              </li>
+              <li class="list-group-item" onClick={this.setActiveList_Accepted}>
+                Accepted{" "}
+                <span className="badge badge-primary float-right">
+                  {acceptedApps.length}
                 </span>
               </li>
             </ul>

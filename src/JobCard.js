@@ -13,17 +13,37 @@ class JobCard extends Component {
     this.state = {
       progressPercentage: 0,
       activeClass: "card p-2 mb-3 shadow",
-      sideShowing: "front"
+      sideShowing: "front",
+      progressColor: "progress-bar primary"
     };
   }
 
   componentDidMount = () => {
     this.calculateProgressPercentage(this.props.data.progress);
+    this.determineProgressColor(this.props.data.closure);
   };
 
   calculateProgressPercentage = arg => {
     if (arg === "Application Submitted") {
       this.setState({ progressPercentage: 5 });
+    } else if (arg === "Discussed With Recruiter") {
+      this.setState({ progressPercentage: 35 });
+    } else if (arg === "Phone Interview Offered") {
+      this.setState({ progressPercentage: 60 });
+    } else if (arg === "Onsite Interview Offered") {
+      this.setState({ progressPercentage: 80 });
+    } else if (arg === "Job Offered") {
+      this.setState({ progressPercentage: 100 });
+    }
+  };
+
+  determineProgressColor = arg => {
+    if (arg === "Denied" || arg === "Never Responded") {
+      this.setState({ progressColor: "progress-bar bg-danger" });
+    } else if (arg === "Withdrawn" || arg === "Application Lost") {
+      this.setState({ progressColor: "progress-bar bg-secondary" });
+    } else {
+      this.setState({ progressColor: "progress-bar bg-success" });
     }
   };
 
@@ -68,7 +88,7 @@ class JobCard extends Component {
           <p class="card-text">{this.props.data.jobTitle}</p>
           <div className="progress">
             <div
-              class="progress-bar"
+              class={this.state.progressColor}
               role="progressbar"
               style={progressStyle}
             ></div>
