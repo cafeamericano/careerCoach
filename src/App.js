@@ -88,11 +88,11 @@ class App extends Component {
     );
 
     return (
-      <div style={appStyle}>
+      <div className='full-height' style={appStyle}>
         <nav class="navbar navbar-dark bg-dark">
           <span class="navbar-brand mb-0 h1">Career Coach</span>
         </nav>
-        <section className="row">
+        <section className="row no-margin">
           <div className="col-2 bg-secondary p-3">
             <ul class="list-group">
               <li class="list-group-item" onClick={this.setActiveList_All}>
