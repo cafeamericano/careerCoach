@@ -1,1 +1,0 @@
-grabAllEntries(sort.column, sort.order)
